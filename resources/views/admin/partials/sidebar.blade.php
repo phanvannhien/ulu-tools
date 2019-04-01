@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html"><img src="{{ url('logo.png') }}" alt="logo"></a>
+            <a href="/"><img src="{{ url('logo.png') }}" alt="logo"></a>
         </div>
     </div>
     <div class="main-menu">
@@ -18,6 +18,14 @@
                             <i class="ti-layout-sidebar-left"></i>
                             <span>Merchant</span></a>
                     </li>
+
+                    @if( session()->has('user') )
+                    <li>
+                        <a href="{{ route('transaction') }}" aria-expanded="true">
+                            <i class="ti-layout-sidebar-left"></i>
+                            <span>Transaction</span></a>
+                    </li>
+                    @endif
                     {{--<li>--}}
                         {{--<a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>--}}
                         {{--<ul class="collapse">--}}

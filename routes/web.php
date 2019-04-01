@@ -22,8 +22,11 @@ Auth::routes([
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::get('/transaction', 'TransactionController@index')->name('transaction')->middleware('merchant');
+    Route::post('/transaction', 'TransactionController@check')->name('check.transaction')->middleware('merchant');
 
     Route::resource('merchant', 'MerchantController');
+    Route::post('merchant/login','MerchantController@login' )->name('merchant.login');
 
 });
 

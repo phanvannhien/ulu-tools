@@ -9,10 +9,14 @@
                 <span></span>
             </div>
             <div class="search-box pull-left">
-                <form action="#">
-                    <input type="text" name="search" placeholder="Search..." required>
-                    <i class="ti-search"></i>
-                </form>
+                <div class="p-2">
+                    @if( session()->get('user') )
+                    You on: {{ session()->get('user')['email'] }}
+                        @else
+                    Please choose merchant
+                    @endif
+                </div>
+
             </div>
         </div>
         <!-- profile info & task notification -->
