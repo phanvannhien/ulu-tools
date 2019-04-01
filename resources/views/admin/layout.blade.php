@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/metisMenu.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/slicknav.min.css') }}">
-    <!-- amchart css -->
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
     <!-- others css -->
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/typography.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/default-css.css') }}">
@@ -35,6 +34,7 @@
         <!-- main content area start -->
         <div class="main-content ">
             @include('admin.partials.main_header')
+
             <div class="main-content-inner mt-3">
                 @yield('main')
             </div>

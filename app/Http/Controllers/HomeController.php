@@ -21,13 +21,13 @@ class HomeController extends Controller
 //            die("Cannot login. Message: ".$session->getMessage());
 //        }
 
-//        if(!@$session->login("phanvannhien@gmail.com", 'Vannhien@88')) {
-//            die("Cannot login. Message: ".$session->getMessage());
-//        }
-
-        if(!@$session->login("nhienphan@ulf.vn", 'Vannhien@88')) {
+        if(!@$session->login("phanvannhien@gmail.com", 'Vannhien@88')) {
             die("Cannot login. Message: ".$session->getMessage());
         }
+
+//        if(!@$session->login("nhienphan@ulf.vn", 'Vannhien@88')) {
+//            die("Cannot login. Message: ".$session->getMessage());
+//        }
 
         $request = new Pap_Api_TransactionsGrid($session);
 

@@ -1,15 +1,18 @@
 @extends('admin.layout')
 
 @section('main')
-
-
-    @csrf
+    <div class="clearfix mb-3">
+        <a href="{{ route('merchant.create') }}" class="btn btn-primary float-right">Create</a>
+    </div>
+    @include('admin.partials.messages')
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
+
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <td>Account</td>
                         <td>Email</td>
                         <td>Password</td>
                         <td></td>
@@ -18,18 +21,26 @@
                 <tbody>
                 @foreach( $data as $item )
                     <tr>
+                        <td>{{ $item->account }}</td>
                         <td>
-                            <a href="#">{{ $item->email }}</a>
+                            <a href="#">{{ $item->email }}</a> <br/>
+                            <a href="{{ route('merchant.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a> |
+
                         </td>
                         <td>
                             <a href="#">{{ $item->password }}</a>
                         </td>
                         <td>
-                            <form action="">
-                                <input type="hidden" name="email" value="{{ $item->email }}">
-                                <input type="hidden" name="password" value="{{ $item->password }}">
-                                <button class="btn btn-success" type="submit" name="login" value="1">Login</button>
-                            </form>
+                            <div class="btn-group">
+
+                                <form action="{{ route('merchant.destroy',$item->id ) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit" name="delete" value="1">Delete</button>
+                                </form>
+                            </div>
+
+
                         </td>
 
                     </tr>
