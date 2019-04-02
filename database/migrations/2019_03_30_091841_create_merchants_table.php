@@ -17,6 +17,7 @@ class CreateMerchantsTable extends Migration
             $table->bigIncrements('id');
             $table->string('email', 200);
             $table->string('password', 200);
+            $table->string('account', 200);
             $table->timestamps();
         });
     }
