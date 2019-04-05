@@ -26,6 +26,15 @@
                             <span>Transaction</span></a>
                     </li>
                     @endif
+
+
+                    <li>
+                        <a href="{{ route('shopee.index') }}" aria-expanded="true">
+                            <i class="ti-layout-sidebar-left"></i>
+                            <span>Shopee</span></a>
+                    </li>
+
+
                     {{--<li>--}}
                         {{--<a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>--}}
                         {{--<ul class="collapse">--}}

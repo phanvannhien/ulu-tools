@@ -28,5 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('merchant', 'MerchantController');
     Route::post('merchant/login','MerchantController@login' )->name('merchant.login');
 
+
+    Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
+
 });
 
