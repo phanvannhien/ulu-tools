@@ -115,7 +115,7 @@ class Shopee{
     }
 
 
-    public function sysToULU(){
+    public function syncToULU(){
 
 
         if( $this->data['data'] && count( $this->data['data'] ) ){
@@ -129,6 +129,7 @@ class Shopee{
                     $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
                     $sale->setOrderID( $conversion['Stat']['ad_id'] );
                     $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
+//                    $sale->setAffiliateID( '0000001' );
                     $sale->setStatus('P');
                     $sale->setCampaignID($conversion['Stat']['offer_id']);
                     $sale->setData1( $conversion['Stat']['affiliate_info2'] ); // URL product

@@ -51,7 +51,7 @@ class SyncReportShopee extends Command
 
         $this->info('Fetching...');
         $shopee->applyFilters( 'Stat.datetime', $filterDate )
-            ->getConversions()->sysToULU();
+            ->getConversions()->syncToULU();
         $this->info('Update has been send successfully');
     }
 }
