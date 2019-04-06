@@ -16,7 +16,7 @@ class SessionMerchantMiddleware
     public function handle($request, Closure $next)
     {
         if( session()->has('user') ){
-            $request->merchant = session()->get('user')['session'];
+            $request->merchant = session()->get('admin');
             return $next($request);
         }
 

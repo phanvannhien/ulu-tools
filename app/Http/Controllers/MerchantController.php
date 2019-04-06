@@ -90,27 +90,6 @@ class MerchantController extends Controller
 
 
     public function login( Request $request ){
-        $rules = [
-            'email' => 'required|email|string',
-            'password' => 'required|string',
-        ];
-
-        $validator = Validator::make($request->all(), $rules );
-        if ($validator->fails()) {
-            return back()->withErrors ( $validator )->withInput();
-        }
-
-        $session = new Pap_Api_Session("https://account.ulu.vn/scripts/server.php");
-        if(!@$session->login( $request->input('email') , $request->input('password'))) {
-            return back()->withErrors ( "Cannot login. Message: ".$session->getMessage() )->withInput();
-        }
-
-        Session::put('user', [
-            'email' => $request->input('email'),
-            'session' => $session
-        ]);
-
-        return back()->with('status', 'Success');
 
     }
 

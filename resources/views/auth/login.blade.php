@@ -9,6 +9,7 @@
                 </div>
 
                 <form method="POST" action="{{ route('login') }}" class="login100-form validate-form">
+                    @include('admin.partials.messages')
                     @csrf
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" name="email" placeholder="Email">

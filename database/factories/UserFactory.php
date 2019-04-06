@@ -18,9 +18,9 @@ use Faker\Generator as Faker;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => 'ulu',
-        'email' =>  'admin@ulu.vn' ,
+        'email' =>  'pap-support@ulf.vn' ,
         'email_verified_at' => now(),
-        'password' => \Illuminate\Support\Facades\Hash::make('admin'), // password
+        'password' => \Illuminate\Support\Facades\Hash::make('xoWC$WBG89#z'), // password
         'remember_token' => Str::random(10),
     ];
 });

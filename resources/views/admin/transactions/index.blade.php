@@ -13,9 +13,6 @@
 
                 <button class="btn btn-primary" type="submit" name="submit">Upload</button>
             </form>
-
-
         </div>
     </div>
-
 @endsection

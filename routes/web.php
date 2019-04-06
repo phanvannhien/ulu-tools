@@ -22,11 +22,16 @@ Auth::routes([
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', 'HomeController@index')->name('dashboard');
-    Route::get('/transaction', 'TransactionController@index')->name('transaction')->middleware('merchant');
-    Route::post('/transaction', 'TransactionController@check')->name('check.transaction')->middleware('merchant');
+
+
+    Route::get('/transaction', 'TransactionController@index')->name('transaction');
+    Route::post('/transaction', 'TransactionController@check')->name('check.transaction');
+
 
     Route::resource('merchant', 'MerchantController');
-    Route::post('merchant/login','MerchantController@login' )->name('merchant.login');
+    Route::resource('affiliate', 'AffiliateController');
+    Route::get('affiliate-sync', 'AffiliateController@syncPAP')->name('affiliate.sync');
+
 
 
     Route::get('shopee', 'ShopeeController@index')->name('shopee.index');

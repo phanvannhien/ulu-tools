@@ -9,30 +9,35 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li class="active">
-                        <a href="{{ route('dashboard') }}">Dashboard</a>
-                    </li>
 
                     <li>
                         <a href="{{ route('merchant.index') }}" aria-expanded="true">
-                            <i class="ti-layout-sidebar-left"></i>
+                            <i class="ti-user"></i>
                             <span>Merchant</span></a>
                     </li>
 
-                    @if( session()->has('user') )
                     <li>
-                        <a href="{{ route('transaction') }}" aria-expanded="true">
-                            <i class="ti-layout-sidebar-left"></i>
-                            <span>Transaction</span></a>
+                        <a href="{{ route('affiliate.index') }}" aria-expanded="true">
+                            <i class="ti-user"></i>
+                            <span>Affiliate</span></a>
                     </li>
-                    @endif
 
 
                     <li>
-                        <a href="{{ route('shopee.index') }}" aria-expanded="true">
-                            <i class="ti-layout-sidebar-left"></i>
-                            <span>Shopee</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true">
+                            <i class="fa fa-align-left"></i>
+                            <span>Transactions</span>
+                        </a>
+                        <ul class="collapse">
+                            <li>
+                                <a href="{{ route('shopee.index') }}" aria-expanded="true">
+                                    <i class="ti-layout-sidebar-left"></i>
+                                    <span>Shopee</span></a>
+                            </li>
+
+                        </ul>
                     </li>
+
 
 
                     {{--<li>--}}

@@ -3,15 +3,24 @@ namespace App\APIs;
 
 
 use GuzzleHttp\Client;
+use Matrix\Exception;
 use Pap_Api_SaleTracker;
+use Pap_Api_Session;
+use Pap_Api_Transaction;
 
 class Shopee{
 
-    public $base_uri = 'https://shopeeaffiliates.api.hasoffers.com/Apiv3/json';
-    public $api_key = "e89bc7d00c04447caf93bfdb871dd67cde30b21c4876cc340730a74724f74017";
+    public $base_uri = '';
+    public $api_key = '';
     public $filters = [];
 
     public $data = [];
+
+    public function __construct()
+    {
+        $this->base_uri =config('ulu.shopee_api_url');
+        $this->api_key =config('ulu.shopee_api_key');
+    }
 
     public function applyFilters( $field,  $value ){
 
@@ -115,26 +124,46 @@ class Shopee{
     }
 
 
-    public function syncToULU(){
+    public function syncToULU($offer_id){
 
 
         if( $this->data['data'] && count( $this->data['data'] ) ){
-            $saleTracker = new Pap_Api_SaleTracker('https://account.ulu.vn/scripts/sale.php', true);
+
+            $session = new Pap_Api_Session( config('ulu.server') );
+
+            if(! $session->login('pap-support@ulf.vn','xoWC$WBG89#z')) {
+                return false;
+            }
+
+            $saleTracker = new Pap_Api_SaleTracker('https://account.ulu.vn/scripts/sale.php');
             $saleTracker->setAccountId('b8e749d1');
+
+
             foreach ( $this->data['data']  as $conversion  ){
 
 
-                if( $conversion['Stat']['offer_id'] == 16 ){
-                    $sale = $saleTracker->createSale();
-                    $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
-                    $sale->setOrderID( $conversion['Stat']['ad_id'] );
-                    $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
-//                    $sale->setAffiliateID( '0000001' );
-                    $sale->setStatus('P');
-                    $sale->setCampaignID($conversion['Stat']['offer_id']);
-                    $sale->setData1( $conversion['Stat']['affiliate_info2'] ); // URL product
-                    $sale->setData2( $conversion['Stat']['id'] ); // URL product
-                    //$sale->setProductID('pid');
+                if( $conversion['Stat']['offer_id'] == $offer_id ){
+
+                    $sale = new Pap_Api_Transaction($session);
+                    $sale->setOrderId( $conversion['Stat']['ad_id'] );
+
+                    try{
+                        $sale->load();
+
+                    }catch (Exception $e){
+                        $sale = $saleTracker->createSale();
+                        $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
+                        $sale->setOrderID( $conversion['Stat']['ad_id'] );
+                        $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
+                        $sale->setStatus('P');
+                        $sale->setCampaignID($conversion['Stat']['offer_id']);
+                        $sale->setData1( $conversion['Stat']['affiliate_info2'] ); // URL product
+                        $sale->setData2( $conversion['Stat']['id'] ); // URL product
+                        $sale->setCustomCommission( 0 ); // URL product
+                        //$sale->setProductID('pid');
+                    }
+
+
 
                 }
 

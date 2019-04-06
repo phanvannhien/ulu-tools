@@ -12,7 +12,6 @@ class ShopeeController extends Controller
     {
 
 
-
     }
 
 }

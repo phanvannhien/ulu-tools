@@ -10,10 +10,8 @@
             </div>
             <div class="search-box pull-left">
                 <div class="p-2">
-                    @if( session()->get('user') )
-                    You on: {{ session()->get('user')['email'] }}
-                        @else
-                    Please choose merchant
+                    @if( auth()->check() )
+                        Welcome: {{ auth()->user()->email }}
                     @endif
                 </div>
 
