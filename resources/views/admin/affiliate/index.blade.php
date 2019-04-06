@@ -12,6 +12,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <td>ID</td>
+                        <td>UserID</td>
                         <td>Name</td>
                         <td>Email</td>
                         <td>Phone</td>
@@ -22,6 +24,8 @@
                 <tbody>
                 @foreach( $data as $item )
                     <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->userid }}</td>
                         <td>{{ $item->fullname}}</td>
                         <td>
                             <a href="#">{{ $item->username }}</a> <br/>

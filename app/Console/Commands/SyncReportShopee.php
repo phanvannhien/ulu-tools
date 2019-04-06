@@ -15,7 +15,7 @@ class SyncReportShopee extends Command
      *
      * @var string
      */
-    protected $signature = 'shopee:report {date?} {offer_id?}';
+    protected $signature = 'shopee:report {offer_type?}';
 
     /**
      * The console command description.
@@ -42,17 +42,34 @@ class SyncReportShopee extends Command
     public function handle(Shopee $shopee)
     {
 
-        $date = $this->argument('date') ??  Date::now()->toDateString();
-        $offer_id = $this->argument('offer_id') ?? 9 ;
+        $date = Date::now()->subDays(5)->toDateString();
+        $offer_type = $this->argument('offer_type') ?? 'tracking' ;
 
         $filterDate = [
             "conditional" => "GREATER_THAN_OR_EQUAL_TO",
             "values" => $date
         ];
 
+        $shopee = $shopee->applyFilters( 'Stat.datetime', $filterDate );
+
+        if( $offer_type == 'tracking'  ){
+            $shopee = $shopee->applyFilters( 'Stat.offer_id', [
+                "conditional" => "EQUAL_TO",
+                "values" => [ 9,22 ]
+            ]);
+        }
+
+        if( $offer_type == 'payment'  ){
+            $shopee =  $shopee->applyFilters( 'Stat.offer_id', [
+                "conditional" => "EQUAL_TO",
+                "values" => [ 16, 21 ]
+            ]);
+        }
+
+
         $this->info('Fetching...');
-        $shopee->applyFilters( 'Stat.datetime', $filterDate )
-            ->getConversions()->syncToULU($offer_id);
+        $shopee->getConversions()->syncToULU($offer_type);
+
         $this->info('Update has been send successfully');
     }
 }

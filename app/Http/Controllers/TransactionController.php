@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Imports\TransactionImport;
+use App\Models\Sale;
 use Illuminate\Http\Request;
-
 
 
 use Excel;
@@ -12,11 +12,14 @@ use Excel;
 class TransactionController extends Controller
 {
     public function index(Request $request){
-        return view('admin.transactions.index', compact('recordset'));
+
+        $data = Sale::paginate();
+
+        return view('admin.transactions.index', compact('data'));
     }
 
-    public function check(Request $request){
 
+    public function import(Request $request){
 
         if( $request->hasFile('file') ){
             try {

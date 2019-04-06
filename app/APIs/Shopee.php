@@ -2,6 +2,8 @@
 namespace App\APIs;
 
 
+use App\Models\Affiliate;
+use App\Models\Sale;
 use GuzzleHttp\Client;
 use Matrix\Exception;
 use Pap_Api_SaleTracker;
@@ -124,55 +126,100 @@ class Shopee{
     }
 
 
-    public function syncToULU($offer_id){
+    public function syncToULU( $offer_type ){
 
 
         if( $this->data['data'] && count( $this->data['data'] ) ){
 
-            $session = new Pap_Api_Session( config('ulu.server') );
 
+            $session = new Pap_Api_Session( config('ulu.server') );
             if(! $session->login('pap-support@ulf.vn','xoWC$WBG89#z')) {
                 return false;
             }
 
-            $saleTracker = new Pap_Api_SaleTracker('https://account.ulu.vn/scripts/sale.php');
-            $saleTracker->setAccountId('b8e749d1');
 
-
-            foreach ( $this->data['data']  as $conversion  ){
-
-
-                if( $conversion['Stat']['offer_id'] == $offer_id ){
-
-                    $sale = new Pap_Api_Transaction($session);
-                    $sale->setOrderId( $conversion['Stat']['ad_id'] );
-
-                    try{
-                        $sale->load();
-
-                    }catch (Exception $e){
+            if( $offer_type == 'tracking' ){
+                $saleTracker = new Pap_Api_SaleTracker( config('ulu.sale') );
+                $saleTracker->setAccountId('b8e749d1'); // Shoppe account
+                foreach ( $this->data['data']  as $conversion  ){
+                    $currentSale  = Sale::where('t_orderid', $conversion['Stat']['ad_id'] )->first();
+                    if( !$currentSale){
+                        // save lead to PAP
                         $sale = $saleTracker->createSale();
                         $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
                         $sale->setOrderID( $conversion['Stat']['ad_id'] );
                         $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
                         $sale->setStatus('P');
-                        $sale->setCampaignID($conversion['Stat']['offer_id']);
-                        $sale->setData1( $conversion['Stat']['affiliate_info2'] ); // URL product
-                        $sale->setData2( $conversion['Stat']['id'] ); // URL product
-                        $sale->setCustomCommission( 0 ); // URL product
-                        //$sale->setProductID('pid');
+
+                        $sale->setData1( $conversion['Stat']['affiliate_info2'] );
+                        $sale->setData2( $conversion['Stat']['offer_id'] );
+                        $sale->setCustomCommission( 0 );
+
+                        // Save to local
+                        $sysSale = Sale::create([
+                            't_orderid' =>  $conversion['Stat']['ad_id'],
+                            'userid' =>  $conversion['Stat']['affiliate_info1'],
+                            'accountid' =>  'b8e749d1',
+                            'commission' =>  0,
+                            'totalcost' =>  $conversion['Stat']['sale_amount@VND'],
+                            'rstatus' =>  'P',
+                            'data1' =>  $conversion['Stat']['affiliate_info2']
+                        ]);
+
                     }
 
+                }
+
+                $saleTracker->register();
+
+            }
 
 
+            if( $offer_type == 'payment' ){
+
+
+                foreach ( $this->data['data']  as $conversion  ){
+                    if( $conversion['Stat']['conversion_status'] == 'approved' ){
+
+                        $sale = Sale::where('data1', $conversion['Stat']['affiliate_info2'])
+                            ->where('rstatus', 'P')
+                            ->first();
+
+                        if( $sale ){
+                            $transaction = new Pap_Api_Transaction($session);
+                            $transaction->setOrderId($sale->t_orderid);
+
+                            try{
+                                $transaction->load();
+
+                                // Get affiliate
+                                $affiliate = Affiliate::where( 'userid', $sale->userid  )->first();
+                                if( $affiliate ){
+                                    $transaction->setStatus('A');
+                                    $commission = $conversion['Stat']['approved_payout'] * $affiliate->commission_rate/100;
+                                    $transaction->setCommission( $commission );
+                                    $transaction->save();
+
+                                    $sale->rstatus = 'A';
+                                    $sale->save();
+
+                                }
+
+                            }catch (Exception $e){
+
+                            }
+
+                        }
+
+
+                    }
                 }
 
             }
 
-            $saleTracker->register();
         }
 
-        return false;
+        return true;
 
     }
 

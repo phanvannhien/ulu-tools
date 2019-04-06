@@ -25,13 +25,12 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/transaction', 'TransactionController@index')->name('transaction');
-    Route::post('/transaction', 'TransactionController@check')->name('check.transaction');
+    Route::post('/transaction', 'TransactionController@import')->name('check.transaction');
 
 
     Route::resource('merchant', 'MerchantController');
     Route::resource('affiliate', 'AffiliateController');
     Route::get('affiliate-sync', 'AffiliateController@syncPAP')->name('affiliate.sync');
-
 
 
     Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
