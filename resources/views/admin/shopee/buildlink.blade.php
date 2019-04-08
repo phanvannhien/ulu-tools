@@ -36,8 +36,8 @@
 
     </form>
 
-    <div class="card">
-        <div class="cart-body" id="result"></div>
+    <div class="card mt-4">
+        <div class="card-body" id="result"></div>
     </div>
 
 @stop
@@ -54,7 +54,7 @@
         const webNav = `{"paths":[{"webNav":{"url":"${encodeURI( decodeURI(deepUrl) )}"}}]}`;
         $('#result').append('webNav: ' + webNav );
         $('#result').append('<hr/>');
-        
+
     
         base64Encode( webNav, function( base64DeepUrl ){
             $('#result').append('base64DeepUrl: ' + base64DeepUrl );
@@ -92,7 +92,7 @@
                 $('#result').append('<hr/>');
 
                 shopee_one_link( encodeAppDeepLink, function( oneLinkUrl ){
-                    const urlShopeeAff = targetShopeeUrl + "&url="+ encodeURIComponent( oneLinkUrl ) ;
+                    const urlShopeeAff = targetShopeeUrl + "&url="+  oneLinkUrl  ;
 
                     $('#result').append('Shopee hasoffer:' + urlShopeeAff );
                     $('#result').append('<hr/>');
@@ -130,6 +130,8 @@
                         if(data) {
                             if (data.status_code == 200){
                                 resultUrl = data.data.url;
+                                $('#result').append( 'Bit link: '+ resultUrl );
+                                $('#result').append('<hr/>');
                             }
                         }
                     }
