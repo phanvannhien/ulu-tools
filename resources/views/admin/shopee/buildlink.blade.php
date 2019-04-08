@@ -51,9 +51,10 @@
     }
     
     function encode_app_deeplink( deepUrl, cb ){
-        const webNav = `"{"paths":[{"webNav":{"url":"${encodeURI( decodeURI(deepUrl) )}"}}]}"`;
+        const webNav = `{"paths":[{"webNav":{"url":"${encodeURI( decodeURI(deepUrl) )}"}}]}`;
         $('#result').append('webNav: ' + webNav );
         $('#result').append('<hr/>');
+        
     
         base64Encode( webNav, function( base64DeepUrl ){
             $('#result').append('base64DeepUrl: ' + base64DeepUrl );
