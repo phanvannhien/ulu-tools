@@ -1,9 +1,7 @@
 @extends('admin.layout')
 
 @section('main')
-    <div class="clearfix mb-3">
-        <a href="{{ route('merchant.create') }}" class="btn btn-primary float-right">Create</a>
-    </div>
+   
     @include('admin.partials.messages')
     <!-- Default box -->
     <div class="card">
@@ -30,19 +28,7 @@
                         <td>
                             <a href="#">{{ $item->password }}</a>
                         </td>
-                        <td>
-                            <div class="btn-group">
-
-                                <form action="{{ route('merchant.destroy',$item->id ) }}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit" name="delete" value="1">Delete</button>
-                                </form>
-                            </div>
-
-
-                        </td>
-
+                        
                     </tr>
                 @endforeach
                 </tbody>

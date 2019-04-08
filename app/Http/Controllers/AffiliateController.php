@@ -20,7 +20,7 @@ class AffiliateController extends Controller
     }
 
     public function create(){
-        return view('admin.affiliate.create');
+        return back();
     }
 
     public function store(Request $request){
@@ -128,7 +128,8 @@ class AffiliateController extends Controller
                             'rstatus' => $rec->get('rstatus'),
                             'parentuserid' => $rec->get('parentuserid'),
                             'dateinserted' => $rec->get('dateinserted'),
-                            'data8' => $rec->get('data8')
+                            'data8' => $rec->get('data8'),
+                            'commission_rate' => 70
                         ]);
 
                 }

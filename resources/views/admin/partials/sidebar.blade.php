@@ -22,9 +22,12 @@
                             <span>Affiliate</span></a>
                     </li>
 
-
-                    
-
+                    <li>
+                        <a href="{{ route('transaction') }}" aria-expanded="true">
+                            <i class="ti-user"></i>
+                            <span>Transaction PAP</span>
+                        </a>
+                    </li>
 
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true">

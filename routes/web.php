@@ -28,14 +28,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/transaction', 'TransactionController@import')->name('check.transaction');
 
 
-    Route::resource('merchant', 'MerchantController');
-    Route::resource('affiliate', 'AffiliateController');
+    Route::resource('merchant', 'MerchantController',[
+        'only' => ['update','edit','index']
+    ]);
+    Route::resource('affiliate', 'AffiliateController',[
+        'only' => ['update','edit','index']
+    ]);
     Route::get('affiliate-sync', 'AffiliateController@syncPAP')->name('affiliate.sync');
 
-
     Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
-
     Route::get('link/shopee', 'ShopeeController@buildlink')->name('shopee.buildlink');
+
+
 
 });
 

@@ -139,9 +139,10 @@ class Shopee{
 
 
             if( $offer_type == 'tracking' ){
-                $saleTracker = new Pap_Api_SaleTracker( config('ulu.sale') );
-                $saleTracker->setAccountId('b8e749d1'); // Shoppe account
+                
                 foreach ( $this->data['data']  as $conversion  ){
+                    $saleTracker = new Pap_Api_SaleTracker( config('ulu.sale') );
+                    $accountID = 'b8e749d1'; //web shopee account
                     $currentSale  = Sale::where('t_orderid', $conversion['Stat']['ad_id'] )->first();
                     if( !$currentSale){
                         // save lead to PAP
@@ -151,19 +152,29 @@ class Shopee{
                         $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
                         $sale->setStatus('P');
 
+                        $sale->setVisitorId( $conversion['Stat']['affiliate_info2'] );
                         $sale->setData1( $conversion['Stat']['affiliate_info2'] );
                         $sale->setData2( $conversion['Stat']['offer_id'] );
                         $sale->setCustomCommission( 0 );
+
+                        $sale->getDateInserted( $conversion['Stat']['Stat.datetime'] );
+
+    
+                        if( $conversion['Stat']['offer_id'] == 22 ){
+                            $accountID = 'd794e8f3';
+                        }
+                        $saleTracker->setAccountId( $accountID  );
 
                         // Save to local
                         $sysSale = Sale::create([
                             't_orderid' =>  $conversion['Stat']['ad_id'],
                             'userid' =>  $conversion['Stat']['affiliate_info1'],
-                            'accountid' =>  'b8e749d1',
+                            'accountid' =>  $accountID,
                             'commission' =>  0,
                             'totalcost' =>  $conversion['Stat']['sale_amount@VND'],
                             'rstatus' =>  'P',
-                            'data1' =>  $conversion['Stat']['affiliate_info2']
+                            'data1' =>  $conversion['Stat']['affiliate_info2'],
+                            'data2' =>  $conversion['Stat']['offer_id']
                         ]);
 
                     }
@@ -173,7 +184,6 @@ class Shopee{
                 $saleTracker->register();
 
             }
-
 
             if( $offer_type == 'payment' ){
 

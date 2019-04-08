@@ -13,7 +13,6 @@ class MerchantController extends Controller
 {
 
     public function index(){
-
         return view('admin.merchant.index', [ 'data' => Merchant::paginate() ]);
     }
 
