@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/default-css.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/responsive.css') }}">
-    <!-- modernizr css -->
-    <script src="{{ url('srtdashassets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+
 </head>
 
 <body>
@@ -53,10 +53,12 @@
     <script src="{{ url('srtdash/assets/js/jquery.slicknav.min.js') }}"></script>
 
 
-
     <!-- others plugins -->
     <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
+
+    @yield('footer')
+
 </body>
 
 </html>

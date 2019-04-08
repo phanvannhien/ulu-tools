@@ -35,5 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
 
+    Route::get('link/shopee', 'ShopeeController@buildlink')->name('shopee.buildlink');
+
 });
 

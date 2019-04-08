@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b69cfb6-4514-4441-a744-72f1e1229f6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/APIs/Shopee.php" afterPath="$PROJECT_DIR$/app/APIs/Shopee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/SyncReportShopee.php" afterPath="$PROJECT_DIR$/app/Console/Commands/SyncReportShopee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Kernel.php" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/ulu.php" afterPath="$PROJECT_DIR$/config/ulu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/affiliate/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/affiliate/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
-    </list>
+    <list default="true" id="6b69cfb6-4514-4441-a744-72f1e1229f6c" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -757,12 +748,12 @@
       <workItem from="1554171031567" duration="6231000" />
       <workItem from="1554373459822" duration="1767000" />
       <workItem from="1554444236986" duration="10286000" />
-      <workItem from="1554517998308" duration="15191000" />
+      <workItem from="1554517998308" duration="15337000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49438000" />
+    <option name="totallyTimeSpent" value="49584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />

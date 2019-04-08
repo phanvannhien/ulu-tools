@@ -35,7 +35,7 @@
                         <td>{{ $item->totalcost}}</td>
                         <td>{{ $item->rstatus}}</td>
                         <td>{{ $item->data1}}</td>
-                        
+
                     </tr>
                 @endforeach
                 </tbody>

@@ -23,16 +23,19 @@
                     </li>
 
 
+                    
+
+
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true">
                             <i class="fa fa-align-left"></i>
-                            <span>Transactions</span>
+                            <span>Shopee</span>
                         </a>
                         <ul class="collapse">
                             <li>
-                                <a href="{{ route('shopee.index') }}" aria-expanded="true">
+                                <a href="{{ route('shopee.buildlink') }}" aria-expanded="true">
                                     <i class="ti-layout-sidebar-left"></i>
-                                    <span>Shopee</span></a>
+                                    <span>Link</span></a>
                             </li>
 
                         </ul>
