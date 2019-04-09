@@ -3,6 +3,7 @@ namespace App\APIs;
 
 
 use App\Models\Affiliate;
+use App\Models\Log;
 use App\Models\Sale;
 use GuzzleHttp\Client;
 use Matrix\Exception;
@@ -131,7 +132,6 @@ class Shopee{
 
         if( $this->data['data'] && count( $this->data['data'] ) ){
 
-
             $session = new Pap_Api_Session( config('ulu.server') );
             if(! $session->login('pap-support@ulf.vn','xoWC$WBG89#z')) {
                 return false;
@@ -178,6 +178,12 @@ class Shopee{
                             'data2' =>  $conversion['Stat']['offer_id']
                         ]);
 
+                        Log::create([
+                           'action' => 'sync_shopee_PAP',
+                            'detail' => 'Sync transaction:  ' . $conversion['Stat']['ad_id']
+                        ]);
+
+
                     }
 
                 }
@@ -186,7 +192,6 @@ class Shopee{
             }
 
             if( $offer_type == 'payment' ){
-
 
                 foreach ( $this->data['data']  as $conversion  ){
                     if( $conversion['Stat']['conversion_status'] == 'approved' ){
@@ -216,7 +221,10 @@ class Shopee{
                                 }
 
                             }catch (Exception $e){
-
+                                Log::create([
+                                    'action' => 'update_commission',
+                                    'detail' => 'Fail to find order_id:  '.$sale->t_orderid
+                                ]);
                             }
 
                         }
