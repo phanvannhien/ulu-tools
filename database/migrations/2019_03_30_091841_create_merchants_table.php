@@ -13,6 +13,7 @@ class CreateMerchantsTable extends Migration
      */
     public function up()
     {
+        if( !Schema::hasTable('merchants') )
         Schema::create('merchants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email', 200);

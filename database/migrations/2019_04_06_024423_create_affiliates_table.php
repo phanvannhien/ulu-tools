@@ -13,6 +13,7 @@ class CreateAffiliatesTable extends Migration
      */
     public function up()
     {
+        if( !Schema::hasTable('affiliates') )
         Schema::create('affiliates', function (Blueprint $table) {
 
             $table->string('id', 100)->unique();

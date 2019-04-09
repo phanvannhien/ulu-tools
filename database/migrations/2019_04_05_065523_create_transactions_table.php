@@ -13,6 +13,7 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
+        if( !Schema::hasTable('transactions') )
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Browser_display_name')->nullable();

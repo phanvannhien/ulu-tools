@@ -13,6 +13,7 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
+        if( !Schema::hasTable('sales') )
         Schema::create('sales', function (Blueprint $table) {
             $table->string('t_orderid')->primary();
             $table->string('userid',100); // affiliate

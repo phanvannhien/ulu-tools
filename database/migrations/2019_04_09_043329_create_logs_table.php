@@ -13,6 +13,7 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
+        if( !Schema::hasTable('logs') )
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('action');
