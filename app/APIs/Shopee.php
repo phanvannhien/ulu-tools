@@ -158,7 +158,7 @@ class Shopee{
                         $sale->setData1( $conversion['Stat']['affiliate_info2'] );
                         $sale->setData2( $conversion['Stat']['offer_id'] );
                         $sale->setCustomCommission( 0 );
-                        $sale->setDateInserted( $conversion['Stat']['Stat.datetime'] );
+                        $sale->setTimeStamp( $conversion['Stat']['Stat.datetime'] );
 
                         if( $conversion['Stat']['offer_id'] == 22 ){
                             $accountID = 'd794e8f3';
