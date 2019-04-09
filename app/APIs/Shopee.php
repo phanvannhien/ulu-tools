@@ -146,15 +146,15 @@ class Shopee{
                     if( !$currentSale ){
 
                         $saleTracker = new Pap_Api_SaleTracker( config('ulu.sale') );
+                        $saleTracker->setVisitorId( $conversion['Stat']['affiliate_info2'] );
+
                         $accountID = 'b8e749d1'; //web shopee account
                         // save lead to PAP
                         $sale = $saleTracker->createSale();
-
                         $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
                         $sale->setOrderID( $conversion['Stat']['ad_id'] );
                         $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
                         $sale->setStatus('P');
-                        $sale->setVisitorId( $conversion['Stat']['affiliate_info2'] );
                         $sale->setData1( $conversion['Stat']['affiliate_info2'] );
                         $sale->setData2( $conversion['Stat']['offer_id'] );
                         $sale->setCustomCommission( 0 );
