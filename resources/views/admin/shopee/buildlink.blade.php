@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label for="">Shopee hasoffer link</label>
-            <input id="targetShopeeUrl" class="form-control" type="text" name="targetShopeeUrl" value="http://shopeeaffiliates.go2cloud.org/aff_c?offer_id=22&aff_id=1176&aff_sub2={$visitorid}&aff_sub=5ca72b11d8120">
+            <input id="targetShopeeUrl" class="form-control" type="text" name="targetShopeeUrl" value="http://shopeeaffiliates.go2cloud.org/aff_c?offer_id=22&aff_id=1176&aff_sub2={$visitorid}&aff_sub=5ca72b11d8120&aff_sub3={$bannerid}">
         </div>
 
         <div class="form-group">

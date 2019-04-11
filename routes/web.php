@@ -28,9 +28,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/transaction', 'TransactionController@import')->name('check.transaction');
 
 
-    Route::resource('merchant', 'MerchantController',[
-        'only' => ['update','edit','index']
-    ]);
+    Route::get('configuration', 'ConfigurationController@index')->name('configuration.index');
+    Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
+
+
+//    Route::resource('merchant', 'MerchantController',[
+//        'only' => ['update','edit','index']
+//    ]);
+
     Route::resource('affiliate', 'AffiliateController',[
         'only' => ['update','edit','index']
     ]);
@@ -38,6 +43,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
     Route::get('link/shopee', 'ShopeeController@buildlink')->name('shopee.buildlink');
+    Route::get('link/smart-link', 'ShopeeController@smartLink')->name('shopee.smartlink');
+
+
+    Route::get('hub', 'HubController@index')->name('hub.index');
+
 
 
 

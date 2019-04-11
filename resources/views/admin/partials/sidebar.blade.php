@@ -10,11 +10,6 @@
             <nav>
                 <ul class="metismenu" id="menu">
 
-                    <li>
-                        <a href="{{ route('merchant.index') }}" aria-expanded="true">
-                            <i class="ti-user"></i>
-                            <span>Merchant</span></a>
-                    </li>
 
                     <li>
                         <a href="{{ route('affiliate.index') }}" aria-expanded="true">
@@ -40,9 +35,24 @@
                                     <i class="ti-layout-sidebar-left"></i>
                                     <span>Link</span></a>
                             </li>
+                            <li>
+                                <a href="{{ route('shopee.smartlink') }}" aria-expanded="true">
+                                    <i class="ti-layout-sidebar-left"></i>
+                                    <span>Smart Link</span></a>
+                            </li>
+
 
                         </ul>
                     </li>
+
+
+                    <li>
+                        <a href="{{ route('configuration.index') }}" aria-expanded="true">
+                            <i class="ti-settings"></i>
+                            <span>Setting</span>
+                        </a>
+                    </li>
+
 
 
 

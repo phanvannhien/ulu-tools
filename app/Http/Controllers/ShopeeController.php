@@ -19,4 +19,12 @@ class ShopeeController extends Controller
         return view('admin.shopee.buildlink');
     }
 
+
+    public function smartLink()
+    {
+        # code...
+        return view('admin.shopee.smart_link');
+    }
+
+
 }

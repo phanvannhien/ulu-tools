@@ -58,7 +58,7 @@
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    padding-left: 280px;
+    padding-left: 250px;
     -webkit-transition: padding-left 0.3s ease 0s;
     transition: padding-left 0.3s ease 0s;
 }
@@ -80,8 +80,12 @@
 }
 
 .card-body {
-    padding: 25.6px;
-    padding: 1.6rem;
+
+    padding: 1rem;
+}
+
+.table td, .table th{
+    padding: 0.3rem .5rem;
 }
 
 .h-full {
@@ -108,7 +112,7 @@
     top: 0;
     z-index: 99;
     height: 100vh;
-    width: 280px;
+    width: 250px;
     overflow: hidden;
     background: #303641;
     box-shadow: 2px 0 32px rgba(0, 0, 0, 0.05);
@@ -166,7 +170,7 @@
 }
 
 .metismenu li a i {
-    color: #6a56a5;
+    color: #0088fb;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -191,6 +195,7 @@
 
 .metismenu li a span {
     margin-left: 10px;
+    font-size: 0.9rem;
 }
 
 .metismenu li.active>a,
@@ -396,7 +401,7 @@
 /*-------------------- 2.2 Header Area -------------------*/
 
 .header-area {
-    padding: 15px 30px;
+    padding: 5px 15px;
     background: #fff;
     border-bottom: 1px solid #d8e3e7;
 }
@@ -495,7 +500,7 @@
 }
 
 .notification-area li>i {
-    font-size: 26px;
+    font-size: 18px;
     color: #bdbcbc;
     vertical-align: middle;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
@@ -1779,7 +1784,7 @@ table.dbkit-table tr td {
 /*-------------------- 10. Badge------------------- */
 
 .btn {
-    padding: 11px 17px;
+    padding: 7px 15px;
     font-size: 13px;
     letter-spacing: 0;
 }
@@ -1914,8 +1919,7 @@ p.card-text {
 .form-control {
     font-size: 14px;
     border: 1px solid rgba(170, 170, 170, .3);
-    padding: 10.72px 12.8px;
-    padding: .67rem .8rem;
+    padding: .3rem .5rem;
 }
 
 .form-control-sm,

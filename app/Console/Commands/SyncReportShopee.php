@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Configuration;
 use Illuminate\Console\Command;
 
 use App\APIs\Shopee;
@@ -42,17 +43,21 @@ class SyncReportShopee extends Command
     public function handle(Shopee $shopee)
     {
 
-        $date = Date::now()->subDays(5)->toDateString();
+
+
+
         $offer_type = $this->argument('offer_type') ?? 'tracking' ;
 
-        $filterDate = [
-            "conditional" => "GREATER_THAN_OR_EQUAL_TO",
-            "values" => $date
-        ];
 
-        $shopee = $shopee->applyFilters( 'Stat.datetime', $filterDate );
 
         if( $offer_type == 'tracking'  ){
+            $time_offer = Configuration::where('name','cron_time_conversion' )->first();
+            $date = Date::now()->subMinutes( $time_offer->value )->toDateString();
+            $filterDate = [
+                "conditional" => "GREATER_THAN_OR_EQUAL_TO",
+                "values" => $date
+            ];
+
             $shopee = $shopee->applyFilters( 'Stat.offer_id', [
                 "conditional" => "EQUAL_TO",
                 "values" => [ 9,22 ]
@@ -60,16 +65,23 @@ class SyncReportShopee extends Command
         }
 
         if( $offer_type == 'payment'  ){
+            $time_offer = Configuration::where('name','cron_time_payment' )->first();
+            $date = Date::now()->subMinutes( $time_offer->value )->toDateString();
+            $filterDate = [
+                "conditional" => "GREATER_THAN_OR_EQUAL_TO",
+                "values" => $date
+            ];
+
             $shopee =  $shopee->applyFilters( 'Stat.offer_id', [
                 "conditional" => "EQUAL_TO",
                 "values" => [ 16, 21 ]
             ]);
         }
 
-
+        $shopee = $shopee->applyFilters( 'Stat.datetime', $filterDate );
         $this->info('Fetching...');
         $shopee->getConversions()->syncToULU($offer_type);
-
         $this->info('Update has been send successfully');
+
     }
 }

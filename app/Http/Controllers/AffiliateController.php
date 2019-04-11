@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\AffiliateFilter;
 use App\Models\Affiliate;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,10 @@ use Validator;
 class AffiliateController extends Controller
 {
 
-    public function index(){
-        return view('admin.affiliate.index', [ 'data' => Affiliate::paginate() ]);
+    public function index( Request $request, AffiliateFilter $filter ){
+        $data = Affiliate::filter( $filter )->paginate();
+
+        return view('admin.affiliate.index', [ 'data' => $data ]);
     }
 
     public function create(){

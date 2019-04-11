@@ -25,6 +25,10 @@ class Shopee{
         $this->api_key =config('ulu.shopee_api_key');
     }
 
+    public function getData(){
+        return $this->data;
+    }
+
     public function applyFilters( $field,  $value ){
 
         $this->filters[$field] = $value;

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Affiliate extends Model
 {
     //
+
+    use Filterable;
 
     protected $primaryKey = 'id';
     public $incrementing = false;
