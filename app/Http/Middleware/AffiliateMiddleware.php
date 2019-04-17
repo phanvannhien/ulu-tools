@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class SessionMerchantMiddleware
+class AffiliateMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,12 +15,11 @@ class SessionMerchantMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( session()->has('user') ){
-            $request->merchant = session()->get('admin');
+        if( session()->has('affiliate') ){
             return $next($request);
         }
 
 
-        return redirect()->route('dashboard');
+        return redirect()->route('affiliate.login');
     }
 }

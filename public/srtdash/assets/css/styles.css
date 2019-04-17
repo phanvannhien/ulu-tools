@@ -245,7 +245,7 @@
 }
 
 .horizontal-main-wrapper .container {
-    max-width: 1440px;
+    max-width: 1200px;
 }
 
 .horizontal-main-wrapper .header-area,
@@ -288,13 +288,19 @@
     display: block;
     font-size: 13px;
     padding: 10px 20px;
-    color: #000000;
+    color: #FFF;
     text-transform: capitalize;
+}
+
+.horizontal-menu ul li .submenu a,
+.horizontal-menu ul li .submenu li:hover>a,
+.horizontal-menu ul .submenu li.active >a {
+    color: #333;
 }
 
 .horizontal-menu ul li:hover>a,
 .horizontal-menu ul li.active>a {
-    color: #007BFF;
+    color: #FFF;
 }
 
 .horizontal-menu nav>ul>li:first-child>a {
@@ -350,15 +356,14 @@
 /* mobile menu */
 
 .slicknav_menu {
-    background: #8255f7;
+    background: transparent;
     padding: 0;
-    margin-top: 20px;
 }
 
 .slicknav_menu>a {
     display: block;
     width: 100%;
-    padding: 15px;
+    padding: 8px 15px;
     margin: 0;
     background: transparent;
 }
@@ -383,7 +388,7 @@
 
 .slicknav_nav .slicknav_row:hover {
     border-radius: 0;
-    background: #8e66f7;
+    background: rgba( 0,0,0,0.3 ) ;
 }
 
 .slicknav_nav li i {
@@ -688,7 +693,7 @@ ul.breadcrumbs {
     display: block;
     font-size: 14px;
     font-weight: 400;
-    color: #7801ff;
+    color: #0088fb;
     letter-spacing: 0;
     margin-right: 16px;
     position: relative;
@@ -718,9 +723,7 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
-    padding: 17px 38px;
+    padding: 17px 0px;
     position: relative;
 }
 
@@ -732,9 +735,8 @@ ul.breadcrumbs {
 }
 
 .user-name {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 500;
-    color: #fff;
     letter-spacing: 0;
     cursor: pointer;
     -webkit-user-select: none;
@@ -767,7 +769,7 @@ ul.breadcrumbs {
     -webkit-transform: none!important;
             transform: none!important;
     top: 130%!important;
-    right: 30px!important;
+    right: 0px!important;
     left: auto!important;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;

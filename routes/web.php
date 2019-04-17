@@ -11,45 +11,71 @@
 |
 */
 
+Auth::routes();
+
+Route::group([
+    'middleware' => ['auth'],
+    ], function () {
+
+    Route::get('/', 'Affiliate\AffiliateController@dashboard')->name('affiliate.dashboard');
+    Route::group([
+        'prefix' => 'affiliate'
+    ], function () {
+
+        Route::get('shopee/data-feed', 'Affiliate\ShopeeDataFeedController@dataFeed')->name('shopee.datafeed');
+
+        Route::get('campaign', 'Affiliate\CampaignController@getCampaign')->name('affiliate.campaign');
+        Route::get('campaign/{campaign_id}/banners', 'Affiliate\CampaignController@getBanner')->name('affiliate.campaign.banner');
+
+        Route::get('report', 'Affiliate\ReportController@report')->name('affiliate.report');
+
+        Route::get('update-profile', 'Affiliate\AffiliateController@profile')->name('affiliate.profile');
+
+    });
 
 
-Auth::routes([
-    'register' => false,
-    'forgot' => false,
-]);
+});
 
 
-Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', 'HomeController@index')->name('dashboard');
+Route::group([
+    'prefix' => 'admin'
+], function () {
+
+    Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login.submit');
+
+    Route::group([
+        'middleware' => 'auth:admin'
+    ], function() {
+
+        Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
+
+        Route::get('/transaction', 'Admin\TransactionController@index')->name('transaction');
+        Route::post('/transaction', 'Admin\TransactionController@import')->name('check.transaction');
+
+        Route::get('configuration', 'Admin\ConfigurationController@index')->name('configuration.index');
+        Route::post('configuration', 'Admin\ConfigurationController@store')->name('configuration.store');
+
+        Route::resource('merchant', 'Admin\MerchantController',[
+            'only' => ['update','edit','index']
+        ]);
+
+        Route::resource('affiliate', 'Admin\AffiliateController',[
+            'only' => ['update','edit','index']
+        ]);
+        Route::get('affiliate-sync', 'Admin\AffiliateController@syncPAP')->name('affiliate.sync');
 
 
-    Route::get('/transaction', 'TransactionController@index')->name('transaction');
-    Route::post('/transaction', 'TransactionController@import')->name('check.transaction');
+        Route::get('shopee', 'Admin\ShopeeController@index')->name('shopee.index');
+        Route::get('shopee/link/normal-link', 'Admin\ShopeeController@buildlink')->name('shopee.buildlink');
+        Route::get('shopee/link/smart-link', 'Admin\ShopeeController@smartLink')->name('shopee.smartlink');
 
-
-    Route::get('configuration', 'ConfigurationController@index')->name('configuration.index');
-    Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
-
-
-//    Route::resource('merchant', 'MerchantController',[
-//        'only' => ['update','edit','index']
-//    ]);
-
-    Route::resource('affiliate', 'AffiliateController',[
-        'only' => ['update','edit','index']
-    ]);
-    Route::get('affiliate-sync', 'AffiliateController@syncPAP')->name('affiliate.sync');
-
-    Route::get('shopee', 'ShopeeController@index')->name('shopee.index');
-    Route::get('link/shopee', 'ShopeeController@buildlink')->name('shopee.buildlink');
-    Route::get('link/smart-link', 'ShopeeController@smartLink')->name('shopee.smartlink');
-
-
-    Route::get('hub', 'HubController@index')->name('hub.index');
+    });
 
 
 
 
 });
+
 

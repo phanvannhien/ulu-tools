@@ -91,21 +91,21 @@
     /*================================
     datatable active
     ==================================*/
-    if ($('#dataTable').length) {
-        $('#dataTable').DataTable({
-            responsive: true
-        });
-    }
-    if ($('#dataTable2').length) {
-        $('#dataTable2').DataTable({
-            responsive: true
-        });
-    }
-    if ($('#dataTable3').length) {
-        $('#dataTable3').DataTable({
-            responsive: true
-        });
-    }
+    // if ($('#dataTable').length) {
+    //     $('#dataTable').DataTable({
+    //         responsive: true
+    //     });
+    // }
+    // if ($('#dataTable2').length) {
+    //     $('#dataTable2').DataTable({
+    //         responsive: true
+    //     });
+    // }
+    // if ($('#dataTable3').length) {
+    //     $('#dataTable3').DataTable({
+    //         responsive: true
+    //     });
+    // }
 
 
     /*================================
@@ -138,36 +138,36 @@
     /*================================
     Owl Carousel
     ==================================*/
-    function slider_area() {
-        var owl = $('.testimonial-carousel').owlCarousel({
-            margin: 50,
-            loop: true,
-            autoplay: false,
-            nav: false,
-            dots: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                450: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                1000: {
-                    items: 2
-                },
-                1360: {
-                    items: 1
-                },
-                1600: {
-                    items: 2
-                }
-            }
-        });
-    }
-    slider_area();
+    // function slider_area() {
+    //     var owl = $('.testimonial-carousel').owlCarousel({
+    //         margin: 50,
+    //         loop: true,
+    //         autoplay: false,
+    //         nav: false,
+    //         dots: true,
+    //         responsive: {
+    //             0: {
+    //                 items: 1
+    //             },
+    //             450: {
+    //                 items: 1
+    //             },
+    //             768: {
+    //                 items: 2
+    //             },
+    //             1000: {
+    //                 items: 2
+    //             },
+    //             1360: {
+    //                 items: 1
+    //             },
+    //             1600: {
+    //                 items: 2
+    //             }
+    //         }
+    //     });
+    // }
+    // slider_area();
 
     /*================================
     Fullscreen Page
@@ -219,4 +219,29 @@
         });
     }
 
+    $( 'table' ).addClass('table table-striped').css({ width: '100% !important' });
+
+    $('.banner-detail').each( function (index, item) {
+        if( $(item).height() < 350 ){
+            $(item).next('p').hide();
+        }
+    })
+
+    $('.banner-detail-wrap .load-more').on('click', function (e) {
+        e.preventDefault();
+        var target =  $( this ).parent().prev();
+        if( $(target).hasClass('active') ){
+            $(target).removeClass('active');
+            $(this).html('Xem thêm <i class="fa fa-angle-down"></i>');
+        }else{
+            $(target).addClass('active');
+            $(this).html('Thu gọn <i class="fa fa-angle-up"></i>');
+
+        }
+
+
+    })
+
+
 })(jQuery);
+

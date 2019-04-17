@@ -44,10 +44,7 @@ class SyncReportShopee extends Command
     {
 
 
-
-
         $offer_type = $this->argument('offer_type') ?? 'tracking' ;
-
 
 
         if( $offer_type == 'tracking'  ){

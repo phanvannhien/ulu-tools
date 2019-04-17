@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
 @section('main')
     @include('admin.partials.messages')
@@ -10,7 +10,6 @@
                 <a href="{{ route('affiliate.sync') }}" class="btn btn-primary"><i class="fa fa-refresh"></i> Sync to PAP</a>
             </div>
 
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -20,6 +19,7 @@
                         <th>Phone</th>
                         <th>Status</th>
                         <th>Commission Rate(%)</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +38,10 @@
                             {{ $item->rstatus }}
                         </td>
                         <td>
-                            {{ $item->commission_rate }} <br>
-                            <a href="{{ route('affiliate.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit commission</a>
+                            {{ $item->commission_rate }}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="{{ route('affiliate.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit commission</a>
 
                         </td>
                     </tr>
@@ -50,18 +52,16 @@
         <div class="card-footer text-center">
             <div class="clearfix">
                 @if( $data && count($data))
-                    <p class="text-right">@lang('app.showing') {{$data->firstItem()}}-{{$data->lastItem()}} @lang('app.of') {{$data->total()}}
-                        @lang('app.results')</p>
+                    <p class="text-right">Showing {{$data->firstItem()}}-{{$data->lastItem()}} of {{$data->total()}} results</p>
                 @endif
             </div>
         </div>
     </div>
 
     <!-- /.box -->
-    <div class="text-center">
+    <div class="d-flex justify-content-center">
         {!! $data->appends(request()->input())->links() !!}
     </div>
-
 
     <div class="modal fade" id="modal-search">
         <div class="modal-dialog modal-sm">

@@ -10,7 +10,6 @@
             <nav>
                 <ul class="metismenu" id="menu">
 
-
                     <li>
                         <a href="{{ route('affiliate.index') }}" aria-expanded="true">
                             <i class="ti-user"></i>
@@ -41,6 +40,11 @@
                                     <span>Smart Link</span></a>
                             </li>
 
+                            <li>
+                                <a href="{{ route('shopee.datafeed') }}" aria-expanded="true">
+                                    <i class="ti-layout-sidebar-left"></i>
+                                    <span>Data feed</span></a>
+                            </li>
 
                         </ul>
                     </li>

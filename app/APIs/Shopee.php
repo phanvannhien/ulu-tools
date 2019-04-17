@@ -21,8 +21,8 @@ class Shopee{
 
     public function __construct()
     {
-        $this->base_uri =config('ulu.shopee_api_url');
-        $this->api_key =config('ulu.shopee_api_key');
+        $this->base_uri = config('ulu.shopee_api_url');
+        $this->api_key = config('ulu.shopee_api_key');
     }
 
     public function getData(){

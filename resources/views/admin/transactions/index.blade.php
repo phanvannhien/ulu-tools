@@ -1,8 +1,16 @@
-@extends('admin.layout')
-
+@extends('admin.layouts.app')
 @section('main')
-   
     @include('admin.partials.messages')
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="card bg-info">
+                <div class="p-4 d-flex justify-content-between align-items-center">
+                    <div class="seofct-icon">Total cost: {{ number_format($total) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
@@ -45,15 +53,13 @@
         <div class="card-footer text-center">
             <div class="clearfix">
                 @if( $data && count($data))
-                    <p class="text-right">@lang('app.showing') {{$data->firstItem()}}-{{$data->lastItem()}} @lang('app.of') {{$data->total()}}
-                        @lang('app.results')</p>
+                    <p class="text-right">Showing {{$data->firstItem()}}-{{$data->lastItem()}} of {{$data->total()}} results</p>
                 @endif
             </div>
         </div>
     </div>
-
     <!-- /.box -->
-    <div class="text-center">
+    <div class="d-flex justify-content-center">
         {!! $data->appends(request()->input())->links() !!}
     </div>
 @stop

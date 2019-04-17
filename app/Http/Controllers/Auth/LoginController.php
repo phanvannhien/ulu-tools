@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliate;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Session;
 use Pap_Api_Session;
@@ -31,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -43,6 +45,25 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('affiliate.auth.login');
+    }
+
+    public function username()
+    {
+        return 'username';
+    }
+
+    public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+    }
+
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -52,20 +73,24 @@ class LoginController extends Controller
         // the IP address of the client making these requests into this application.
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
-
         // Action login
         $session = new Pap_Api_Session( config('ulu.server') );
-        if(!@$session->login( $request->input('email') , $request->input('password'))) {
+        if(!@$session->login( $request->input('username') , $request->input('password'),Pap_Api_Session::AFFILIATE, 'vi' )) {
             throw ValidationException::withMessages([
-                $this->username() => ["Cannot login. Message: ".$session->getMessage()],
+                $this->username() => ["Lỗi: ".$session->getMessage()],
             ]);
         }
-        Session::put('admin', $session );
 
+        Session::put('affiliate', $session );
+
+        $affiliate = Affiliate::where('username', $request->input('username') )->first();
+        if( $affiliate->password == '' ){
+            $affiliate->password =  Hash::make($request->input('password')) ;
+            $affiliate->save();
+        }
 
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
@@ -78,6 +103,12 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
 
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+
+        return redirect()->route('affiliate.dashboard');
     }
 
 }

@@ -1,7 +1,6 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
 @section('main')
-    @include('admin.partials.messages')
     <div class="row align-items-stretch">
 
     </div>

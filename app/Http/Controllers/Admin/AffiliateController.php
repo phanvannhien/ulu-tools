@@ -1,6 +1,7 @@
 <?php
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-namespace App\Http\Controllers;
 
 use App\Http\Filters\AffiliateFilter;
 use App\Models\Affiliate;
@@ -15,6 +16,8 @@ use Validator;
 
 class AffiliateController extends Controller
 {
+
+
 
     public function index( Request $request, AffiliateFilter $filter ){
         $data = Affiliate::filter( $filter )->paginate();

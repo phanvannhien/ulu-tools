@@ -1,10 +1,13 @@
 <?php
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-namespace App\Http\Controllers;
-
+use App\Imports\ShopeeDataFeedImport;
 use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ShopeeController extends Controller
 {
@@ -15,14 +18,11 @@ class ShopeeController extends Controller
 
     public function buildlink()
     {
-        # code...
         return view('admin.shopee.buildlink');
     }
 
-
     public function smartLink()
     {
-        # code...
         return view('admin.shopee.smart_link');
     }
 

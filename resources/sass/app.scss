@@ -1,14 +1,62 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+.banner-detail{
+  max-height: 350px;
+  overflow: hidden;
+  transition: all .5s ease;
+}
+
+.banner-detail.active{
+  max-height: 100%;
+}
+
+.statistic{
+
+  div.row{
+    border-bottom: 1px solid #efefef;
+    padding: 1rem 0;
+    h4{
+      text-align: center;
+      font-size: 1rem;
+      .NumberData{
+        display: block;
+        font-size: 2rem;
+        text-align: center;
+        color: $blue
+      }
+    }
+    h5{
+      text-align: center;
+      font-size: 1rem;
+      span{
+        font-size: 0.9rem;
+        color: red;
+        text-align: center;
+        display: block;
+      }
+    }
+
+    .CurrencyData{
+      font-size: 0.9rem;
+      color: red;
+      text-align: center;
+      display: block;
+    }
+
+
+  }
 }

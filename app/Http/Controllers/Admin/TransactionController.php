@@ -1,6 +1,6 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use App\Imports\TransactionImport;
 use App\Models\Sale;
@@ -14,8 +14,9 @@ class TransactionController extends Controller
     public function index(Request $request){
 
         $data = Sale::paginate();
+        $total = Sale::sum('totalcost');
 
-        return view('admin.transactions.index', compact('data'));
+        return view('admin.transactions.index', compact('data', 'total'));
     }
 
 

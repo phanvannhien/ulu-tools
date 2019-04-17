@@ -1,44 +1,48 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
 @section('main')
-    <form action="">
+    <div class="card">
+        <div class="card-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="">Link type</label>
+                    <select id="type" name="type" class="form-control">
+                        <option value="web_shopee">web_shopee</option>
+                        <option value="app_shopee">app_shopee</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label for="">Link type</label>
-            <select id="type" name="type" class="form-control">
-                <option value="web_shopee">web_shopee</option>
-                <option value="app_shopee">app_shopee</option>
-            </select>
+                <div class="form-group">
+                    <label for="">Affiliate ULU link</label>
+                    <input id="baseULUAffUrl" class="form-control" type="text" name="baseULUAffUrl" value="https://account.ulu.vn/scripts/cgolqd?publisher_id=5ca72b11d8120&banner_id=ae40411f">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Shopee hasoffer link</label>
+                    <input id="targetShopeeUrl" class="form-control" type="text" name="targetShopeeUrl" value="http://shopeeaffiliates.go2cloud.org/aff_c?offer_id=22&aff_id=1176&aff_sub2={$visitorid}&aff_sub=5ca72b11d8120&aff_sub3={$bannerid}">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Shopee deep link</label>
+                    <input id="deepUrl" class="form-control" type="text" name="deepUrl" value="https://shopee.vn/LOA-Bluetooth-SUNTEK-SC211-X%C3%A1m-%C4%91en-T%E1%BA%B7ng-Jack-3.5mm-i.11824260.230290812">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Extract link</label>
+                    <input id="extraUrl" class="form-control" type="text" name="extraUrl" value="%3Futm_source%3D%7Baffiliate_name%7D%26utm_medium%3Daffiliate%26utm_content%3D%7Baffiliate_id%7D%26utm_campaign%3D%7Btransaction_id%7D">
+                </div>
+
+
+                <button id="btn-build" type="button" class="btn btn-primary">GET LINK</button>
+
+            </form>
+
+            <div class="card mt-4">
+                <div class="card-body" id="result"></div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label for="">Affiliate ULU link</label>
-            <input id="baseULUAffUrl" class="form-control" type="text" name="baseULUAffUrl" value="https://account.ulu.vn/scripts/cgolqd?publisher_id=5ca72b11d8120&banner_id=ae40411f">
-        </div>
-
-        <div class="form-group">
-            <label for="">Shopee hasoffer link</label>
-            <input id="targetShopeeUrl" class="form-control" type="text" name="targetShopeeUrl" value="http://shopeeaffiliates.go2cloud.org/aff_c?offer_id=22&aff_id=1176&aff_sub2={$visitorid}&aff_sub=5ca72b11d8120&aff_sub3={$bannerid}">
-        </div>
-
-        <div class="form-group">
-            <label for="">Shopee deep link</label>
-            <input id="deepUrl" class="form-control" type="text" name="deepUrl" value="https://shopee.vn/LOA-Bluetooth-SUNTEK-SC211-X%C3%A1m-%C4%91en-T%E1%BA%B7ng-Jack-3.5mm-i.11824260.230290812">
-        </div>
-
-        <div class="form-group">
-            <label for="">Extract link</label>
-            <input id="extraUrl" class="form-control" type="text" name="extraUrl" value="%3Futm_source%3D%7Baffiliate_name%7D%26utm_medium%3Daffiliate%26utm_content%3D%7Baffiliate_id%7D%26utm_campaign%3D%7Btransaction_id%7D">
-        </div>
-        
-
-        <button id="btn-build" type="button" class="btn btn-primary">GET LINK</button>
-
-    </form>
-
-    <div class="card mt-4">
-        <div class="card-body" id="result"></div>
     </div>
+
 
 @stop
 
