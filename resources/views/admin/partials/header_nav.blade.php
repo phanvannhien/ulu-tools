@@ -1,5 +1,5 @@
 <!-- header area start -->
-<div class="header-area header-bottom">
+<div class="header-area bg-primary header-bottom">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-9  d-none d-lg-block">

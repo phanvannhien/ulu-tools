@@ -11,8 +11,44 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <form class=" mb-3" action="{{ route('affiliate.report') }}" method="get">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Mã đơn hàng</label>
+                                <input type="text" name="t_orderid" value="{{ request()->get('t_orderid') }}" class="form-control" placeholder="Mã đơn hàng">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Ngày tạo</label>
+                                <select name="dateinserted" id="" class="form-control">
+                                    <option value="">Tất cả</option>
+                                    @foreach( config('ulu.commission_date') as $key => $text )
+                                    <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="">Trạng thái</label>
+                                <select name="payoutstatus" id="" class="form-control">
+                                    <option value="">Tất cả</option>
+                                    @foreach( config('ulu.payout_status') as $key => $text )
+                                    <option {{ request()->get('payoutstatus') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
+                                    @endforeach
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <button class="btn btn-primary btn-sm ml-3 float-right" type="submit" name="submit" value="filter"><i class="fa fa-filter"></i> Lọc</button>
+                        </div>
+                    </div>
+                   
+                    
 
+                    
+                </form>
+                <div class="table-responsive">
 
                     <table>
                         <thead>
@@ -66,4 +102,3 @@
 
     </div>
 @endsection
-

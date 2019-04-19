@@ -18,6 +18,21 @@ class ReportController extends Controller
         $page = $request->page ? $request->page : 1;
         $offset = ( $page-1 ) * $perPage;
 
+        $filters = [];
+
+        if( $request->has('t_orderid') && $request->input('t_orderid') != '' ){
+            $filters[] = ["orderId","L", $request->input('t_orderid') ];
+        }
+        if( $request->has('dateinserted') && $request->input('dateinserted') != '' ){
+            $filters[] = ["dateinserted","DP", $request->input('dateinserted') ];
+        }
+
+        if( $request->has('payoutstatus') && $request->input('payoutstatus') != '' ){
+            $filters[] = ["payoutstatus","IN", $request->input('payoutstatus') ];
+        }
+
+
+
         $columns = [
             ['id'],
             ['commission'],
@@ -46,6 +61,7 @@ class ReportController extends Controller
                     'sort_asc' => false,
                     'offset' => $offset,
                     'limit' => $perPage,
+                    'filters' => $filters,
                     'columns' => $columns,
                 ]
             ],
@@ -53,6 +69,8 @@ class ReportController extends Controller
         ];
 
         $queryString = 'D='.json_encode($arrQuery);
+
+       // dd($queryString);
 
         $response =  $client->request('POST', 'https://account.ulu.vn/scripts/server.php', [
             'body' => $queryString,

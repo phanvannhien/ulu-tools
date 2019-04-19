@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::group([
-    'middleware' => ['auth'],
+    'middleware' => ['auth','affiliate'],
     ], function () {
 
     Route::get('/', 'Affiliate\AffiliateController@dashboard')->name('affiliate.dashboard');
@@ -39,7 +39,7 @@ Route::group([
 
 
 Route::group([
-    'prefix' => 'admin'
+    'prefix' => 'merchant'
 ], function () {
 
     Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');

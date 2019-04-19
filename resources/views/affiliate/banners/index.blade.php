@@ -38,12 +38,18 @@
                                     </div>
                                     <button class="btn btn-primary get-url" type="button" name="get_url">Nhận Link</button>
                                     <div class="end-link mt-3"></div>
+
+                                    <div class="wrap-loadding justify-content-center align-items-center" style="display:none">
+                                        <div role="status" class="spinner-grow text-primary"><span class="sr-only">Loading...</span></div></div>
                                 </form>
                             </div>
                             <div class="col-md-5">
                                 <div class="bg-light border p-3 banner-detail-wrap">
                                     <div class="banner-detail" id="{{ $arrData['bannerid'] }}">
-                                        {!! $dataCampaign[1][1][1] !!}
+                                        <div class="table-responsive">
+                                                {!! $dataCampaign[1][1][1] !!}
+                                        </div>
+                                        
                                     </div>
 
                                     <p class="text-center mt-3">
@@ -79,20 +85,27 @@
                 const hubUrl = $(form).find("input[name='hubUrl']").val();
                 const extraUrl =  $(form).find("input[name='extraUrl']").val();
 
+
                 if( deepUrl == '' ){
                     $(form).find("input[name='desturl']").focus();
                     return false;
                 }else{
+                    $(form).find('.wrap-loadding').show();
+
                     wrap_shopee_link( baseULUAffUrl, hubUrl , deepUrl, extraUrl, function( endUrl ){
                         $.ajax({
                             type: 'get',
                             url: 'https://api-ssl.bitly.com/v3/shorten?access_token='+bitlyToken+'&longUrl='+ encodeURIComponent(endUrl) ,
                             success: function (data) {
+                                $(form).find('.wrap-loadding').hide();
                                 if(data) {
                                     if (data.status_code == 200){
                                         $(form).find('.end-link').html(data.data.url).addClass('alert alert-info');
                                     }
                                 }
+                            },
+                            error: function(  jqXHR,  textStatus,  errorThrown){
+                                $(form).find('.wrap-loadding').hide();
                             }
                         });
                     });

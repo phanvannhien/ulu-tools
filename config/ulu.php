@@ -9,5 +9,21 @@ return [
         'P' => 'Đang đợi',
         'A' => 'Đã duyệt',
         'D' => 'Đã huỷ',
+    ],
+    'commission_date' => [
+        'T' => 'Hôm nay',
+        'Y' => 'Hôm qua',
+        'L7D' => '7 ngày gần đây',
+        'L30D' => '30 ngày gần đây',
+        'TW' => 'Tuần này (thứ hai - chủ nhật)',
+        'LW' => 'Tuần trước (thứ hai - chủ nhật)',
+        'LWW' => 'Tuần làm việc gần đây (Thứ Hai-Thứ Sáu)',
+        'TM' => 'Tháng này',
+        'LM' => 'Tháng gần đây',
+        'TY' => 'Năm nay',
+    ],
+    'payout_status' => [
+        'P' => 'Đang chờ',
+        'A' => 'Đã duyệt',
     ]
 ];

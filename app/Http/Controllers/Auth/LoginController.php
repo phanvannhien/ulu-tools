@@ -84,7 +84,8 @@ class LoginController extends Controller
             ]);
         }
 
-        Session::put('affiliate', $session );
+
+        session()->put('affiliate', $session );
 
         $affiliate = Affiliate::where('username', $request->input('username') )->first();
         if( $affiliate->password == '' ){

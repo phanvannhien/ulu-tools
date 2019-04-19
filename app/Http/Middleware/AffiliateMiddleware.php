@@ -16,10 +16,15 @@ class AffiliateMiddleware
     public function handle($request, Closure $next)
     {
         if( session()->has('affiliate') ){
+
+            //$sessionUlu = session()->get('affiliate');
+            //dd($sessionUlu);
+    
             return $next($request);
         }
 
 
+        auth()->logout();
         return redirect()->route('affiliate.login');
     }
 }

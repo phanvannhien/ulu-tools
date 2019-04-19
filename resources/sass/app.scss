@@ -6,6 +6,7 @@
 @import 'variables';
 
 // Bootstrap
+@import 'bootstrap';
 //@import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
@@ -60,3 +61,16 @@
 
   }
 }
+
+
+.wrap-loadding{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.67);
+  display: flex;
+}
+
