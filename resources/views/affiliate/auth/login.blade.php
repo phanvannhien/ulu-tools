@@ -4,8 +4,9 @@
     <div class="login-area">
         <div class="container">
             <div class="login-box ptb--100">
+                    
                 <form method="POST" action="{{ route('login') }}" class="login100-form validate-form">
-                    @include('admin.partials.messages')
+                        @include('affiliate.partials.messages')
                     @csrf
                     <div class="login-form-head">
                         <h4>Đăng nhập</h4>

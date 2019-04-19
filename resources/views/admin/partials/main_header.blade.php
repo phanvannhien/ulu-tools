@@ -162,7 +162,10 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Message</a>
                             <a class="dropdown-item" href="#">Settings</a>
-                            <a class="dropdown-item" href="#">Log Out</a>
+                            <form class="d-inline" action="{{ route('admin.logout') }}" method="post">
+                                @csrf
+                                <a class="dropdown-item" href="#" onclick="$(this).parent('form').submit()"><i class="ti-lock"></i> Đăng xuất</a>
+                            </form>
                         </div>
                     </div>
                 </div>

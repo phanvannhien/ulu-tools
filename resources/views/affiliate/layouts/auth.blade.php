@@ -24,8 +24,8 @@
 </head>
 
 <body>
-
-@yield('main')
+ 
+    @yield('main')
 
 <!-- jquery latest version -->
 <script src="{{ url('srtdash/assets/js/vendor/jquery-2.2.4.min.js') }}"></script>

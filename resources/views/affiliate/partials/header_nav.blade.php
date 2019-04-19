@@ -16,7 +16,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{ route('affiliate.campaign') }}"><i class="ti-dashboard"></i><span>Chiến dịch</span></a>
+                                <a class="btn btn-danger" href="{{ route('affiliate.campaign') }}"><i class="ti-dashboard"></i><span>Chiến dịch</span></a>
                             </li>
                             <li>
                                 <a href="{{ route('affiliate.report') }}"><i class="ti-bar-chart"></i><span>Báo cáo</span></a>

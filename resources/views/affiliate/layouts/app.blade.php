@@ -36,8 +36,10 @@
 <div class="horizontal-main-wrapper">
     @include('affiliate.partials.main_header')
     @include('affiliate.partials.header_nav')
-
     <div id="app" class="main-content-inner">
+        <div class="container mt-3">
+                @include('affiliate.partials.messages')
+        </div>
         @yield('main')
     </div>
 

@@ -82,6 +82,7 @@ class AffiliateController extends Controller
 
     public function profile(){
 
+        return back()->with('status', 'Đang cập nhật');
         $session = session()->get('affiliate');
        
     
