@@ -164,9 +164,9 @@ class Shopee{
                         $sale->setCustomCommission( 0 );
                         //$sale->setTimeStamp( $conversion['Stat']['datetime'] );
 
-                        if( $conversion['Stat']['offer_id'] == 22 ){
-                            $accountID = 'd794e8f3';
-                        }
+                        // if( $conversion['Stat']['offer_id'] == 22 ){
+                        //     $accountID = 'd794e8f3';
+                        // }
 
                         $saleTracker->setAccountId( $accountID  );
                         $saleTracker->register();

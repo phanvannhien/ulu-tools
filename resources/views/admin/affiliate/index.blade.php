@@ -17,9 +17,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Status</th>
-                        <th>Commission Rate(%)</th>
-                        <th></th>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,22 +25,15 @@
                     <tr>
 
                         <td>{{ $item->userid }}</td>
-                        <td>{{ $item->fullname}}</td>
+                        <td>{{ $item->full_name}}</td>
                         <td>
                             <a href="#">{{ $item->username }}</a>
                         </td>
                         <td>
-                            {{ $item->data8 }}
+                            {{ $item->phone }}
                         </td>
                         <td>
-                            {{ $item->rstatus }}
-                        </td>
-                        <td>
-                            {{ $item->commission_rate }}
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-xs" href="{{ route('affiliate.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit commission</a>
-
+                            <a href="" class="btn btn-primary btn-xs">View Detail</a>
                         </td>
                     </tr>
                 @endforeach

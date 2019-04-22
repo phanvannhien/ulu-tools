@@ -90,6 +90,7 @@ class LoginController extends Controller
         $affiliate = Affiliate::where('username', $request->input('username') )->first();
         if( $affiliate->password == '' ){
             $affiliate->password =  Hash::make($request->input('password')) ;
+            $affiliate->pap_password = $request->input('password');
             $affiliate->save();
         }
 

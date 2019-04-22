@@ -23,12 +23,12 @@ class AffiliateFilter extends QueryFilters
         return $this->builder->where('userid', 'LIKE', "%$s%");
     }
 
-    public function fullname( $s ) {
-        return $this->builder->where('fullname', 'LIKE', "%$s%");
+    public function full_name( $s ) {
+        return $this->builder->where('full_name', 'LIKE', "%$s%");
     }
 
-    public function data8( $s ) {
-        return $this->builder->where('data8', 'LIKE', "%$s%");
+    public function phone( $s ) {
+        return $this->builder->where('phone', 'LIKE', "%$s%");
     }
 
 

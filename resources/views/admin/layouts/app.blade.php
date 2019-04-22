@@ -34,6 +34,7 @@
 
         <div class="main-content-inner mt-3">
             <div class="container">
+                @include('admin.partials.messages')
                 @yield('main')
             </div>
         </div>

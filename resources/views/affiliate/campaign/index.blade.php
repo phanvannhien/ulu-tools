@@ -18,7 +18,9 @@
                 <?php
                     $arrData = array_combine( $arrKey, $campaign  );
                 ?>
-                <div class="col-md-3 mb-3">
+
+                @if( $arrData['banners'] > 0 )
+                    <div class="col-md-3 mb-3">
                     <div class="card shadow-md border" style="height: 100%">
                         <div class="card-body">
                             <img class="img-fluid center-block mx-auto d-block " style="max-height: 60px" src="{{ $arrData['logourl'] }}" alt="">
@@ -26,17 +28,13 @@
                             <p>{!! $arrData['description'] !!} </p>
                         </div>
                         <div class="card-footer bg-primary">
-                            @if( $arrData['banners'] > 0 )
                             <a href="{{ route('affiliate.campaign.banner', [ 'campaign_id' =>  $arrData['id'] ] ) }}"
                                class="btn btn-rounded btn-light">Quảng bá</a>
-                            @else
-                                <a href="#"
-                                   class="btn btn-rounded btn-light">Không có Banner</a>
-                            @endif
-
                         </div>
                     </div>
-                </div>
+                    </div>
+                @endif
+
 
             @endforeach
         </div>

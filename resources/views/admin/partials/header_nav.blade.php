@@ -10,6 +10,9 @@
                                 <a href="{{ route('affiliate.index') }}" aria-expanded="true">
                                     <i class="ti-user"></i>
                                     <span>Affiliate</span></a>
+                                    <ul class="submenu">
+                                        <li><a href="{{ route('affiliate_level.index') }}">Affiliate level</a></li>
+                                    </ul>
                             </li>
                             <li>
                                 <a href="{{ route('transaction') }}" aria-expanded="true">

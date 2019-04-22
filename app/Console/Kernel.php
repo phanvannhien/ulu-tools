@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        Commands\SyncReportShopee::class
+        Commands\SyncReportShopee::class,
+        Commands\SyncAffiliatePAP::class,
     ];
 
     /**
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('shopee:report tracking')->everyFiveMinutes();
         $schedule->command('shopee:report payment')->daily();
+        $schedule->command('ulu:sync affiliate')->daily();
     }
 
     /**

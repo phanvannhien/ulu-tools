@@ -16,17 +16,28 @@ class CreateAffiliatesTable extends Migration
         if( !Schema::hasTable('affiliates') )
         Schema::create('affiliates', function (Blueprint $table) {
 
-            $table->string('id', 100)->unique();
-            $table->string('refid', 100)->nullable();
-            $table->string('userid', 100)->nullable();
-            $table->string('username', 100)->nullable();
-            $table->string('firstname', 100)->nullable();
-            $table->string('lastname', 100)->nullable();
-            $table->string('parentuserid', 100)->nullable();
-            $table->string('dateinserted', 100)->nullable();
-            $table->integer('commission_rate')->unsigned()->default(0);
-            $table->string('rstatus',50);
-            $table->string('data8',50);
+            $table->increments('id');
+
+            $table->string('userid', 100)->unique(); // id PAP
+            $table->string('username', 100)->unique();
+            $table->string('password', 100)->nullable();
+            $table->string('dob', 100)->nullable();
+            $table->boolean('agreement')->nullable();
+            $table->string('avatar', 200)->nullable();
+            $table->string('full_name', 200);
+            $table->string('phone', 12);
+
+
+            $table->string('company', 200)->nullable();
+            $table->string('website', 200)->nullable();
+
+            $table->string('address', 200)->nullable();
+            $table->integer('matp')->unsigned()->nullable();
+            $table->integer('maqh')->unsigned()->nullable();
+
+
+            $table->boolean('status')->default(1);
+            $table->boolean('locked')->default(0);
 
             $table->timestamps();
         });

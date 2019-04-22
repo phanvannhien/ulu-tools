@@ -12,10 +12,11 @@
                 <div class="clearfix d-md-inline-block d-block">
                     <div class="user-profile m-0 float-right">
                         <img class="avatar user-thumb" src="{{ url('srtdash/assets/images/author/avatar.png') }}" alt="avatar">
-                        <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ auth()->user()->fullname }}
+                        <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ auth()->user()->full_name }}
                             <i class="fa fa-angle-down"></i></h4>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('affiliate.profile') }}"><i class="ti-user"></i>  Tài khoản</a>
+                            <a class="dropdown-item" href="{{ route('bank.index') }}"><i class="fa fa-bank"></i> Ngân hàng</a>
 
                             <form class="d-inline" action="{{ route('logout') }}" method="post">
                                 @csrf

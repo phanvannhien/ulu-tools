@@ -22,6 +22,7 @@
                                 <a href="{{ route('affiliate.report') }}"><i class="ti-bar-chart"></i><span>Báo cáo</span></a>
                                 <ul class="submenu">
                                     <li><a href="{{ route('affiliate.report') }}">Hoa hồng</a></li>
+                                    <li><a href="{{ route('affiliate.report.click') }}">Lượt click</a></li>
                                 </ul>
                             </li>
 
