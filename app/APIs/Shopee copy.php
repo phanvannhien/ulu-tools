@@ -135,33 +135,79 @@ class Shopee{
 
     public function syncToULU( $offer_type ){
 
+
         if( $this->data['data'] && count( $this->data['data'] ) ){
+
             if( $offer_type == 'tracking' ){
+
+                $pap = new PAPMerchant();
+
                 foreach ( $this->data['data']  as $conversion  ){
 
-                    $accountID = 'b8e749d1'; //web shopee account
-                    Sale::firstOrCreate(
-                        ['t_orderid' =>  $conversion['Stat']['ad_id'] ],
-                        [
+                    $currentSale  = Sale::where('t_orderid', $conversion['Stat']['ad_id'] )->first();
+                    if( !$currentSale ){
+
+                        $accountID = 'b8e749d1'; //web shopee account
+
+                        $pap->saveConsersion( [
+                            'userid' => $conversion['Stat']['affiliate_info1'],
+                            'orderid' => $conversion['Stat']['ad_id'],
+                            'accountid' => $accountID ,
+                            'dateinserted' => $conversion['Stat']['datetime'],
+                            'totalcost' => $conversion['Stat']['sale_amount@VND'],
+                            'data1' => $conversion['Stat']['affiliate_info2'],
+                            'data2' => $conversion['Stat']['offer_id'],
+                        ]);
+
+                        die('done');
+
+
+//                        $saleTracker = new Pap_Api_SaleTracker( config('ulu.sale') );
+//                        $saleTracker->setVisitorId( $conversion['Stat']['affiliate_info2'] );
+//                        // save lead to PAP
+//                        $sale = $saleTracker->createSale();
+//                        $sale->setTotalCost( $conversion['Stat']['sale_amount@VND'] );
+//                        $sale->setOrderID( $conversion['Stat']['ad_id'] );
+//                        $sale->setAffiliateID( $conversion['Stat']['affiliate_info1'] );
+//                        $sale->setStatus('P');
+//                        $sale->setData1( $conversion['Stat']['affiliate_info2'] );
+//                        $sale->setData2( $conversion['Stat']['offer_id'] );
+//                        $sale->setCustomCommission( 0 );
+//                        //$sale->setTimeStamp( $conversion['Stat']['datetime'] );
+//
+//                        // if( $conversion['Stat']['offer_id'] == 22 ){
+//                        //     $accountID = 'd794e8f3';
+//                        // }
+//
+//                        $saleTracker->setAccountId( $accountID  );
+//                        $saleTracker->register();
+
+
+
+
+                        // Save to local
+                        $sysSale = Sale::create([
                             't_orderid' =>  $conversion['Stat']['ad_id'],
                             'userid' =>  $conversion['Stat']['affiliate_info1'],
                             'accountid' =>  $accountID,
-                            'bannerid' =>  $conversion['Stat']['affiliate_info3'],
-                            'visitorid' =>  $conversion['Stat']['affiliate_info2'],
                             'commission' =>  0,
                             'totalcost' =>  $conversion['Stat']['sale_amount@VND'],
                             'rstatus' =>  'P',
                             'data1' =>  $conversion['Stat']['affiliate_info2'],
-                            'data2' =>  $conversion['Stat']['offer_id'],
-                            'conversion_date' => $conversion['Stat']['datetime']
-                        ]
-                    );
+                            'data2' =>  $conversion['Stat']['offer_id']
+                        ]);
 
-                    Log::create([
-                        'action' => 'sync_shopee_PAP',
-                        'detail' => 'Sync transaction:  ' . $conversion['Stat']['ad_id']
-                    ]);
+                        Log::create([
+                           'action' => 'sync_shopee_PAP',
+                            'detail' => 'Sync transaction:  ' . $conversion['Stat']['ad_id']
+                        ]);
+
+
+                    }
+
                 }
+
+
             }
 
 //            if( $offer_type == 'payment' ){

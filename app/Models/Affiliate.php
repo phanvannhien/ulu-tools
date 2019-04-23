@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Filters\Filterable;
 use App\Models\Affiliate\UserBanks;
+use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +22,7 @@ class Affiliate extends Authenticatable
 
     public $fillable = [
         'userid',
+        'refid',
         'username',
         'password',
         'pap_password',
@@ -42,5 +44,8 @@ class Affiliate extends Authenticatable
 
     public function banks(){
         return $this->hasMany( UserBanks::class, 'user_id' );
+    }
+    public function conversions(){
+        return $this->hasMany( Transaction::class, 'userid','refid' );
     }
 }

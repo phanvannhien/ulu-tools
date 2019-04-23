@@ -14,39 +14,73 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
+            <form action="" method="get" class="mb-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select name="account_id" id="" class="form-control">
+                            <option value="">All Advertiser</option>
+                            @foreach( \App\Models\Merchant::orderBy('account')->select('account_id', 'account')->get() as $mechant  )
+                                <option {{ request()->get('account_id') == $mechant->account_id ? 'selected': '' }} value="{{ $mechant->account_id }}">{{ $mechant->account }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="userid" id="" class="form-control">
+                            <option value="">All Affiliate</option>
+                            @foreach( \App\Models\Affiliate::orderBy('full_name')->select('refid', 'full_name')->get() as $mechant  )
+                                <option {{ request()->get('userid') == $mechant->refid ? 'selected': '' }} value="{{ $mechant->refid }}">{{ $mechant->full_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <div class="btn">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+
+                            </div>
+                            <input id="reportrange" name="conversion_date" class="form-control" value="{{ request()->get('conversion_date') }}" type="text">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Filter</button>
+                    <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Download xlsx</button>
+                </div>
+            </form>
             <div class="table-responsive">
                 <table class="table table-striped">
-                        <thead>
+                    <thead>
+                    <head>
+                        <th>Order ID</th>
+                        <th>Affiliate</th>
+                        <th>Campaign</th>
+                        <th>Advertiser</th>
+                        <th>Commission</th>
+                        <th>Total cost</th>
+                        <th>Status</th>
+                        <th>Visitor ID</th>
+                        <th>Offer type</th>
+                    </head>
+                    </thead>
+                    <tbody>
+                    @foreach( $data as $item )
                         <tr>
-                            <td>Order ID</td>
-                            <td>Affiliate ID</td>
-                            <td>Campaign ID</td>
-                            <td>Product ID</td>
-                            <td>Account ID</td>
-                            <td>Commission</td>
-                            <td>Total cost</td>
-                            <td>Status</td>
-                            <td>Data 1 (Visitor ID)</td>
-                            <td>Data 2 (Shopee offer type)</td>
+                            <td>
+                                {{ $item->t_orderid }} <br>
+                                <span class="text-primary">{{ $item->conversion_date }}</span>
+                            </td>
+                            <td>{{ ($item->affiliate) ? $item->affiliate->full_name : '' }}</td>
+                            <td>{{ $item->campaignid}}</td>
+                            <td>{{ ($item->advertiser ) ? $item->advertiser->account : ''  }}</td>
+                            <td class="text-right"><span class="text-danger">{{ number_format($item->commission) }}</span></td>
+                            <td class="text-right"><span class="text-danger">{{ number_format($item->totalcost) }}</span></td>
+                            <td><span class="badge-info badge">{{ config('ulu.commission_status')[$item->rstatus] }}</span></td>
+                            <td>{{ $item->visitorid }}</td>
+                            <td>{{ $item->data2 }}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach( $data as $item )
-                            <tr>
-                                <td>{{ $item->t_orderid }}</td>
-                                <td>{{ $item->userid }}</td>
-                                <td>{{ $item->campaignid}}</td>
-                                <td>{{ $item->productid}}</td>
-                                <td>{{ $item->accountid}}</td>
-                                <td>{{ number_format($item->commission) }}</td>
-                                <td>{{ number_format($item->totalcost) }}</td>
-                                <td>{{ $item->rstatus}}</td>
-                                <td>{{ $item->data1}}</td>
-                                <td>{{ $item->data2}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             
         </div>

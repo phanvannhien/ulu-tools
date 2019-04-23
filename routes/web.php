@@ -77,6 +77,9 @@ Route::group([
         Route::resource('affiliate', 'Admin\AffiliateController',[
             'only' => ['update','edit','index']
         ]);
+
+        Route::resource('merchant', 'Admin\MerchantController');
+
         Route::get('affiliate-sync', 'Admin\AffiliateController@syncPAP')->name('affiliate.sync');
         Route::resource('affiliate_level', 'Admin\AffiliateLevelController');
         Route::get('affiliate_level/{id}/set-default', 'Admin\AffiliateLevelController@setDefault')->name('affiliate_level.set.default');

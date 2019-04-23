@@ -1,104 +1,95 @@
 @extends('affiliate.layouts.app')
-
 @section('main')
-    <div class="container mt-3">
-        <div class="breadcrumbs-area clearfix mb-3">
-            <ul class="breadcrumbs">
-                <li><a href="{{ route('affiliate.dashboard') }}"><i class="ti-dashboard"></i> Dashboard</a></li>
-                <li><span>Hoa hồng</span></li>
-            </ul>
+    @include('admin.partials.messages')
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="card bg-info">
+                    <div class="p-4 d-flex justify-content-between align-items-center">
+                        <div class="seofct-icon">Tổng giá trị đơn hàng: {{ number_format($total).config('ulu.price_suffix')  }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success">
+                    <div class="p-4 d-flex justify-content-between align-items-center">
+                        <div class="seofct-icon">Tổng giá trị Hoa hồng: {{ number_format($commission_total).config('ulu.price_suffix')  }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-
+        <!-- Default box -->
         <div class="card">
             <div class="card-body">
-                <form class=" mb-3" action="{{ route('affiliate.report') }}" method="get">
+                <form action="" method="get" class="mb-3">
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="">Mã đơn hàng</label>
-                                <input type="text" name="t_orderid" value="{{ request()->get('t_orderid') }}" class="form-control" placeholder="Mã đơn hàng">
-                            </div>
+                            <select name="account_id" id="" class="form-control">
+                                <option value="">Tất cả Nhà cung cấp</option>
+                                @foreach( \App\Models\Merchant::orderBy('account')->select('account_id', 'account')->get() as $mechant  )
+                                    <option {{ request()->get('account_id') == $mechant->account_id ? 'selected': '' }} value="{{ $mechant->account_id }}">{{ $mechant->account }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="">Ngày tạo</label>
-                                <select name="dateinserted" id="" class="form-control">
-                                    <option value="">Tất cả</option>
-                                    @foreach( config('ulu.commission_date') as $key => $text )
-                                    <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                                <label for="">Trạng thái</label>
-                                <select name="payoutstatus" id="" class="form-control">
-                                    <option value="">Tất cả</option>
-                                    @foreach( config('ulu.payout_status') as $key => $text )
-                                    <option {{ request()->get('payoutstatus') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
-                                    @endforeach
-                                </select>
-                        </div>
-                        <div class="col-md-3">
-                                <button class="btn btn-primary btn-sm ml-3 float-right" type="submit" name="submit" value="filter"><i class="fa fa-filter"></i> Lọc</button>
-                        </div>
-                    </div>
-                   
-                    
 
-                    
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <div class="btn">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+
+                                </div>
+                                <input id="reportrange" name="conversion_date" class="form-control" value="{{ request()->get('conversion_date') }}" type="text">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Lọc</button>
+                        <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Tải về (xlsx)</button>
+                    </div>
                 </form>
                 <div class="table-responsive">
-
-                    <table>
+                    <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>Hoa hồng</th>
-                                <th>Tổng giá trị</th>
-                                <th>ID Đơn hàng</th>
-                                <th>ID Sản phẩm</th>
-                                <th>Ngày tạo</th>
-                                <th>Tên chiến dịch</th>
-                                <th>Trạng thái</th>
-                            </tr>
+                        <head>
+                            <th>Mã đơn hàng</th>
+                            <th>Chiến dịch</th>
+                            <th>Nhà cung cấp</th>
+                            <th>Hoa hồng</th>
+                            <th>Giá trị đơn hàng</th>
+                            <th>Trạng thái</th>
+                        </head>
                         </thead>
                         <tbody>
-                        <?php $arrKey = [] ?>
-                        @foreach ($data as $item)
-
-                            @if( $loop->index == 0 )
-                                <?php $arrKey = $item; ?>
-                            @else
-                                <?php $arrData = array_combine( $arrKey, $item  ); ?>
-                                <tr>
-                                    <td>{{ number_format($arrData['commission']) }}</td>
-                                    <td>{{ number_format($arrData['totalcost']) }}</td>
-                                    <td>{{ $arrData['t_orderid'] }}</td>
-                                    <td>{{ $arrData['productid'] }}</td>
-                                    <td>{{ $arrData['dateinserted'] }}</td>
-                                    <td>{{ $arrData['name'] }}</td>
-                                    <td><span class="badge badge-info">{{ config('ulu.commission_status')[$arrData['rstatus']] }}</span></td>
-                                </tr>
-                            @endif
-
-
+                        @foreach( $data as $item )
+                            <tr>
+                                <td>
+                                    {{ $item->t_orderid }} <br>
+                                    <span class="text-primary">{{ $item->conversion_date }}</span>
+                                </td>
+                                <td>{{ $item->campaignid}}</td>
+                                <td>{{ ($item->advertiser ) ? $item->advertiser->account : ''  }}</td>
+                                <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
+                                <td class="text-center"><span class="text-danger">{{ number_format($item->totalcost).config('ulu.price_suffix') }}</span></td>
+                                <td><span class="badge-info badge">{{ config('ulu.commission_status')[$item->rstatus] }}</span></td>
+                            </tr>
                         @endforeach
                         </tbody>
-
                     </table>
                 </div>
-                <div class="d-flex justify-content-center">
-                    {!! $data->appends(request()->input())->links() !!}
+
+            </div>
+            <div class="card-footer text-center">
+                <div class="clearfix">
+                    @if( $data && count($data))
+                        <p class="text-right">Showing {{$data->firstItem()}}-{{$data->lastItem()}} of {{$data->total()}} results</p>
+                    @endif
                 </div>
             </div>
-            <div class="card-footer">
-                @if( $data && count($data))
-                    <p class="text-right">Hiển thị {{$data->firstItem()}}-{{$data->lastItem()}} đến  {{$data->total()}} kết quả</p>
-                @endif
-            </div>
-
+        </div>
+        <!-- /.box -->
+        <div class="d-flex justify-content-center">
+            {!! $data->appends(request()->input())->links() !!}
         </div>
 
-
     </div>
-@endsection
+@stop

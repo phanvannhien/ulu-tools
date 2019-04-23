@@ -91,5 +91,82 @@ class PAP{
 
     }
 
+    public function getConversion( $page, $filters ){
+        $sessionId = Session::get('affiliate')->getSessionId();
+        $client = new Client();
+
+        $perPage = 100;
+
+        $offset = ( $page-1 ) * $perPage;
+
+        $filters = [];
+
+//        if( $request->has('t_orderid') && $request->input('t_orderid') != '' ){
+//            $filters[] = ["orderId","L", $request->input('t_orderid') ];
+//        }
+//        if( $request->has('dateinserted') && $request->input('dateinserted') != '' ){
+//            $filters[] = ["dateinserted","DP", $request->input('dateinserted') ];
+//        }
+//
+//        if( $request->has('payoutstatus') && $request->input('payoutstatus') != '' ){
+//            $filters[] = ["payoutstatus","IN", $request->input('payoutstatus') ];
+//        }
+
+
+
+        $columns = [
+            ['id'],
+            ['commission'],
+            ['totalcost'],
+            ['fixedcost'],
+            ['t_orderid'],
+            ['productid'],
+            ['dateinserted'],
+            ['name'],
+            ['rtype'],
+            ['tier'],
+            ['commissionTypeName'],
+            ['rstatus'],
+            ['merchantnote'],
+            ['channel'],
+        ];
+
+        $arrQuery = [
+            'C' => 'Gpf_Rpc_Server',
+            'M' => 'run',
+            'requests' => [
+                [
+                    'C' => 'Pap_Affiliates_Reports_TransactionsGrid',
+                    'M' => 'getRows',
+                    'sort_col' => 'dateinserted',
+                    'sort_asc' => false,
+                    'offset' => $offset,
+                    'limit' => $perPage,
+                    'filters' => $filters,
+                    'columns' => $columns,
+                ]
+            ],
+            'S' =>  $sessionId,
+        ];
+
+        $queryString = 'D='.json_encode($arrQuery);
+
+        // dd($queryString);
+
+        $response =  $client->request('POST', 'https://account.ulu.vn/scripts/server.php', [
+            'body' => $queryString,
+            'headers' => [
+                "Access-Control-Allow-Credentials"=> true,
+                "Access-Control-Allow-Origin" => "*",
+                "content-type" => "application/x-www-form-urlencoded"
+            ]
+        ]);
+
+        $data = $response->getBody()->getContents();
+        $data = json_decode($data);
+
+        $data = new Paginator($data[0]->rows, $data[0]->count, $perPage, $page, ['path'  => $request->url(), 'query' => $request->query()]);
+
+    }
 
 }

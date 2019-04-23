@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Merchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use Session;
 
@@ -23,9 +24,10 @@ class MerchantController extends Controller
 
     public function store(Request $request){
         $rules = [
-            'email' => 'required|email|string',
-            'password' => 'required|string',
-            'account' => 'required|string',
+            'email' => 'required|email|string|unique:merchants,email',
+            'account' => 'required|string|unique:merchants,account',
+            'account_id' => 'required|unique:merchants,account_id',
+            'password' => 'required|min:6|max:50',
         ];
 
 
@@ -34,18 +36,26 @@ class MerchantController extends Controller
             return back()->withErrors ( $validator )->withInput();
         }
 
-
         $merchant = new Merchant();
         $merchant->email = $request->input('email');
-        $merchant->password = $request->input('password');
+        $merchant->password = Hash::make($request->input('password'));
         $merchant->account = $request->input('account');
+        $merchant->account_id = $request->input('account_id');
+        $merchant->terms = $request->input('terms');
+        $merchant->agreement_term = 1;
+        $merchant->company_name = $request->input('company_name');
+        $merchant->company_tax_code = $request->input('company_tax_code');
+        $merchant->company_phone = $request->input('company_phone');
+        $merchant->company_address = $request->input('company_address');
+        $merchant->company_website = $request->input('company_website');
+        $merchant->status = $request->input('status');
 
         if( $merchant->save() ){
             return redirect()
                 ->route( 'merchant.edit', $merchant->id )
-                ->with('status',  'Create success' );
+                ->with('status',  'Success' );
         }
-        return back()->with('status', 'Create fail');
+        return back()->with('status', 'Fail');
     }
 
     public function edit(Merchant $merchant){
@@ -53,12 +63,19 @@ class MerchantController extends Controller
     }
 
     public function update(Request $request, Merchant $merchant){
-        $rules = [
-            'email' => 'required|email|string',
-            'password' => 'required|string',
-            'account' => 'required|string',
-        ];
 
+        $rules = [];
+        if( $merchant->email != $request->input('email') ){
+            $rules['email'] = 'required|email|string|unique:merchants,email';
+
+        }
+        if( $merchant->account != $request->input('account') ){
+            $rules['account'] = 'required|string|unique:merchants,account';
+        }
+
+        if( $request->has('has_change_password') ){
+            $rules['password'] = 'required|min:6|max:50';
+        }
 
         $validator = Validator::make($request->all(), $rules );
         if ($validator->fails()) {
@@ -66,16 +83,27 @@ class MerchantController extends Controller
         }
 
 
+        if( $request->has('has_change_password') )
+            $merchant->password = Hash::make($request->input('password'));
+
         $merchant->email = $request->input('email');
-        $merchant->password = $request->input('password');
         $merchant->account = $request->input('account');
+        $merchant->terms = $request->input('terms');
+        $merchant->agreement_term = 1;
+        $merchant->company_name = $request->input('company_name');
+        $merchant->company_tax_code = $request->input('company_tax_code');
+        $merchant->company_phone = $request->input('company_phone');
+        $merchant->company_address = $request->input('company_address');
+        $merchant->company_website = $request->input('company_website');
+        $merchant->status = $request->input('status');
+
 
         if( $merchant->save() ){
             return redirect()
                 ->route( 'merchant.edit', $merchant->id )
-                ->with('status',  'Update success' );
+                ->with('status',  'Success' );
         }
-        return back()->with('status', 'Update fail');
+        return back()->with('status', 'Fail');
     }
 
 
@@ -85,11 +113,6 @@ class MerchantController extends Controller
         return redirect()
             ->route( 'merchant.index' )
             ->with('status',  'Delete success' );
-
-    }
-
-
-    public function login( Request $request ){
 
     }
 

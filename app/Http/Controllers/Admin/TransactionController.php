@@ -1,21 +1,29 @@
 <?php
 namespace App\Http\Controllers\Admin;
+use App\Exports\TransactionExport;
 use App\Http\Controllers\Controller;
 
+use App\Http\Filters\TransactionFilter;
 use App\Imports\TransactionImport;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 
 
 use Excel;
+use Str;
 
 class TransactionController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request, TransactionFilter $filter){
 
-        $data = Sale::paginate();
-        $total = Sale::sum('totalcost');
+        $data = Sale::filter($filter)->orderBy('conversion_date', 'DESC');
+        $total = $data->sum('totalcost');
 
+        if( $request->input('action') == 'download' ){
+            return Excel::download( new TransactionExport(  $data->get() ), 'conversion'. str_replace('/','-', $request->get('conversion_date') ).'.xlsx' );
+        }
+
+        $data = $data->paginate(100);
         return view('admin.transactions.index', compact('data', 'total'));
     }
 

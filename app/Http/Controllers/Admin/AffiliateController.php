@@ -21,7 +21,6 @@ class AffiliateController extends Controller
 
     public function index( Request $request, AffiliateFilter $filter ){
         $data = Affiliate::filter( $filter )->paginate();
-
         return view('admin.affiliate.index', [ 'data' => $data ]);
     }
 

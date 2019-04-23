@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/default-css.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url('css/app.css') }}">
 </head>
 
 <body class="body-bg">
@@ -63,6 +64,7 @@
     <!-- others plugins -->
     <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
+    <script src="{{ url('js/app.js') }}"></script>
 
     @yield('footer')
 

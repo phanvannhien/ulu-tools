@@ -59,6 +59,7 @@
 <!-- others plugins -->
 <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
 <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
+<script src="{{ url('js/app.js') }}"></script>
 
 
 @yield('footer')

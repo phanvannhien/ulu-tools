@@ -34,5 +34,11 @@ return [
     'click_type' => [
         'R' => 'Lặp lại',
         'U' => 'Duy nhất',
-    ]
+    ],
+    'affiliate_status' => [
+        '1' => 'Activate',
+        '0' => 'Deactivate',
+    ],
+    'price_suffix' => ' đ',
+
 ];

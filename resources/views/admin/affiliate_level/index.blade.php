@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div class="clearfix mb-3">
-                <a class="btn btn-success btn-xs" href="{{ route('affiliate_level.create') }}">Create new</a>
+                <a class="btn btn-success btn-xs" href="{{ route('affiliate_level.create') }}"><i class="fa fa-plus"></i> Create new</a>
             </div>
             <table class="table table-striped">
                 <thead>

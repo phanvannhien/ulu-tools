@@ -2,91 +2,37 @@
 
 namespace App\Http\Controllers\Affiliate;
 
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Session;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use App\Http\Filters\TransactionFilter;
+
+use Excel;
+use Str;
+
+use App\Exports\TransactionExport;
+
 class ReportController extends Controller
 {
-    public function report(Request $request){
+    public function report(Request $request, TransactionFilter $filter){
 
-        $sessionId = Session::get('affiliate')->getSessionId();
-        $client = new Client();
 
-        $perPage = 100;
-        $page = $request->page ? $request->page : 1;
-        $offset = ( $page-1 ) * $perPage;
+        $data = Sale::filter($filter)->where('userid', auth()->user()->refid )->orderBy('conversion_date', 'DESC');
 
-        $filters = [];
+        $total = $data->sum('totalcost');
+        $commission_total = $data->sum('commission');
 
-        if( $request->has('t_orderid') && $request->input('t_orderid') != '' ){
-            $filters[] = ["orderId","L", $request->input('t_orderid') ];
-        }
-        if( $request->has('dateinserted') && $request->input('dateinserted') != '' ){
-            $filters[] = ["dateinserted","DP", $request->input('dateinserted') ];
+        if( $request->input('action') == 'download' ){
+            return Excel::download( new TransactionExport(  $data->get() ), 'conversion'. str_replace('/','-', $request->get('conversion_date') ).'.xlsx' );
         }
 
-        if( $request->has('payoutstatus') && $request->input('payoutstatus') != '' ){
-            $filters[] = ["payoutstatus","IN", $request->input('payoutstatus') ];
-        }
+        $data = $data->paginate(100);
+        return view('affiliate.reports.commission', compact('data', 'total','commission_total'));
 
 
-
-        $columns = [
-            ['id'],
-            ['commission'],
-            ['totalcost'],
-            ['fixedcost'],
-            ['t_orderid'],
-            ['productid'],
-            ['dateinserted'],
-            ['name'],
-            ['rtype'],
-            ['tier'],
-            ['commissionTypeName'],
-            ['rstatus'],
-            ['merchantnote'],
-            ['channel'],
-        ];
-
-        $arrQuery = [
-            'C' => 'Gpf_Rpc_Server',
-            'M' => 'run',
-            'requests' => [
-                [
-                    'C' => 'Pap_Affiliates_Reports_TransactionsGrid',
-                    'M' => 'getRows',
-                    'sort_col' => 'dateinserted',
-                    'sort_asc' => false,
-                    'offset' => $offset,
-                    'limit' => $perPage,
-                    'filters' => $filters,
-                    'columns' => $columns,
-                ]
-            ],
-            'S' =>  $sessionId,
-        ];
-
-        $queryString = 'D='.json_encode($arrQuery);
-
-       // dd($queryString);
-
-        $response =  $client->request('POST', 'https://account.ulu.vn/scripts/server.php', [
-            'body' => $queryString,
-            'headers' => [
-                "Access-Control-Allow-Credentials"=> true,
-                "Access-Control-Allow-Origin" => "*",
-                "content-type" => "application/x-www-form-urlencoded"
-            ]
-        ]);
-
-        $data = $response->getBody()->getContents();
-        $data = json_decode($data);
-
-        $data = new Paginator($data[0]->rows, $data[0]->count, $perPage, $page, ['path'  => $request->url(), 'query' => $request->query()]);
-
-        return view('affiliate.reports.commission', compact('data'));
     }
 
 

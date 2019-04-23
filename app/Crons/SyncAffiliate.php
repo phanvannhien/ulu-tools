@@ -93,12 +93,11 @@ class SyncAffiliate {
             }else{
                 $arrData = array_combine( $arrKey, $rec  );
 
-                
-
-                Affiliate::updateOrCreate(
+                $aff = Affiliate::updateOrCreate(
                     ['userid' => $arrData['userid'] ],
                     [
                         'userid' => $arrData['userid'],
+                        'refid' => $arrData['refid'],
                         'username' => $arrData['username'],
                         'full_name' => $arrData['firstname'].' '.$arrData['lastname'],
                         'status' => 1,

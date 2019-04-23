@@ -11,33 +11,20 @@
                                     <i class="ti-user"></i>
                                     <span>Affiliate</span></a>
                                     <ul class="submenu">
+                                        <li><a href="{{ route('affiliate.index') }}">All Affiliate</a></li>
                                         <li><a href="{{ route('affiliate_level.index') }}">Affiliate level</a></li>
                                     </ul>
                             </li>
                             <li>
-                                <a href="{{ route('transaction') }}" aria-expanded="true">
+                                <a href="{{ route('merchant.index') }}" aria-expanded="true">
                                     <i class="ti-user"></i>
-                                    <span>Transaction PAP</span>
-                                </a>
+                                    <span>Merchant</span></a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="fa fa-align-left"></i>
-                                    <span>Shopee</span>
+                                <a href="{{ route('transaction') }}" aria-expanded="true">
+                                    <i class="ti-user"></i>
+                                    <span>Conversion</span>
                                 </a>
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="{{ route('shopee.buildlink') }}" aria-expanded="true">
-                                            <i class="ti-layout-sidebar-left"></i>
-                                            <span>Link</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('shopee.smartlink') }}" aria-expanded="true">
-                                            <i class="ti-layout-sidebar-left"></i>
-                                            <span>Smart Link</span></a>
-                                    </li>
-
-                                </ul>
                             </li>
 
 

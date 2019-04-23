@@ -1,9 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('main')
-    <div class="clearfix mb-3">
-        <a href="{{ route('affiliate_level.index') }}" class="btn btn-primary btn-xs float-right">Back</a>
-    </div>
+
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
@@ -31,7 +29,8 @@
                     <input name="commision_rate" class="form-control" type="text" value="{{ old('commision_rate') }}" id="commision_rate">
                 </div>
                 
-                <button type="submit" name="action" value="save" class="btn btn-success">Save</button>
+                <button type="submit" name="action" value="save" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                <a href="{{ route('affiliate_level.index') }}" class="btn btn-primary">Back</a>
             </form>
 
         </div>

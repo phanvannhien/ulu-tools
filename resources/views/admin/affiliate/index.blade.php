@@ -7,9 +7,7 @@
         <div class="card-body">
             <div class="clearfix mb-2">
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-search"><i class="fa fa-filter"></i> Filter</a>
-                <a href="{{ route('affiliate.sync') }}" class="btn btn-primary"><i class="fa fa-refresh"></i> Sync to PAP</a>
             </div>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -17,6 +15,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Status</th>
                         <td></td>
                     </tr>
                 </thead>
@@ -32,8 +31,10 @@
                         <td>
                             {{ $item->phone }}
                         </td>
+                        <td><span class="badge badge-info">{{ config( 'ulu.affiliate_status' )[$item->status] }}</span></td>
                         <td>
-                            <a href="" class="btn btn-primary btn-xs">View Detail</a>
+                            <a href="" class="btn btn-warning btn-xs">View Detail</a>
+                            <a href="{{ route('affiliate.edit', $item->id ) }}" class="btn btn-primary btn-xs">Edit</a>
                         </td>
                     </tr>
                 @endforeach
