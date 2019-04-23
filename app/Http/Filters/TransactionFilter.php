@@ -25,10 +25,15 @@ class TransactionFilter extends QueryFilters
 
     public function conversion_date( $s ) {
         $arr = explode('-', $s);
-        if( $arr[0] )
-            $this->builder->where('conversion_date','>=', $arr[0]);
-        if( $arr[1] )
-            $this->builder->where('conversion_date','<=', $arr[1]);
+
+        $startDate = str_replace('/','-',trim($arr[0]));
+        $endDate = str_replace('/','-',trim($arr[1]));
+
+
+        if( $startDate )
+            $this->builder->whereDate('conversion_date','>=', $startDate  );
+        if( $endDate )
+            $this->builder->whereDate('conversion_date','<=', $endDate ) ;
         return $this;
     }
 

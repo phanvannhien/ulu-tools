@@ -4,9 +4,6 @@ require('daterangepicker');
 
 $(document).ready(function () {
 
-    var start = moment().subtract(1, 'days');
-    var end = moment();
-
     function cb(start, end) {
         console.log(start);
         $('#reportrange').val(start.format('YYYY/MM/DD') + ' - ' + end.format('YYYY/MM/DD'));
@@ -16,8 +13,8 @@ $(document).ready(function () {
         locale: {
             format: 'YYYY/MM/DD'
         },
-        startDate: start,
-        endDate: end,
+        // startDate: start,
+        // endDate: end,
         ranges: {
             'Today': [moment(), moment()],
             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -28,5 +25,5 @@ $(document).ready(function () {
         }
     }, cb);
 
-    cb(start , end);
+
 });
