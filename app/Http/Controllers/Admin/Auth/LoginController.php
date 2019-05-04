@@ -81,6 +81,9 @@ class LoginController extends Controller
         // Action login
         $session = new Pap_Api_Session( config('ulu.server') );
         if(!@$session->login( $request->input('email') , $request->input('password') )) {
+
+            auth('admin')->logout();
+
             throw ValidationException::withMessages([
                 $this->username() => ["Error: ".$session->getMessage()],
             ]);

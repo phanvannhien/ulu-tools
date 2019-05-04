@@ -4,8 +4,12 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('merchant.store') }}" method="post">
+            <form action="{{ route('merchant.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <div class="form-group">
+                    <label for="logo" class="col-form-label">Logo</label>
+                    <input name="logo" class="form-control" type="file" value="{{ old('logo') }}" placeholder="" id="logo">
+                </div>
                 <div class="form-group">
                     <label for="account" class="col-form-label">Account</label>
                     <input name="account" class="form-control" type="text" value="{{ old('account') }}" placeholder="" id="account">

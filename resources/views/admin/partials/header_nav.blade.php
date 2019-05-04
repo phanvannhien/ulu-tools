@@ -26,8 +26,12 @@
                                     <span>Conversion</span>
                                 </a>
                             </li>
-
-
+                            <li>
+                                <a href="{{ route('campaign.index') }}" aria-expanded="true">
+                                    <i class="ti-user"></i>
+                                    <span>Campaign</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('configuration.index') }}" aria-expanded="true">
                                     <i class="ti-settings"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Affiliate;
 
+use App\Models\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,21 +25,9 @@ class CampaignController extends Controller
 
     public function getCampaign()
     {
-        $sessionId = Session::get('affiliate')->getSessionId();
-        $client = new Client();
-        $data = 'D={"C":"Gpf_Rpc_Server",+"M":"run",+"requests":[{"C":"Pap_Affiliates_Promo_CampaignsGrid",+"M":"getRows",+"offset":0,+"limit":100,+"columns":[["id"],["id"],["name"],["description"],["logourl"],["banners"],["longdescriptionexists"],["commissionsdetails"],["rstatus"],["commissionsexist"],["affstatus"]]}],+"S":"'.$sessionId.'"}';
 
-        $response =  $client->request('POST', 'https://account.ulu.vn/scripts/server.php', [
-            'body' => $data,
-            'headers' => [
-                "Access-Control-Allow-Credentials"=> true,
-                "Access-Control-Allow-Origin" => "*",
-                "content-type" => "application/x-www-form-urlencoded"
-            ]
-        ]);
 
-        $data = $response->getBody()->getContents();
-        $data = json_decode($data);
+        $data = Merchant::where('status',1)->get();
         return view('affiliate.campaign.index', compact('data'));
 
     }

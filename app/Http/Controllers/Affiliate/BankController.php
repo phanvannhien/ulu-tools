@@ -99,11 +99,9 @@ class BankController extends Controller
         $bank->bank_acc_number = $request->input('bank_acc_number');
         $bank->bank_location = $request->input('bank_location');
         $bank->user_id = Auth::user()->id;
-
         if( UserBanks::count() <= 0 ){
             $bank->bank_default = 1;
         }
-
         if( $bank->save() ){
             return redirect()->route( 'bank.edit', $bank->id )->with('status','Thành công');
         }
@@ -115,13 +113,10 @@ class BankController extends Controller
     public function destroy(Request $request, $id){
 
         $bank = UserBanks::findOrFail($id);
-        
         if( $bank->bank_default ){
             return back()->with('status','Bạn không thể xoá ngân hàng mặc định');
         }
-
         $deleted = UserBanks::where('id', $id)->delete();
-
         if($deleted){
             return back()->with('status','Xoá thành công');
         }

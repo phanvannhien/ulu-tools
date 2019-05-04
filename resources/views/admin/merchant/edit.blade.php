@@ -10,9 +10,14 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('merchant.update', $merchant->id ) }}" method="post">
+            <form action="{{ route('merchant.update', $merchant->id ) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
+                <div class="form-group">
+                    <label for="logo" class="col-form-label">Logo</label>
+                    <input name="logo" class="form-control" type="file" value="{{ old('logo', $merchant->logo ) }}" placeholder="" id="logo">
+                    <img src="{{ $merchant->getLogo() }}" alt="" style="max-width: 120px">
+                </div>
                 <div class="form-group">
                     <label for="account" class="col-form-label">Account</label>
                     <input name="account" class="form-control" type="text" value="{{ old('account', $merchant->account ) }}" placeholder="" id="account">

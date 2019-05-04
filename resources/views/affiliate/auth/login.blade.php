@@ -10,7 +10,9 @@
                     @csrf
                     <div class="login-form-head" style="padding: 0">
                         <p class="text-center mb-4">
-                            <img src="{{ url('logo-blue.png') }}" style="max-width: 50px" alt="">
+                            <a href="{{ route('affiliate.dashboard') }}">
+                                <img src="{{ url('logo-blue.png') }}" style="max-width: 50px" alt="">
+                            </a>
                         </p>
                         <h4>Đăng nhập</h4>
                     </div>

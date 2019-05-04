@@ -114,20 +114,5 @@ class ResetPasswordController extends Controller
     }
 
 
-    protected function resetPassword($user, $password)
-    {
-
-        $pap = new PAPMerchant();
-        $change = $pap->changeAffiliatePassword( $user->userid, $password );
-        if( $change ){
-            $user->password = Hash::make($password);
-            $user->setRememberToken(Str::random(60));
-            $user->save();
-            event(new PasswordReset($user));
-            //$this->guard()->login($user);
-        }
-
-
-    }
 
 }

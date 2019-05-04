@@ -7,39 +7,13 @@
                 Đơn hàng
             </div>
             <div class="card-body">
-                <div id="user-statistics"></div>
-            </div>
-        </div>
-
-        <div class="card statistic">
-            <div class="card-header">
-                30 ngày gần đây
-            </div>
-            <div class="card-body ">
-                {!! $data[0][1][1] !!}
-            </div>
-            <div class="card-footer">
-                {!! $dataReportAction[0][1][1] !!}
+                <div id="user-sale"></div>
             </div>
         </div>
     </div>
 @endsection
 
 @section('footer')
-    <?php
-
-        $arr = array_combine( $dataChart[0][0],$dataChart[0][1] );
-        $arrData = [];
-        foreach ($arr as $key => $val ){
-            $arrData[] = [
-                'date' => $key,
-                'value' => $val
-            ];
-        }
-
-
-
-    ?>
     <!-- start amcharts -->
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
@@ -48,7 +22,7 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script>
-        var data = '@json($arrData)';
+        var data = [];
         /*-------------- 10 line chart amchart start ------------*/
         if ($('#user-statistics').length) {
             var chart = AmCharts.makeChart("user-statistics", {

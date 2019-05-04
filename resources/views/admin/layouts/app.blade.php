@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/png" href="{{ url('favicon.ico') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/font-awesome.min.css') }}">
@@ -61,10 +62,30 @@
     <script src="{{ url('srtdash/assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/jquery.slicknav.min.js') }}"></script>
 
+    <!-- Editor -->
+    <script src="{{ url('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url('js/ckeditor/adapters/jquery.js') }}"></script>
+
     <!-- others plugins -->
     <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
-    <script src="{{ url('js/app.js') }}"></script>
+  
+
+    <script>
+        if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
+            CKEDITOR.tools.enableHtml5Elements( document );
+
+        // The trick to keep the editor in the sample quite small
+        // unless user specified own height.
+        CKEDITOR.config.height = 150;
+        CKEDITOR.config.width = 'auto';
+
+        $(function () {
+            $('textarea.editor').ckeditor();
+        });
+
+            
+    </script>
 
     @yield('footer')
 

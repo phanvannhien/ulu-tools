@@ -13,11 +13,10 @@
 
 Auth::routes();
 
-Route::get('/home','Affiliate\AffiliateController@dashboard')->name('home');
-
+Route::get('/','Affiliate\AffiliateController@dashboard')->name('home');
 
 Route::group([
-    'middleware' => ['auth','affiliate'],
+    'middleware' => ['auth'],
     ], function () {
 
     Route::get('/', 'Affiliate\AffiliateController@dashboard')->name('affiliate.dashboard');
@@ -50,7 +49,7 @@ Route::group([
 
 
 Route::group([
-    'prefix' => 'merchant'
+    'prefix' => 'admin'
 ], function () {
 
     Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
@@ -79,6 +78,7 @@ Route::group([
         ]);
 
         Route::resource('merchant', 'Admin\MerchantController');
+        Route::resource('campaign', 'Admin\CampaignController');
 
         Route::get('affiliate-sync', 'Admin\AffiliateController@syncPAP')->name('affiliate.sync');
         Route::resource('affiliate_level', 'Admin\AffiliateLevelController');

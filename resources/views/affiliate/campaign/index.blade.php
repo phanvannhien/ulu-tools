@@ -10,20 +10,21 @@
         </div>
 
         <div class="row align-items-stretch">
-            <?php
-                $arrKey = $data[0]->rows[0];
-                unset($data[0]->rows[0]);
-            ?>
-            @foreach ($data[0]->rows as $campaign)
-                <?php
-                    $arrData = array_combine( $arrKey, $campaign  );
-                ?>
-
-                @if( $arrData['banners'] > 0 )
-                    <div class="col-md-3 mb-3">
+            @foreach ($data as $merchant)
+                <div class="col-md-3 mb-3">
                     <div class="card shadow-md border" style="height: 100%">
                         <div class="card-body">
-                            <img class="img-fluid center-block mx-auto d-block " style="max-height: 60px" src="{{ $arrData['logourl'] }}" alt="">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img class="img-fluid center-block mx-auto d-block "
+                                         style="max-height: 60px"
+                                         src="{{ $merchant->logo }}" alt="">
+                                </div>
+                                <div class="col-9">
+                                    {{ $merchant-> }}
+                                </div>
+                            </div>
+
                             <p>{{ $arrData['name'] }} </p>
                             <p>{!! $arrData['description'] !!} </p>
                         </div>
@@ -32,10 +33,7 @@
                                class="btn btn-rounded btn-light">Quảng bá</a>
                         </div>
                     </div>
-                    </div>
-                @endif
-
-
+                </div>
             @endforeach
         </div>
     </div>

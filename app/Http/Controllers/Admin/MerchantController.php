@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Validator;
 use Session;
 
-use Pap_Api_Session;
+use Str;
 
 class MerchantController extends Controller
 {
@@ -26,7 +26,6 @@ class MerchantController extends Controller
         $rules = [
             'email' => 'required|email|string|unique:merchants,email',
             'account' => 'required|string|unique:merchants,account',
-            'account_id' => 'required|unique:merchants,account_id',
             'password' => 'required|min:6|max:50',
         ];
 
@@ -40,7 +39,13 @@ class MerchantController extends Controller
         $merchant->email = $request->input('email');
         $merchant->password = Hash::make($request->input('password'));
         $merchant->account = $request->input('account');
-        $merchant->account_id = $request->input('account_id');
+
+        if( $request->input('account_id') != '' )
+            $merchant->account_id = $request->input('account_id');
+        else{
+            $merchant->account_id = strtolower(Str::random(8)) ;
+        }
+
         $merchant->terms = $request->input('terms');
         $merchant->agreement_term = 1;
         $merchant->company_name = $request->input('company_name');
@@ -49,6 +54,11 @@ class MerchantController extends Controller
         $merchant->company_address = $request->input('company_address');
         $merchant->company_website = $request->input('company_website');
         $merchant->status = $request->input('status');
+
+        if( $request->hasFile('logo') ){
+            $path = $request->file('logo')->store('logo');
+            $merchant->logo = $path;
+        }
 
         if( $merchant->save() ){
             return redirect()
@@ -97,6 +107,10 @@ class MerchantController extends Controller
         $merchant->company_website = $request->input('company_website');
         $merchant->status = $request->input('status');
 
+        if( $request->hasFile('logo') ){
+            $path = $request->file('logo')->store('logo');
+            $merchant->logo = $path;
+        }
 
         if( $merchant->save() ){
             return redirect()
