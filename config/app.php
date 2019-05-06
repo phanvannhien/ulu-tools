@@ -167,7 +167,6 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-        Jenssegers\Mongodb\MongodbServiceProvider::class,
         /*
          * Application Service Providers...
          */
