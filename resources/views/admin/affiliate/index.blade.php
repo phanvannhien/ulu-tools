@@ -5,7 +5,34 @@
     <div class="card">
         <div class="card-body">
             <div class="clearfix mb-2">
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-search"><i class="fa fa-filter"></i> Filter</a>
+                <form action="{{ route('affiliate.index') }}" method="get" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" value="{{ Request::get('userid') }}" name="userid" placeholder="User ID" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" value="{{ Request::get('username') }}" name="username" placeholder="Name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" value="{{ Request::get('email') }}" name="email" placeholder="Email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" value="{{ Request::get('phone') }}" name="phone" placeholder="Phone" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+
+                </form>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -54,36 +81,6 @@
         {!! $data->appends(request()->input())->links() !!}
     </div>
 
-    <div class="modal fade" id="modal-search">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <form action="{{ route('affiliate.index') }}" method="get" class="form-horizontal">
-                <div class="modal-header">
-                    <h5 class="modal-title">Search</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                </div>
-                <div class="modal-body">
 
-                    <div class="form-group">
-                        <input type="text" value="{{ Request::get('userid') }}" name="userid" placeholder="User ID" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{ Request::get('username') }}" name="username" placeholder="Name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{ Request::get('email') }}" name="email" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{ Request::get('phone') }}" name="phone" placeholder="Phone" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ route('affiliate.index') }}" class="btn btn-success"><i class="fa fa-remove"></i> Clear</a>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 @stop
