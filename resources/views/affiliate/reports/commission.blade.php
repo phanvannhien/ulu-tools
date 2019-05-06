@@ -31,6 +31,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-3">
+                            <select name="campaign_id" id="" class="form-control">
+                                <option value="">Tất cả chiến dịch</option>
+                                @foreach( \App\Models\Campaign::orderBy('campaign_name')->get() as $campaign  )
+                                    <option {{ request()->get('campaign_id') == $campaign->campaign_id ? 'selected': '' }} value="{{ $campaign->campaign_id }}">
+                                        {{ $campaign->campaign_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="col-md-3">
                             <div class="input-group">
@@ -43,9 +52,12 @@
                                 <input id="reportrange" name="conversion_date" class="form-control" value="{{ request()->get('conversion_date') }}" type="text">
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Lọc</button>
-                        <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Tải về (xlsx)</button>
+
                     </div>
+                    <hr>
+                    <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Lọc</button>
+                    <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Tải về (xlsx)</button>
+
                 </form>
                 <div class="table-responsive">
                     <table class="table table-striped">

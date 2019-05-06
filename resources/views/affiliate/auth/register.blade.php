@@ -8,7 +8,9 @@
                     @csrf
                     <div class="login-form-head" style="padding: 0">
                         <p class="text-center mb-4">
+                            <a href="{{ route('affiliate.dashboard') }}">
                             <img src="{{ url('logo-blue.png') }}" style="max-width: 50px" alt="">
+                            </a>
                         </p>
                         <h4>Đăng ký thành viên</h4>
                     </div>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -91,6 +92,8 @@ class RegisterController extends Controller
 
         return Affiliate::create([
             'full_name' => $data['full_name'],
+            'userid' => Str::lower( Str::random(8) ),
+            'email' => $data['email'],
             'username' => $data['email'],
             'phone' => $data['phone'],
             'website' => $data['website'],

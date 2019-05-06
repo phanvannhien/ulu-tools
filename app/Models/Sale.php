@@ -37,5 +37,9 @@ class Sale extends Model
         return $this->belongsTo( Merchant::class, 'accountid','account_id' );
     }
 
+    public function campaign(){
+        return $this->belongsTo( Campaign::class, 'campaignid','campaign_id' );
+    }
+
 
 }

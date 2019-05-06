@@ -18,19 +18,22 @@
                     </div>
                     <div class="login-form-body">
 
-                            <div class="form-gp">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="">
-                                <i class="ti-lock"></i>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback {{ $errors->has('email') ? ' d-block' : '' }}" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="submit-btn-area mt-5">
-                                <button id="form_submit" type="submit">Gửi <i class="ti-arrow-right"></i></button>
-                            </div>
+                        <div class="form-gp">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="">
+                            <i class="ti-lock"></i>
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback {{ $errors->has('email') ? ' d-block' : '' }}" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="submit-btn-area mt-5">
+                            <button id="form_submit" type="submit">Gửi <i class="ti-arrow-right"></i></button>
+                        </div>
+                        <p class="text-right mt-3">
+                            <a href="{{ route('login') }}">Quay lại</a>
+                        </p>
 
                     </div>
                 </form>

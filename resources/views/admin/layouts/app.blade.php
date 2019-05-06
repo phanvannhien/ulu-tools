@@ -62,14 +62,18 @@
     <script src="{{ url('srtdash/assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/jquery.slicknav.min.js') }}"></script>
 
-    <!-- Editor -->
-    <script src="{{ url('js/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ url('js/ckeditor/adapters/jquery.js') }}"></script>
+
 
     <!-- others plugins -->
     <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
     <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
-  
+
+
+
+    <script src="{{ url('js/app.js') }}"></script>
+    <!-- Editor -->
+    <script src="{{ url('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url('js/ckeditor/adapters/jquery.js') }}"></script>
 
     <script>
         if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )

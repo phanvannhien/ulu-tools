@@ -23,6 +23,12 @@ class TransactionFilter extends QueryFilters
         return $this->builder->where('accountid', $s );
     }
 
+    public function campaign_id( $s ) {
+        return $this->builder->where('campaignid', $s );
+    }
+
+
+
     public function conversion_date( $s ) {
         $arr = explode('-', $s);
 

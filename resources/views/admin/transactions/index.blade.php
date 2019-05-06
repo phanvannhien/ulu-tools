@@ -25,6 +25,15 @@
                         </select>
                     </div>
                     <div class="col-md-3">
+                        <select name="campaign_id" id="" class="form-control">
+                            <option value="">All campaigns</option>
+                            @foreach( \App\Models\Campaign::orderBy('campaign_name')->get() as $campaign  )
+                                <option {{ request()->get('campaign_id') == $campaign->campaign_id ? 'selected': '' }} value="{{ $campaign->campaign_id }}">
+                                    {{ $campaign->campaign_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
                         <select name="userid" id="" class="form-control">
                             <option value="">All Affiliate</option>
                             @foreach( \App\Models\Affiliate::orderBy('full_name')->select('refid', 'full_name')->get() as $mechant  )
@@ -43,9 +52,12 @@
                             <input id="reportrange" name="conversion_date" class="form-control" value="{{ request()->get('conversion_date') }}" type="text">
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Filter</button>
-                    <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Download xlsx</button>
+
                 </div>
+                <hr>
+                <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Filter</button>
+                <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Download xlsx</button>
+
             </form>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -70,7 +82,7 @@
                                 <span class="text-primary">{{ $item->conversion_date }}</span>
                             </td>
                             <td>{{ ($item->affiliate) ? $item->affiliate->full_name : '' }}</td>
-                            <td>{{ $item->campaignid}}</td>
+                            <td>{{ $item->campaign ? $item->campaign->campaign_name: '' }}</td>
                             <td>{{ ($item->advertiser ) ? $item->advertiser->account : ''  }}</td>
                             <td class="text-right"><span class="text-danger">{{ number_format($item->commission) }}</span></td>
                             <td class="text-right"><span class="text-danger">{{ number_format($item->totalcost) }}</span></td>
