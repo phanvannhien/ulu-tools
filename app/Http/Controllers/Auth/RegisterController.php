@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'email.email' => 'Vui lòng nhập email đúng định dạng',
             'email.max' => 'Vui lòng nhập email tối đa 200 ký tự',
             'email.unique' => 'Email này đã được sử dụng',
-            'phone.required' => 'Vui lònh nhập số điện thoại',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.min' => 'Vui lòng nhập số điện thoại tối thiểu 10 số',
             'phone.max' => 'Vui lòng nhập số điện thoại tối đa 11 số',
             'phone.unique' => 'Số điện thoại đã được sử dụng',
