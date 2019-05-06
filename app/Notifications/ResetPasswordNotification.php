@@ -45,11 +45,13 @@ class ResetPasswordNotification extends Notification
     {
         $url = route('password.reset', $this->token );
         return (new MailMessage)
+            ->from('support@ulu.vn', 'Ulu')
             ->greeting('Xin chào!')
             ->line('Bạn đang nhận được email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.')
             ->action('Đặt lại mật khẩu', $url)
             ->line('Liên kết đặt lại mật khẩu này sẽ hết hạn sau 60 phút.')
             ->line('Nếu bạn không yêu cầu đặt lại mật khẩu, không cần thực hiện hành động này.');
+
     }
 
     /**
