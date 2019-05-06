@@ -17,12 +17,7 @@
             <form action="" method="get" class="mb-3">
                 <div class="row">
                     <div class="col-md-3">
-                        <select name="account_id" id="" class="form-control">
-                            <option value="">All Advertiser</option>
-                            @foreach( \App\Models\Merchant::orderBy('account')->select('account_id', 'account')->get() as $mechant  )
-                                <option {{ request()->get('account_id') == $mechant->account_id ? 'selected': '' }} value="{{ $mechant->account_id }}">{{ $mechant->account }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" name="t_orderid" placeholder="Mã đơn hàng">
                     </div>
                     <div class="col-md-3">
                         <select name="campaign_id" id="" class="form-control">

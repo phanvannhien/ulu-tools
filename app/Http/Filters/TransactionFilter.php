@@ -27,6 +27,9 @@ class TransactionFilter extends QueryFilters
         return $this->builder->where('campaignid', $s );
     }
 
+    public function t_orderid( $s ) {
+        return $this->builder->where('t_orderid', $s );
+    }
 
 
     public function conversion_date( $s ) {
