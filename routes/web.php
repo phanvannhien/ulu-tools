@@ -31,7 +31,8 @@ Route::group([
         Route::get('shopee/data-feed', 'Affiliate\ShopeeDataFeedController@dataFeed')->name('shopee.datafeed');
 
         Route::get('campaign', 'Affiliate\CampaignController@getCampaign')->name('affiliate.campaign');
-        Route::get('campaign/{campaign_id}/banners', 'Affiliate\CampaignController@getBanner')->name('affiliate.campaign.banner');
+        Route::get('campaign/{id}/detail', 'Affiliate\CampaignController@getCampaignDetail')->name('affiliate.campaign.show');
+        Route::post('campaign/{id}/register', 'Affiliate\CampaignController@registerCampaign')->name('affiliate.campaign.register');
 
         Route::get('report', 'Affiliate\ReportController@report')->name('affiliate.report');
         Route::get('report-click', 'Affiliate\ReportController@reportClick')->name('affiliate.report.click');
@@ -74,8 +75,10 @@ Route::group([
         ]);
 
         Route::resource('affiliate', 'Admin\AffiliateController',[
-            'only' => ['update','edit','index']
+            'only' => ['update','edit','index','show']
         ]);
+        Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
+            ->name('admin.affiliate.campaign.approved');
 
         Route::resource('merchant', 'Admin\MerchantController');
         Route::resource('campaign', 'Admin\CampaignController');

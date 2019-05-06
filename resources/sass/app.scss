@@ -9,9 +9,24 @@
 @import 'bootstrap';
 //@import '~bootstrap/scss/bootstrap';
 @import '~daterangepicker/daterangepicker.css';
+
+@import "~toastr/toastr.scss";
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.campaign-item{
+  .campaign-img{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+  }
 }
 
 

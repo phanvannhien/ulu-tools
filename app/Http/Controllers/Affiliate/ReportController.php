@@ -21,7 +21,8 @@ class ReportController extends Controller
     public function report(Request $request, TransactionFilter $filter){
 
 
-        $data = Sale::filter($filter)->where('userid', auth()->user()->refid )->orderBy('conversion_date', 'DESC');
+        $data = Sale::filter($filter)->where('userid', auth()->user()->refid )
+            ->orderBy('conversion_date', 'DESC');
 
         $total = $data->sum('totalcost');
         $commission_total = $data->sum('commission');
@@ -38,8 +39,6 @@ class ReportController extends Controller
 
 
     public function reportClick(Request $request){
-
-        $data = ClickTracking::paginate();
 
         return view('affiliate.reports.click', compact('data'));
     }

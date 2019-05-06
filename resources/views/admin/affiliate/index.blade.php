@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('main')
-    @include('admin.partials.messages')
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
@@ -33,7 +32,7 @@
                         </td>
                         <td><span class="badge badge-info">{{ config( 'ulu.affiliate_status' )[$item->status] }}</span></td>
                         <td>
-                            <a href="" class="btn btn-warning btn-xs">View Detail</a>
+                            <a href="{{ route('affiliate.show', $item->id ) }}" class="btn btn-warning btn-xs">View</a>
                             <a href="{{ route('affiliate.edit', $item->id ) }}" class="btn btn-primary btn-xs">Edit</a>
                         </td>
                     </tr>

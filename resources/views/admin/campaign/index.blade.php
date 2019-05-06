@@ -11,6 +11,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <td>ID</td>
                         <td>Name</td>
                         <td>Merchant</td>
                         <td>Type</td>
@@ -21,6 +22,7 @@
                 <tbody>
                 @foreach( $data as $item )
                     <tr>
+                        <td>{{ $item->campaign_id }}</td>
                         <td>{{ $item->campaign_name }}</td>
                         <td>{{ $item->merchant->account }}</td>
                         <td>{{ $item->type }}</td>

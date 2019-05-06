@@ -3,7 +3,7 @@
 @section('main')
     <div class="clearfix mb-3">
         <p class="float-left">
-            Edit merchant
+            Edit campaign
         </p>
         <a href="{{ route('campaign.index') }}" class="btn btn-primary float-right">Back</a>
     </div>
@@ -14,13 +14,17 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
+                    <label for="campaign_id" class="col-form-label">Campaign ID</label>
+                    <input name="campaign_id" readonly class="form-control"
+                           type="text" value="{{ $data->campaign_id }}" placeholder="" id="campaign_id">
+                </div>
+                <div class="form-group">
                     <label for="merchant_id" class="col-form-label">Merchant</label>
                     <select name="merchant_id" class="form-control" id="merchant_id">
                         @foreach( \App\Models\Merchant::select('account', 'account_id')->get() as $merchant )
-                            <option {{ old('merchant_id') == $data->account_id ? 'selected' :'' }} value="{{ $merchant->account_id }}">{{ $merchant->account }}</option>
+                            <option {{ old('merchant_id', $merchant->account_id ) == $data->account_id ? 'selected' :'' }} value="{{ $merchant->account_id }}">{{ $merchant->account }}</option>
                         @endforeach
                     </select>
-
                 </div>
                 <div class="form-group">
                     <label for="campaign_name" class="col-form-label">Campaign Name</label>

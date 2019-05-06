@@ -9,14 +9,8 @@
                             <li>
                                 <a href="{{ route('affiliate.dashboard') }}"><i class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
-                            {{--<li>--}}
-                                {{--<a href="#"><i class="ti-dashboard"></i><span>Data Feed</span></a>--}}
-                                {{--<ul class="submenu">--}}
-                                    {{--<li><a href="{{ route('shopee.datafeed') }}">Shopee</a></li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
                             <li>
-                                <a class="btn btn-danger" href="{{ route('affiliate.campaign') }}"><i class="ti-dashboard"></i><span>Chiến dịch</span></a>
+                                <a class="btn btn-danger" href="{{ route('affiliate.campaign') }}"><i class="ti-dashboard"></i><span>Chiến dịch của bạn</span></a>
                             </li>
                             <li>
                                 <a href="{{ route('affiliate.report') }}"><i class="ti-bar-chart"></i><span>Báo cáo</span></a>

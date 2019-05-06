@@ -417,7 +417,7 @@ img {
     z-index: 99999;
     height: 100%;
     width: 100%;
-    background: #fff;
+    background:rgba(255, 255, 255, 0.5);
     display: flex;
 }
 .loader{
@@ -434,7 +434,7 @@ img {
     top: 0;
     height: 100%;
     width: 100%;
-    background: #000;
+    background: #102875;
     border-radius: 50%;
     opacity: 0;
     animation: popin 1.5s linear infinite 0s;
@@ -446,7 +446,7 @@ img {
     top: 0;
     height: 100%;
     width: 100%;
-    background: #000;
+    background: red;
     border-radius: 50%;
     opacity: 0;
     animation: popin 1.5s linear infinite 0.5s;

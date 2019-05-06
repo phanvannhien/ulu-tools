@@ -59,90 +59,24 @@ class AffiliateController extends Controller
         return back()->with('status', 'Update fail');
     }
 
-
     public function destroy(Merchant $merchant){
         return back();
     }
 
+    public function show($id){
+        $affiliate = Affiliate::findOrFail( $id );
+        $campaigns = $affiliate->campaigns()->select('campaigns.*','affiliate_campaigns.status as register_status')->get();
+        return view('admin.affiliate.show', compact('affiliate', 'campaigns'));
+    }
 
-    public function syncPAP(){
-
-        $request = new Pap_Api_AffiliatesGrid( Session::get('admin') );
-        //$request->addFilter('username', Gpf_Data_Filter::EQUALS, 'affiliate@example.com');
-
-        // sets limit to 30 rows, offset to 0 (first row starts)
-        $request->setLimit(0, 30);
-
-        // sets columns, use it only if you want retrieve other as default columns
-        $request->addParam('columns', new Gpf_Rpc_Array(array(
-            array('id'),
-            array('refid'),
-            array('userid'),
-            array('username'),
-            array('firstname'),
-            array('lastname'),
-            array('rstatus'),
-            array('parentuserid'),
-            array('dateinserted'),
-            array('data8'),
-
-
-        )));
-
-        // send request
-        try {
-            $request->sendNow();
-        } catch(Exception $e) {
-            return back()->with('status', "API call error: ".$e->getMessage());
+    public function approveCampaign(Request $request, $affiliate_id, $campaign_id ){
+        $update = Affiliate\AffiliateCampaign::where( 'userid', $affiliate_id )
+                ->where('campaign_id', $campaign_id)
+                ->update([ 'status' => 1 ]);
+        if( $update ){
+            return back()->with('status','Success');
         }
-        // request was successful, get the grid result
-        $grid = $request->getGrid();
-        // get recordset from the grid
-        $recordset = $grid->getRecordset();
-
-        //----------------------------------------------
-        // in case there are more than 30 records in total,
-        // we should load and display the rest of the records
-        // via the cycle below
-
-        $totalRecords = $grid->getTotalCount();
-        $maxRecords = $recordset->getSize();
-
-        if ($maxRecords != 0) {
-            $cycles = ceil($totalRecords / $maxRecords);
-
-
-            for( $i=0; $i < $cycles; $i++) {
-
-                // now get next 30 records
-                $request->setLimit($i * $maxRecords, $maxRecords);
-                $request->sendNow();
-                $recordset = $request->getGrid()->getRecordset();
-
-                // iterate through the records
-                foreach($recordset as $rec) {
-                    Affiliate::updateOrCreate(
-                        ['id' => $rec->get('id')],
-                        [
-                            'id' => $rec->get('id'),
-                            'refid' => $rec->get('refid'),
-                            'userid' => $rec->get('userid'),
-                            'username' => $rec->get('username'),
-                            'firstname' => $rec->get('firstname'),
-                            'lastname' => $rec->get('lastname'),
-                            'rstatus' => $rec->get('rstatus'),
-                            'parentuserid' => $rec->get('parentuserid'),
-                            'dateinserted' => $rec->get('dateinserted'),
-                            'data8' => $rec->get('data8'),
-                            'commission_rate' => 70
-                        ]);
-
-                }
-            }
-        }
-
-        return back()->with('status', 'Success');
-
+        return back()->with('warning','Fail');
     }
 
 }

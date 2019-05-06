@@ -66,7 +66,7 @@
                                     {{ $item->t_orderid }} <br>
                                     <span class="text-primary">{{ $item->conversion_date }}</span>
                                 </td>
-                                <td>{{ $item->campaignid}}</td>
+                                <td>{{ ($item->campaign) ? $item->campaign->campaign_name : '' }}</td>
                                 <td>{{ ($item->advertiser ) ? $item->advertiser->account : ''  }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->totalcost).config('ulu.price_suffix') }}</span></td>

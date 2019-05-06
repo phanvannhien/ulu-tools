@@ -1,14 +1,11 @@
 @extends('affiliate.layouts.app')
 
 @section('main')
-    <div class="container  mt-3 ">
-        <div class="card mb-3">
-            <div class="card-header">
-                Đơn hàng
-            </div>
-            <div class="card-body">
-                <div id="user-sale"></div>
-            </div>
+    <div class="container mt-3 ">
+        <div class="row align-items-stretch">
+            @foreach ( $campaigns as $campaign)
+                @include('affiliate.campaign.campaign_item')
+            @endforeach
         </div>
     </div>
 @endsection
@@ -22,8 +19,9 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script>
+        /*
         var data = [];
-        /*-------------- 10 line chart amchart start ------------*/
+
         if ($('#user-statistics').length) {
             var chart = AmCharts.makeChart("user-statistics", {
                 "type": "serial",
@@ -88,7 +86,7 @@
             });
         }
 
-        /*-------------- 10 line chart amchart end ------------*/
+       ------------*/
 
     </script>
     @endsection

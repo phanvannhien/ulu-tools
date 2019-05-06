@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "daterangepicker": "^3.0.5",
-        "moment": "^2.24.0"
+        "moment": "^2.24.0",
+        "toastr": "^2.1.4"
     }
 }

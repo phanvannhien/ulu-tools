@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Filters\AffiliateFilter;
 use App\Models\Affiliate;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -22,7 +23,8 @@ class AffiliateController extends Controller
 
     public function dashboard()
     {
-        return view('affiliate.dashboard');
+        $campaigns = Campaign::where('status',1)->get();
+        return view('affiliate.dashboard', compact('campaigns'));
     }
 
     public function profile(){

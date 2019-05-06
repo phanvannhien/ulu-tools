@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Campaign;
-
+use Illuminate\Support\Str;
 use Validator;
 
 class CampaignController extends Controller
@@ -35,6 +35,7 @@ class CampaignController extends Controller
         }
 
         $data = new Campaign();
+        $data->campaign_id = Str::lower(Str::random( 8 ));
         $data->merchant_id = $request->input('merchant_id');
         $data->campaign_name = $request->input('campaign_name');
         $data->commission_rate = $request->input('commission_rate');
@@ -72,7 +73,7 @@ class CampaignController extends Controller
             return back()->withErrors ( $validator )->withInput();
         }
 
-
+        
         $data->merchant_id = $request->input('merchant_id');
         $data->campaign_name = $request->input('campaign_name');
         $data->commission_rate = $request->input('commission_rate');
