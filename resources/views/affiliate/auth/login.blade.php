@@ -17,15 +17,13 @@
                         <h4>Đăng nhập</h4>
                     </div>
                     <div class="login-form-body">
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="username">Email</label>
-                            <input type="email" id="username" name="username">
-                            <i class="ti-email"></i>
+                            <input class="form-control" type="email" id="username" name="username" placeholder="Email">
                         </div>
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="password">Mật khẩu</label>
-                            <input type="password" id="password" name="password">
-                            <i class="ti-lock"></i>
+                            <input class="form-control" type="password" id="password" name="password" placeholder="Mật khẩu">
                         </div>
 
                         <div class="submit-btn-area">

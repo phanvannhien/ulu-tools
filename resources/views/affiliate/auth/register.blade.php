@@ -16,41 +16,40 @@
                     </div>
                     <div class="login-form-body">
                         @include('affiliate.partials.messages')
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="full_name">Họ tên của bạn <span class="text-danger">*</span></label>
-                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required>
-                            <i class="ti-user"></i>
+                            <input class="form-control" type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required>
                         </div>
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="email">Email <span class="text-danger">*</span></label>
-                            <input type="email" id="email" name="email" required value="{{ old('email') }}">
-                            <i class="ti-email"></i>
+                            <input class="form-control" type="email" id="email" name="email" required value="{{ old('email') }}">
+
                         </div>
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="password">Mật khẩu <span class="text-danger">*</span></label>
-                            <input type="password" id="password" name="password" required value="{{ old('password') }}">
-                            <i class="ti-lock"></i>
+                            <input class="form-control" type="password" id="password" name="password" required value="{{ old('password') }}">
+
                         </div>
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="password_confirmation">Nhắc lại Mật khẩu <span class="text-danger">*</span></label>
-                            <input type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
-                            <i class="ti-lock"></i>
+                            <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
+
                         </div>
 
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="phone">Số điện thoại <span class="text-danger">*</span></label>
-                            <input type="phone" id="phone" name="phone" value="{{ old('phone') }}">
-                            <i class="ti-mobile"></i>
+                            <input class="form-control" type="phone" id="phone" name="phone" value="{{ old('phone') }}">
+
                         </div>
 
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="website">Website ( Nếu có ) </label>
-                            <input type="text" id="website" name="website" value="{{ old('website') }}">
+                            <input class="form-control" type="text" id="website" name="website" value="{{ old('website') }}">
                         </div>
 
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="company">Tên công ty ( Nếu có ) </label>
-                            <input type="text" id="company" name="company" value="{{ old('company') }}">
+                            <input class="form-control" type="text" id="company" name="company" value="{{ old('company') }}">
                         </div>
 
                         <div class="submit-btn-area">
