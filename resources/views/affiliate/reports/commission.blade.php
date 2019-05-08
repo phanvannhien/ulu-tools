@@ -6,14 +6,14 @@
             <div class="col-md-4">
                 <div class="card bg-info">
                     <div class="p-4 d-flex justify-content-between align-items-center">
-                        <div class="seofct-icon">Tổng giá trị đơn hàng: {{ number_format($total).config('ulu.price_suffix')  }}</div>
+                        <div class="seofct-icon text-center">Đã duyệt: {{ number_format( $conversions->payloads->commission->total_approved ).config('ulu.price_suffix')  }}</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card bg-success">
                     <div class="p-4 d-flex justify-content-between align-items-center">
-                        <div class="seofct-icon">Tổng giá trị Hoa hồng: {{ number_format($commission_total).config('ulu.price_suffix')  }}</div>
+                        <div class="seofct-icon text-center">Đang đợi: {{ number_format($conversions->payloads->commission->total_pending).config('ulu.price_suffix')  }}</div>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <form action="" method="get" class="mb-3">
                     <div class="row">
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="t_orderid" placeholder="Mã đơn hàng">
+                            <input type="text" class="form-control" name="order_id" placeholder="Mã đơn hàng" value="{{ request()->get('order_id') }}">
                         </div>
                         <div class="col-md-3">
                             <select name="campaign_id" id="" class="form-control">
@@ -44,7 +44,7 @@
                                     </div>
 
                                 </div>
-                                <input id="reportrange" name="conversion_date" class="form-control" value="{{ request()->get('conversion_date') }}" type="text">
+                                <input id="reportrange" name="created_at" class="form-control" value="{{ request()->get('created_at') }}" type="text">
                             </div>
                         </div>
 
@@ -60,7 +60,6 @@
                         <head>
                             <th>Mã đơn hàng</th>
                             <th>Chiến dịch</th>
-                            <th>Nhà cung cấp</th>
                             <th>Hoa hồng</th>
                             <th>Giá trị đơn hàng</th>
                             <th>Trạng thái</th>
@@ -70,14 +69,13 @@
                         @foreach( $data as $item )
                             <tr>
                                 <td>
-                                    {{ $item->t_orderid }} <br>
-                                    <span class="text-primary">{{ $item->conversion_date }}</span>
+                                    {{ $item->order_id }} <br>
+                                    <span class="text-primary">{{ $item->created_at }}</span>
                                 </td>
-                                <td>{{ ($item->campaign) ? $item->campaign->campaign_name : '' }}</td>
-                                <td>{{ ($item->advertiser ) ? $item->advertiser->account : ''  }}</td>
+                                <td>{{ ($item->campaign_id) }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
-                                <td class="text-center"><span class="text-danger">{{ number_format($item->totalcost).config('ulu.price_suffix') }}</span></td>
-                                <td><span class="badge-info badge">{{ config('ulu.commission_status')[$item->rstatus] }}</span></td>
+                                <td class="text-center"><span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span></td>
+                                <td><span class="badge-info badge">{{ $item->status }}</span></td>
                             </tr>
                         @endforeach
                         </tbody>

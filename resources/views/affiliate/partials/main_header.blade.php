@@ -18,6 +18,7 @@
                             <a class="dropdown-item" href="{{ route('affiliate.profile') }}"><i class="ti-user"></i>  Tài khoản</a>
                             <a class="dropdown-item" href="{{ route('bank.index') }}"><i class="fa fa-bank"></i> Ngân hàng</a>
 
+                            <a class="dropdown-item" target="_blank" href="http://ulu.vn/document"><i class="fa fa-file"></i> API Document</a>
                             <form class="d-inline" action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <a class="dropdown-item" href="#" onclick="$(this).parent('form').submit()"><i class="ti-lock"></i> Đăng xuất</a>

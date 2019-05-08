@@ -16,6 +16,10 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
+                        <div class="mb-3 alert alert-warning">
+                            <p>APY key: {{ $profile->jwt_token }}</p>
+                        </div>
+
                         <form method="post" action="{{ route('affiliate.profile.save') }}" >
                             @csrf
                             <div class="row">

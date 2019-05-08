@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Session;
 
+use App\Services\GoUlu;
 
 
 class LoginController extends Controller
@@ -89,6 +90,15 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
+        if( $user->jwt_token == '' ){
+            $ulu = new GoUlu();
+            $login = $ulu->loginAffiliate( $request->get('username'), $request->get('password'));
+
+            $user->jwt_token = $login->payloads->token;
+            $user->save();
+
+        }
         return redirect()->route('affiliate.dashboard');
     }
 

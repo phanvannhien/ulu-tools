@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Affiliate;
 
 use App\Models\Mongo\ClickTracking;
 use App\Models\Sale;
+use App\Services\GoUlu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
@@ -18,27 +19,54 @@ use App\Exports\TransactionExport;
 
 class ReportController extends Controller
 {
-    public function report(Request $request, TransactionFilter $filter){
+    public function report(Request $request, TransactionFilter $filter,  GoUlu $ulu){
+
+        $perPage = 100;
+        $page = $request->page ? $request->page : 1;
+        $offset = ( $page-1 ) * $perPage;
+
+        $params = [
+            'page' => $page,
+            'per_page' => $perPage,
+            'campaign_id' => $request->has('campaign_id') ? $request->get('campaign_id') : '',
+
+        ];
 
 
-        $data = Sale::filter($filter)->where('userid', auth()->user()->refid )
-            ->orderBy('conversion_date', 'DESC');
+        $conversions = $ulu->getConversions( auth()->user()->jwt_token, $params );
 
-        $total = $data->sum('totalcost');
-        $commission_total = $data->sum('commission');
+        $data = new Paginator(
+            $conversions->payloads->data,
+            $conversions->payloads->total_records,
+            $perPage,
+            $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
-        if( $request->input('action') == 'download' ){
-            return Excel::download( new TransactionExport(  $data->get() ), 'conversion'. str_replace('/','-', $request->get('conversion_date') ).'.xlsx' );
-        }
 
-        $data = $data->paginate(100);
-        return view('affiliate.reports.commission', compact('data', 'total','commission_total'));
+        return view('affiliate.reports.commission', compact('data', 'conversions'));
 
 
     }
 
 
-    public function reportClick(Request $request){
+    public function reportClick(Request $request, GoUlu $ulu){
+        $perPage = 100;
+        $page = $request->page ? $request->page : 1;
+        $offset = ( $page-1 ) * $perPage;
+
+        $params = [
+            'page' => $page,
+            'per_page' => $perPage,
+            'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
+        ];
+
+        $clicks = $ulu->getClickTracking( auth()->user()->jwt_token, $params );
+
+
+        $data = new Paginator(
+            $clicks->payloads->data,
+            $clicks->payloads->count,
+            $perPage,
+            $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
         return view('affiliate.reports.click', compact('data'));
     }
