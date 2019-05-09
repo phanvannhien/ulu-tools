@@ -9,7 +9,12 @@ class AdminUlu{
 
     public function __construct()
     {
-        $this->baseUrl = 'http://go.ulu.vn';
+        if( env('APP_ENV') == 'local'){
+            $this->baseUrl = 'http://localhost:4200';
+        }else{
+            $this->baseUrl = 'http://go.ulu.vn';
+        }
+
     }
 
     public function createShortLink( $token, $params  ){

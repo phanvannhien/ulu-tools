@@ -66,6 +66,7 @@
                             <th>Chiến dịch</th>
                             <th>IP</th>
                             <th width="300">Url</th>
+                            <th width="300">Agent</th>
                             <th>Ngày</th>
                             <th>Loại</th>
                         </tr>
@@ -78,7 +79,9 @@
                                     <td>{{ $item->ip  }}</td>
                                     <td width="300">
                                         <div style="overflow: auto;width: 300px">{{ $item->url  }}</div>
-
+                                    </td>
+                                    <td width="300">
+                                        <div style="overflow: auto;width: 300px">{{ $item->user_agent  }}</div>
                                     </td>
                                     <td>{{ $item->created_at  }}</td>
                                     <td>{{ $item->type }}</td>
