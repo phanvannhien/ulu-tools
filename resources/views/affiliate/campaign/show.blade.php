@@ -59,14 +59,30 @@
                             Chiến dịch của bạn đang được duyệt.
                         </div>
                         @else
-                        <form>
-                            <input type="hidden" name="campaign_id" value="{{ $campaign->campaign_id }}">
+
+
+                        <form method="post" action="{{ route('affiliate.campaign.create.link', $campaign->campaign_id ) }}">
+                            @csrf
+                            <input type="hidden" value="{{ $campaign->merchant->account_id }}" name="merchant_id">
+                            <div id="result"></div>
                             <div class="form-group">
-                                <label for="link">URL đích</label>
-                                <input class="form-control" type="text" name="desturl" value="{{ old('desturl') }}">
+                                <label for="target_url">URL đích <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="target_url" value="{{ old('target_url') }}">
                             </div>
-                            <button class="btn btn-primary get-url" type="button" name="get_url">Nhận Link</button>
-                            <div class="end-link mt-3"></div>
+                            <div class="form-group">
+                                <label for="utm_source">UTM source</label>
+                                <input class="form-control" type="text" name="utm_source" value="{{ old('utm_source') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="utm_campaign">UTM campaign</label>
+                                <input class="form-control" type="text" name="utm_campaign" value="{{ old('utm_campaign') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="utm_medium">UTM medium</label>
+                                <input class="form-control" type="text" name="utm_medium" value="{{ old('utm_medium') }}">
+                            </div>
+                            <button id="get-url" class="btn btn-primary" type="button" name="submit">Nhận Link</button>
 
                             <div class="wrap-loadding justify-content-center align-items-center" style="display:none">
                                 <div role="status" class="spinner-grow text-primary"><span class="sr-only">Loading...</span></div></div>
@@ -89,46 +105,35 @@
 
 @section('footer')
     <script>
-        const bitlyToken = "b3c1329e77097b986dcd7e5582140a6ec017ed6c";
-        function wrap_shopee_link( baseULUAffUrl, hubUrl, deepUrl, extraUrl, cb ){
-            return cb( baseULUAffUrl +'&url=' + encodeURIComponent( hubUrl + '&url=' + encodeURI( decodeURI( deepUrl )) ) );
-        }
+
         $('document').ready(function () {
-            $('.get-url').on('click', function (e) {
+            $('#get-url').on('click', function (e) {
                 e.preventDefault();
                 const form = $(this).closest('form');
-                const deepUrl = $(form).find("input[name='desturl']").val();
-                const baseULUAffUrl = $(form).find("input[name='baseULUAffUrl']").val();
-                const hubUrl = $(form).find("input[name='hubUrl']").val();
-                const extraUrl =  $(form).find("input[name='extraUrl']").val();
 
-
-                if( deepUrl == '' ){
-                    $(form).find("input[name='desturl']").focus();
-                    return false;
-                }else{
-                    $(form).find('.wrap-loadding').show();
-
-                    wrap_shopee_link( baseULUAffUrl, hubUrl , deepUrl, extraUrl, function( endUrl ){
-                        $.ajax({
-                            type: 'get',
-                            url: 'https://api-ssl.bitly.com/v3/shorten?access_token='+bitlyToken+'&longUrl='+ encodeURIComponent(endUrl) ,
-                            success: function (data) {
-                                $(form).find('.wrap-loadding').hide();
-                                if(data) {
-                                    if (data.status_code == 200){
-                                        $(form).find('.end-link').html(data.data.url).addClass('alert alert-info');
-                                    }
-                                }
-                            },
-                            error: function(  jqXHR,  textStatus,  errorThrown){
-                                $(form).find('.wrap-loadding').hide();
+                $.ajax({
+                    type: 'POST',
+                    url: $(form).attr('action'),
+                    dataType: 'json',
+                    data: form.serializeArray(),
+                    beforeSend: function () {
+                        $(form).find('.wrap-loadding').show();
+                    },
+                    success: function (response) {
+                        $(form).find('.wrap-loadding').hide();
+                        if( response.success ) {
+                            $(form).find('#result').html(response.url).addClass('alert alert-success');
+                        }else{
+                            for( var err in res.err ){
+                                $('#result').append(  res.err[err]+'<br/>' ).addClass('alert alert-danger');
                             }
-                        });
-                    });
-                }
 
-
+                        }
+                    },
+                    error: function(  jqXHR,  textStatus,  errorThrown){
+                        $(form).find('.wrap-loadding').hide();
+                    }
+                });
 
             });
         });

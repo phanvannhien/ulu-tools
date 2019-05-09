@@ -4,7 +4,7 @@ namespace App\Services;
 use GuzzleHttp\Client;
 
 
-class GoUlu{
+class AdminUlu{
     protected $baseUrl;
 
     public function __construct()
@@ -79,14 +79,11 @@ class GoUlu{
     }
 
 
-    public function getConversions( $token, $params = array() ){
-        $url = $this->baseUrl.'/api/conversion';
+    public function getConversions( $params = array() ){
+        $url = $this->baseUrl.'/api/admin/conversion';
         $client = new Client();
 
         $response =  $client->request('GET', $url, [
-            'headers' => [
-                'authorization' => 'Bearer '.$token,
-            ],
             'query' => $params
         ]);
         $data = $response->getBody()->getContents();

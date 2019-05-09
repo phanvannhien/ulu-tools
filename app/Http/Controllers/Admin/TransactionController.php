@@ -5,26 +5,70 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Filters\TransactionFilter;
 use App\Imports\TransactionImport;
+use App\Models\Affiliate;
+use App\Models\Campaign;
 use App\Models\Sale;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use App\Services\AdminUlu;
 use Excel;
 use Str;
 
 class TransactionController extends Controller
 {
-    public function index(Request $request, TransactionFilter $filter){
+    public function index(Request $request, TransactionFilter $filter, AdminUlu $ulu){
 
-        $data = Sale::filter($filter)->orderBy('conversion_date', 'DESC');
-        $total = $data->sum('totalcost');
+        $perPage = 100;
+        $page = $request->page ? $request->page : 1;
+        $offset = ( $page-1 ) * $perPage;
 
-        if( $request->input('action') == 'download' ){
-            return Excel::download( new TransactionExport(  $data->get() ), 'conversion'. str_replace('/','-', $request->get('conversion_date') ).'.xlsx' );
+        if( $request->has('created_at') ){
+            $arrDate = explode( '-', $request->get('created_at') );
+            $startDate = str_replace('/','-',trim($arrDate[0]));
+            $endDate = str_replace('/','-',trim($arrDate[1]));
+            $queryDate = $startDate.','.$endDate;
         }
 
-        $data = $data->paginate(100);
-        return view('admin.transactions.index', compact('data', 'total'));
+        $params = [
+            'page' => $page,
+            'per_page' => $perPage,
+            'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
+            'created_at' => isset($queryDate) ? $queryDate : ''
+        ];
+
+
+        $conversions = $ulu->getConversions( $params );
+
+        $data = new Paginator(
+            $conversions->payloads->data,
+            $conversions->payloads->total_records,
+            $perPage,
+            $page, ['path'  => $request->url(), 'query' => $request->query()]);
+
+
+        $dataCampaigns = Campaign::select('campaigns.campaign_id', 'campaign_name')
+            ->get()->toArray();
+
+        $campaigns = array();
+        foreach ($dataCampaigns as $campaign){
+            $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
+        }
+
+        $dataAff = Affiliate::select('userid', 'full_name')
+            ->get()->toArray();
+
+        $affiliates = array();
+        foreach ($dataAff as $aff){
+            $affiliates[$aff['userid']] = $aff['full_name'];
+        }
+
+
+        if( $request->has('action') && $request->get('action') == 'download' ){
+            return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns ),
+                'conversion'. now() .'.xlsx' );
+        }
+
+        return view('admin.transactions.index',  compact('data', 'conversions','campaigns','affiliates' ));
     }
 
 

@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('shopee:report tracking')->everyFiveMinutes();
-        $schedule->command('shopee:report payment')->daily();
-        $schedule->command('ulu:sync affiliate')->daily();
+        //$schedule->command('shopee:report tracking')->everyFiveMinutes();
+        //$schedule->command('shopee:report payment')->daily();
+        //$schedule->command('ulu:sync affiliate')->daily();
     }
 
     /**

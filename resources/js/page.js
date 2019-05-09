@@ -14,15 +14,17 @@ $(document).ready(function () {
 
     $('#reportrange').daterangepicker({
         locale: {
-            format: 'YYYY/MM/DD'
+            format: 'YYYY/MM/DD HH:mm:ss'
         },
         // startDate: start,
         // endDate: end,
+        timePicker: true,
+        timePicker24Hour: true,
         ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'Today': [moment().startOf('day'), moment().endOf('day')],
+            'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+            'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment()],
             'This Month': [moment().startOf('month'), moment().endOf('month')],
             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }

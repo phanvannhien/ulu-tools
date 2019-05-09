@@ -24,19 +24,22 @@
                 <form action="" method="get" class="mb-3">
                     <div class="row">
                         <div class="col-md-3">
+                            <label for="">Mã đơn hàng</label>
                             <input type="text" class="form-control" name="order_id" placeholder="Mã đơn hàng" value="{{ request()->get('order_id') }}">
                         </div>
                         <div class="col-md-3">
+                            <label for="">Chiến dịch</label>
                             <select name="campaign_id" id="" class="form-control">
-                                <option value="">Tất cả chiến dịch</option>
-                                @foreach( \App\Models\Campaign::orderBy('campaign_name')->get() as $campaign  )
-                                    <option {{ request()->get('campaign_id') == $campaign->campaign_id ? 'selected': '' }} value="{{ $campaign->campaign_id }}">
-                                        {{ $campaign->campaign_name }}</option>
+                                <option value="">Tất cả</option>
+                                @foreach( $campaigns as $key => $value )
+                                    <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                        {{  $value }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label for="">Ngày tháng</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <div class="btn">
@@ -72,7 +75,7 @@
                                     {{ $item->order_id }} <br>
                                     <span class="text-primary">{{ $item->created_at }}</span>
                                 </td>
-                                <td>{{ ($item->campaign_id) }}</td>
+                                <td>{{ $campaigns[$item->campaign_id] }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span></td>
                                 <td><span class="badge-info badge">{{ $item->status }}</span></td>

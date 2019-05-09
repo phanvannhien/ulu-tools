@@ -33,6 +33,9 @@ Route::group([
         Route::get('campaign', 'Affiliate\CampaignController@getCampaign')->name('affiliate.campaign');
         Route::get('campaign/{id}/detail', 'Affiliate\CampaignController@getCampaignDetail')->name('affiliate.campaign.show');
         Route::post('campaign/{id}/register', 'Affiliate\CampaignController@registerCampaign')->name('affiliate.campaign.register');
+        Route::post('campaign/{id}/create-link', 'Affiliate\CampaignController@createLink')->name('affiliate.campaign.create.link');
+
+
 
         Route::get('report', 'Affiliate\ReportController@report')->name('affiliate.report');
         Route::get('report-click', 'Affiliate\ReportController@reportClick')->name('affiliate.report.click');
@@ -42,6 +45,8 @@ Route::group([
         Route::post('update-profile', 'Affiliate\AffiliateController@profileSave')->name('affiliate.profile.save');
         Route::get('change-password', 'Affiliate\AffiliateController@changePassword')->name('affiliate.change.password');
         Route::post('change-password', 'Affiliate\AffiliateController@changePasswordSave')->name('affiliate.change.password.save');
+
+
     });
 
 

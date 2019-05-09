@@ -21,15 +21,27 @@ class ReportController extends Controller
 {
     public function report(Request $request, TransactionFilter $filter,  GoUlu $ulu){
 
+
+
+
         $perPage = 100;
         $page = $request->page ? $request->page : 1;
         $offset = ( $page-1 ) * $perPage;
 
+
+        if( $request->has('created_at') ){
+
+            $arrDate = explode( '-', $request->get('created_at') );
+            $startDate = str_replace('/','-',trim($arrDate[0]));
+            $endDate = str_replace('/','-',trim($arrDate[1]));
+            $queryDate = $startDate.','.$endDate;
+        }
+
         $params = [
             'page' => $page,
             'per_page' => $perPage,
-            'campaign_id' => $request->has('campaign_id') ? $request->get('campaign_id') : '',
-
+            'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
+            'created_at' => isset($queryDate) ? $queryDate : ''
         ];
 
 
@@ -42,7 +54,24 @@ class ReportController extends Controller
             $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
 
-        return view('affiliate.reports.commission', compact('data', 'conversions'));
+
+
+        $dataCampaigns = auth()->user()
+            ->campaigns()
+            ->select('campaigns.campaign_id', 'campaign_name')
+            ->get()->toArray();
+
+        $campaigns = array();
+        foreach ($dataCampaigns as $campaign){
+            $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
+        }
+
+        if( $request->has('action') && $request->get('action') == 'download' ){
+            return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns ),
+                'conversion'. now() .'.xlsx' );
+        }
+
+        return view('affiliate.reports.commission', compact('data', 'conversions','campaigns'));
 
 
     }
@@ -53,10 +82,20 @@ class ReportController extends Controller
         $page = $request->page ? $request->page : 1;
         $offset = ( $page-1 ) * $perPage;
 
+        if( $request->has('created_at') ){
+
+            $arrDate = explode( '-', $request->get('created_at') );
+            $startDate = str_replace('/','-',trim($arrDate[0]));
+            $endDate = str_replace('/','-',trim($arrDate[1]));
+            $queryDate = $startDate.','.$endDate;
+        }
+
         $params = [
             'page' => $page,
             'per_page' => $perPage,
             'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
+            'created_at' => isset($queryDate) ? $queryDate : '',
+            'type' => $request->has('type') ? $request->get('type') : '',
         ];
 
         $clicks = $ulu->getClickTracking( auth()->user()->jwt_token, $params );
@@ -68,7 +107,17 @@ class ReportController extends Controller
             $perPage,
             $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
-        return view('affiliate.reports.click', compact('data'));
+        $dataCampaigns = auth()->user()
+            ->campaigns()
+            ->select('campaigns.campaign_id', 'campaign_name')
+            ->get()->toArray();
+
+        $campaigns = array();
+        foreach ($dataCampaigns as $campaign){
+            $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
+        }
+
+        return view('affiliate.reports.click', compact('data','campaigns'));
     }
 
 

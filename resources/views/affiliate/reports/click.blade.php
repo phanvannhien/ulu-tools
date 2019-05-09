@@ -19,14 +19,24 @@
                                 <label for="">Chiến dịch</label>
                                 <select name="campaign_id" id="" class="form-control">
                                     <option value="">Tất cả</option>
-                                    @foreach( auth()->user()->campaigns()->get() as $campaign )
-                                        <option {{ request()->get('dateinserted') == $campaign->campaign_id ? 'selected' : '' }} value="{{ $campaign->campaign_id }}">
-                                            {{  $campaign->campaign_name }}</option>
+                                    @foreach( $campaigns as $key => $value )
+                                        <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                            {{  $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-3">
+                            <label for="">Loại</label>
+                            <select name="type" id="" class="form-control">
+                                <option value="">Tất cả</option>
+                                @foreach( config('ulu.click_type') as $key => $text )
+                                    <option {{ request()->get('type') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label for="">Ngày tháng</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
@@ -38,19 +48,15 @@
                                 <input id="reportrange" name="created_at" class="form-control" value="{{ request()->get('created_at') }}" type="text">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label for="">Loại</label>
-                            <select name="rtype" id="" class="form-control">
-                                <option value="">Tất cả</option>
-                                @foreach( config('ulu.click_type') as $key => $text )
-                                    <option {{ request()->get('rtype') == $key ? 'selected' : '' }} value="{{ $key  }}">{{  $text }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-primary btn-sm ml-3 float-right" type="submit" name="submit" value="filter"><i class="fa fa-filter"></i> Lọc</button>
-                        </div>
+
+
                     </div>
+
+                    <hr>
+                    <p class="clearfix">
+                    <button class="btn btn-primary btn-sm ml-3 float-right" type="submit" name="submit" value="filter"><i class="fa fa-filter"></i> Lọc</button>
+                    </p>
+
                 </form>
                 <div class="table-responsive">
                     <table>
@@ -59,7 +65,7 @@
                             <th>ID</th>
                             <th>Chiến dịch</th>
                             <th>IP</th>
-                            <th>Url</th>
+                            <th width="300">Url</th>
                             <th>Ngày</th>
                             <th>Loại</th>
                         </tr>
@@ -68,9 +74,12 @@
                             @foreach( $data as $item )
                                 <tr>
                                     <td>{{ $item->id  }}</td>
-                                    <td>{{ $item->campaign_id  }}</td>
+                                    <td>{{ $campaigns[$item->campaign_id]  }}</td>
                                     <td>{{ $item->ip  }}</td>
-                                    <td>{{ $item->url  }}</td>
+                                    <td width="300">
+                                        <div style="overflow: auto;width: 300px">{{ $item->url  }}</div>
+
+                                    </td>
                                     <td>{{ $item->created_at  }}</td>
                                     <td>{{ $item->type }}</td>
                                 </tr>
