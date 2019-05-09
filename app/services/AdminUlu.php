@@ -9,7 +9,7 @@ class AdminUlu{
 
     public function __construct()
     {
-        $this->baseUrl = 'http://localhost:4200';
+        $this->baseUrl = 'http://go.ulu.vn';
     }
 
     public function createShortLink( $token, $params  ){
