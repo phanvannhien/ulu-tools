@@ -42,6 +42,7 @@ class CampaignController extends Controller
         $data->cookie_time = $request->input('cookie_time');
         $data->type = $request->input('type');
         $data->description = $request->input('description');
+        $data->fixed_url = $request->input('fixed_url');
 
         if( $data->save() ){
             return redirect()
@@ -80,7 +81,7 @@ class CampaignController extends Controller
         $data->cookie_time = $request->input('cookie_time');
         $data->type = $request->input('type');
         $data->description = $request->input('description');
-
+        $data->fixed_url = $request->input('fixed_url');
         if( $data->save() ){
             return redirect()
                 ->route( 'campaign.edit', $data->id )

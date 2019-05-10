@@ -31,6 +31,9 @@
                                     <i class="ti-user"></i>
                                     <span>Campaign</span>
                                 </a>
+                                <ul class="submenu">
+                                    <li><a href="{{ route('campaign_link.index') }}">Campaign links</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="{{ route('configuration.index') }}" aria-expanded="true">

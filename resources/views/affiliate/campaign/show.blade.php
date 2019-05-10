@@ -74,7 +74,12 @@
                             <div id="result"></div>
                             <div class="form-group">
                                 <label for="target_url">URL đích <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="target_url" value="{{ old('target_url') }}">
+
+                                @if( $campaign->fixed_url != ''  )
+                                <input class="form-control" readonly type="text" name="target_url" value="{{  $campaign->fixed_url }}">
+                                    @else
+                                    <input class="form-control" type="text" name="target_url" value="{{ old('target_url') }}">
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="utm_source">UTM source</label>

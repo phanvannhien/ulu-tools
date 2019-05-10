@@ -83,6 +83,9 @@ Route::group([
             'only' => ['update','edit','index']
         ]);
 
+        Route::resource('campaign_link', 'Admin\CampaignLinkController');
+
+
         Route::resource('affiliate', 'Admin\AffiliateController',[
             'only' => ['update','edit','index','show']
         ]);

@@ -27,6 +27,12 @@
                     <label for="cookie_time" class="col-form-label">Cookie time</label>
                     <input name="cookie_time" class="form-control" type="text" value="{{ old('cookie_time') }}" placeholder="" id="cookie_time">
                 </div>
+
+                <div class="form-group">
+                    <label for="fixed_url" class="col-form-label">Fixed url</label>
+                    <input name="fixed_url" class="form-control" type="text" value="{{ old('fixed_url') }}" placeholder="" id="fixed_url">
+                </div>
+
                 <div class="form-group">
                     <label for="type" class="col-form-label">Type</label>
                     <select name="type" class="form-control" id="">

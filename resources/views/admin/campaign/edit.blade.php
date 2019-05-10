@@ -46,6 +46,14 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="fixed_url" class="col-form-label">Fixed url</label>
+                    <input name="fixed_url" class="form-control" type="text" value="{{ old('fixed_url', $data->fixed_url ) }}"
+                           placeholder="" id="fixed_url">
+                </div>
+
+
                 <div class="form-group">
                     <label for="description" class="col-form-label">Descriptions</label>
                     <textarea  class="form-control editor" name="description" id="description" cols="30" rows="10">{{ old('description', $data->description) }}</textarea>
