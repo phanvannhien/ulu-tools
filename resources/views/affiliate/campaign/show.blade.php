@@ -163,7 +163,7 @@
                 url: '{{ route('ajax.get.links',$campaign->campaign_id ) }}',
                 data: {
                     page: 1,
-                    per_page: 1,
+                    per_page: 50,
                 }
             }, '#table-links');
 
@@ -173,7 +173,7 @@
                     method: 'GET',
                     url: $(this).attr('href') ,
                     data: {
-                        per_page: 1,
+                        per_page: 50,
                     }
                 }, '#table-links');
             });

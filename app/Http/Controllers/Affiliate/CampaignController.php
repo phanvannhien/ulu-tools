@@ -6,6 +6,7 @@ use App\Models\Affiliate\AffiliateCampaign;
 use App\Models\Campaign;
 use App\Models\Merchant;
 use App\Services\GoUlu;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -73,8 +74,8 @@ class CampaignController extends Controller
                     'success' => true,
                     'html' => view('affiliate.renders.link', compact( 'data', 'campaigns' ) )->render()
                 ]);
-            }catch (Exception $e){
-                throw ValidationException::withMessages(['message','Vui lòng thử lại']);
+            }catch (ConnectException $e){
+                ValidationException::withMessages( ['message' => $e->getMessage()] );
             }
 
 

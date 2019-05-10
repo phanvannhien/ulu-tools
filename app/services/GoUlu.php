@@ -2,6 +2,10 @@
 
 namespace App\Services;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Validation\ValidationException;
+use MongoDB\Driver\Exception\ConnectionException;
 
 
 class GoUlu{
@@ -35,7 +39,6 @@ class GoUlu{
 
     public function getLinkHistory( $token, $params  ){
         $url = $this->baseUrl.'/api/url';
-
         $client = new Client();
 
         $response =  $client->request('GET', $url, [
@@ -85,6 +88,7 @@ class GoUlu{
         $url = $this->baseUrl.'/api/conversion';
         $client = new Client();
 
+
         $response =  $client->request('GET', $url, [
             'headers' => [
                 'authorization' => 'Bearer '.$token,
@@ -94,6 +98,8 @@ class GoUlu{
         $data = $response->getBody()->getContents();
         $data = json_decode( $data );
         return $data ;
+
+
     }
 
 
