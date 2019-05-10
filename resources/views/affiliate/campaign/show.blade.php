@@ -91,9 +91,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="utm_medium">UTM medium</label>
+                                <label for="aff_sub1">UTM medium</label>
+                                <input class="form-control" type="text" name="aff_sub1" value="{{ old('aff_sub1') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="aff_sub2">Affiliate Sub 1</label>
+                                <input class="form-control" type="text" name="aff_sub2" value="{{ old('aff_sub2') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="utm_medium">Affiliate Sub 2</label>
                                 <input class="form-control" type="text" name="utm_medium" value="{{ old('utm_medium') }}">
                             </div>
+
                             <button id="get-url" class="btn btn-primary" type="button" name="submit">Nhận Link</button>
 
                             <div class="wrap-loadding justify-content-center align-items-center" style="display:none">

@@ -129,6 +129,8 @@ class CampaignController extends Controller
             'utm_source' => $request->has('utm_source') ? $request->get('utm_source') : '',
             'utm_medium' => $request->has('utm_medium') ? $request->get('utm_medium') : '',
             'utm_campaign' => $request->has('utm_campaign') ? $request->get('utm_campaign') : '',
+            'aff_sub1' => $request->has('aff_sub1') ? $request->get('aff_sub1') : '',
+            'aff_sub2' => $request->has('aff_sub2') ? $request->get('aff_sub2') : '',
             'urls' => [
                 $request->get('target_url')
             ]
