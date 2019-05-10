@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Services\GoUlu;
 
 class RegisterController extends Controller
 {
@@ -99,7 +100,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        return Affiliate::create([
+        $user = Affiliate::create([
             'full_name' => $data['full_name'],
             'userid' => Str::lower( Str::random(8) ),
             'email' => $data['email'],
@@ -109,10 +110,20 @@ class RegisterController extends Controller
             'company' => $data['company'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if( $user->jwt_token == '' ){
+            $ulu = new GoUlu();
+            $login = $ulu->loginAffiliate( $data['email'], $data['password']);
+            $user->jwt_token = $login->payloads->token;
+            $user->save();
+        }
+        return $user;
+
     }
 
     protected function registered(Request $request, $user)
     {
+
         return redirect()->route('login');
     }
 }

@@ -2,7 +2,7 @@
 window.moment = require('moment');
 require('daterangepicker');
 window.toastr = require('toastr');
-
+window.UluShortener = require('./services/shortener')
 
 
 $(document).ready(function () {

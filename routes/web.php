@@ -24,6 +24,10 @@ Route::group([
         'prefix' => 'affiliate'
     ], function () {
 
+        // ajaxs
+        Route::get('campaign/{id}/link', 'Affiliate\CampaignController@getLinkHistory')->name('ajax.get.links');
+
+
         // Banks
         Route::resource('bank','Affiliate\BankController');
         Route::get('bank/{id}/default','Affiliate\BankController@setDefault')->name('bank.default');

@@ -97,7 +97,6 @@ class LoginController extends Controller
 
             $user->jwt_token = $login->payloads->token;
             $user->save();
-
         }
         return redirect()->route('affiliate.dashboard');
     }

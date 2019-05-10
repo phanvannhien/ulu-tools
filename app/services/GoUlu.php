@@ -50,8 +50,6 @@ class GoUlu{
     }
 
 
-
-
     public function loginAffiliate( $email, $password ){
         $url = $this->baseUrl.'/api/affiliate/login';
 

@@ -8,8 +8,10 @@ use App\Models\Merchant;
 use App\Services\GoUlu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
-
+use Illuminate\Validation\ValidationException;
+use Matrix\Exception;
 use Session;
 use Validator;
 use GuzzleHttp\Client;
@@ -25,6 +27,60 @@ class CampaignController extends Controller
     {
         $campaigns = auth()->user()->campaigns()->get();
         return view('affiliate.campaign.index', compact('campaigns'));
+    }
+
+    public function getLinkHistory( Request $request, GoUlu $ulu, $campaign_id ){
+        if( $request->ajax() && $request->isMethod('GET') ){
+
+            $perPage = $request->per_page ? $request->per_page : 50;
+            $page = $request->page ? $request->page : 1;
+            $offset = ( $page-1 ) * $perPage;
+
+            if( $request->has('created_at') ){
+                $arrDate = explode( '-', $request->get('created_at') );
+                $startDate = str_replace('/','-',trim($arrDate[0]));
+                $endDate = str_replace('/','-',trim($arrDate[1]));
+                $queryDate = $startDate.','.$endDate;
+            }
+
+            $params = [
+                'page' => $page,
+                'per_page' => $perPage,
+                'campaign_id' => $campaign_id,
+                'created_at' => isset($queryDate) ? $queryDate : '',
+            ];
+
+            try{
+                $conversions = $ulu->getLinkHistory( auth()->user()->jwt_token, $params );
+                $data = new Paginator(
+                    $conversions->payloads->data,
+                    $conversions->payloads->count,
+                    $perPage,
+                    $page, ['path'  => $request->url(), 'query' => $request->query()]);
+
+
+                $dataCampaigns = auth()->user()
+                    ->campaigns()
+                    ->select('campaigns.campaign_id', 'campaign_name')
+                    ->get()->toArray();
+
+                $campaigns = array();
+                foreach ($dataCampaigns as $campaign){
+                    $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'html' => view('affiliate.renders.link', compact( 'data', 'campaigns' ) )->render()
+                ]);
+            }catch (Exception $e){
+                throw ValidationException::withMessages(['message','Vui lòng thử lại']);
+            }
+
+
+
+
+        }
     }
 
 

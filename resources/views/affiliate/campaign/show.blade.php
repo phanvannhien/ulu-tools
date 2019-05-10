@@ -37,6 +37,13 @@
                                 <span class="col-8 text-right">{{ $campaign->merchant->company_website }}</span>
                             </p>
                         </div>
+
+                        <hr>
+
+                        <a href="#modal-primacy" data-toggle="modal" class="btn btn-info btn-block">
+                            Xem chính sách hoa hồng
+                        </a>
+
                     </div>
                 </div>
 
@@ -91,14 +98,39 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        {!! $campaign->description !!}
-                    </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header text-uppercase">Link đã tạo trong chiến dịch</div>
+            <div class="card-body">
+                <div id="table-links" class="table-responsive">
+
                 </div>
             </div>
+        </div>
 
+    </div>
+    <div id="modal-primacy" class="modal fade bd-example-modal-lg modal-xl">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chính sách hoa hồng chiến dịch: {{ $campaign->campaign_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    {!! $campaign->description !!}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="modal-primacy" class="modal">
+        <div class="modal-body">
+            {!! $campaign->description !!}
         </div>
     </div>
 @endsection
@@ -106,7 +138,47 @@
 @section('footer')
     <script>
 
+        function getLinkHistory(params, element ){
+            $.ajax({
+                url: params.url,
+                dataType: 'json',
+                method: params.method,
+                data: params.data,
+                beforeSend: function(){
+
+                },
+                success: function( response ){
+                    if( response.success ){
+                        $(element).html( response.html )
+                    }else{
+                        toastr.error( response.message, 'Ulu' )
+                    }
+                }
+            })
+        }
+
         $('document').ready(function () {
+            getLinkHistory({
+                method: 'GET',
+                url: '{{ route('ajax.get.links',$campaign->campaign_id ) }}',
+                data: {
+                    page: 1,
+                    per_page: 1,
+                }
+            }, '#table-links');
+
+            $('#table-links').on('click', 'a.page-link', function (e) {
+                e.preventDefault();
+                getLinkHistory({
+                    method: 'GET',
+                    url: $(this).attr('href') ,
+                    data: {
+                        per_page: 1,
+                    }
+                }, '#table-links');
+            });
+
+
             $('#get-url').on('click', function (e) {
                 e.preventDefault();
                 const form = $(this).closest('form');
