@@ -91,13 +91,13 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
 
-        if( $user->jwt_token == '' ){
-            $ulu = new GoUlu();
-            $login = $ulu->loginAffiliate( $request->get('username'), $request->get('password'));
 
-            $user->jwt_token = $login->payloads->token;
-            $user->save();
-        }
+        $ulu = new GoUlu();
+        $login = $ulu->loginAffiliate( $request->get('username'), $request->get('password'));
+
+        $user->jwt_token = $login->payloads->token;
+        $user->save();
+
         return redirect()->route('affiliate.dashboard');
     }
 

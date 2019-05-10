@@ -22,8 +22,8 @@
             <td>{{ $item->utm_source }}</td>
             <td>{{ $item->utm_medium }}</td>
             <td>{{ $item->utm_campaign }}</td>
-            <td>{{ $item->aff_sub1 }}</td>
-            <td>{{ $item->aff_sub2 }}</td>
+            <td>{{ isset($item->aff_sub1) ? $item->aff_sub1 : '' }}</td>
+            <td>{{ isset($item->aff_sub2) ? $item->aff_sub2 : '' }}</td>
             <td>{{ $item->created_at }}</td>
         </tr>
     @endforeach
