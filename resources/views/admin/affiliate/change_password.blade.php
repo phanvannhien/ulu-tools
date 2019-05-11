@@ -12,7 +12,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-            <form class="forms-sample" method="POST" action="{{ route('affiliate.change.password.save',$affiliate->id ) }}">
+            <form class="forms-sample" method="POST" action="{{ route('admin.affiliate.change.password.save',$affiliate->id ) }}">
                 @csrf
                 <div class="form-group">
                     <label for="">Mật khẩu mới <span class="text-danger">*</span></label>

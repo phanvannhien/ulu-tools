@@ -91,10 +91,10 @@ Route::group([
         ]);
 
         Route::get('affiliate/{id}/change-password','Admin\AffiliateController@changePassword')
-            ->name('affiliate.change.password');
+            ->name('admin.affiliate.change.password');
 
         Route::post('affiliate/{id}/change-password','Admin\AffiliateController@changePasswordSave')
-            ->name('affiliate.change.password.save');
+            ->name('admin.affiliate.change.password.save');
 
         Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
             ->name('admin.affiliate.campaign.approved');
