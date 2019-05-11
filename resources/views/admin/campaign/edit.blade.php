@@ -59,7 +59,13 @@
                     <textarea  class="form-control editor" name="description" id="description" cols="30" rows="10">{{ old('description', $data->description) }}</textarea>
                 </div>
 
-
+                <div class="form-group">
+                    <label for="status" class="col-form-label">Status</label>
+                    <select name="status" id="" class="form-control">
+                        <option {{ ( old('status', $data->status) ) ? 'selected' : '' }} value="1">Activate</option>
+                        <option {{ ( old('status', $data->status) == 0) ? 'selected' : '' }} value="0">Deactivate</option>
+                    </select>
+                </div>
                 <button type="submit" name="action" value="save" class="btn btn-success">Save</button>
             </form>
 

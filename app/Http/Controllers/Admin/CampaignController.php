@@ -43,6 +43,7 @@ class CampaignController extends Controller
         $data->type = $request->input('type');
         $data->description = $request->input('description');
         $data->fixed_url = $request->input('fixed_url');
+        $data->status = $request->input('status');
 
         if( $data->save() ){
             return redirect()
@@ -82,6 +83,8 @@ class CampaignController extends Controller
         $data->type = $request->input('type');
         $data->description = $request->input('description');
         $data->fixed_url = $request->input('fixed_url');
+        $data->status = $request->input('status');
+
         if( $data->save() ){
             return redirect()
                 ->route( 'campaign.edit', $data->id )

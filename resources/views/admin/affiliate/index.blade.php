@@ -61,6 +61,8 @@
                         <td>
                             <a href="{{ route('affiliate.show', $item->id ) }}" class="btn btn-warning btn-xs">View</a>
                             <a href="{{ route('affiliate.edit', $item->id ) }}" class="btn btn-primary btn-xs">Edit</a>
+                            <a href="{{ route('affiliate.change.password', [ 'id' => $item->id ] ) }}"
+                               class="btn btn-primary btn-xs">Change Password</a>
                         </td>
                     </tr>
                 @endforeach

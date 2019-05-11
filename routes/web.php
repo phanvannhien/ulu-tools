@@ -89,6 +89,13 @@ Route::group([
         Route::resource('affiliate', 'Admin\AffiliateController',[
             'only' => ['update','edit','index','show']
         ]);
+
+        Route::get('affiliate/{id}/change-password','Admin\AffiliateController@changePassword')
+            ->name('affiliate.change.password');
+
+        Route::post('affiliate/{id}/change-password','Admin\AffiliateController@changePasswordSave')
+            ->name('affiliate.change.password.save');
+
         Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
             ->name('admin.affiliate.campaign.approved');
 

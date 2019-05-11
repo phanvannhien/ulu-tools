@@ -212,8 +212,8 @@
                         if( response.success ) {
                             $(form).find('#result').html(response.url).addClass('alert alert-success');
                         }else{
-                            for( var err in res.err ){
-                                $('#result').append(  res.err[err]+'<br/>' ).addClass('alert alert-danger');
+                            for( var err in response.err ){
+                                $('#result').append(  response.err[err]+'<br/>' ).addClass('alert alert-danger');
                             }
 
                         }

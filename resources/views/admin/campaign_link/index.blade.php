@@ -12,8 +12,9 @@
                 <tr>
 
                     <td>Campaign</td>
-                    <td>Banner</td>
+                    <td>Link title</td>
                     <td>Link</td>
+                    <td>Datetime</td>
                     <td>Status</td>
                     <td></td>
                 </tr>
@@ -21,9 +22,16 @@
                 <tbody>
                 @foreach( $data as $item )
                     <tr>
-                        <td></td>
-                        <td>{{ $item->banner_image }}</td>
-                        <td>{{ $item->link }}</td>
+                        <td>{{ $item->campaign->campaign_name }}</td>
+
+                        <td>{{ $item->link_title }}</td>
+                        <td>
+                            <div style="width: 300px; overflow: hidden">
+                            {{ $item->link }}
+                            </div>
+
+                        </td>
+                        <td>{{ $item->start_date.' - '.$item->end_date }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
                             <a href="{{ route('campaign_link.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>

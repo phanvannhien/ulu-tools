@@ -46,6 +46,14 @@
                     <textarea  class="form-control editor" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="status" class="col-form-label">Status</label>
+                    <select name="status" id="" class="form-control">
+                        <option {{ ( old('status') ) ? 'selected' : '' }} value="1">Activate</option>
+                        <option {{ ( old('status') == 0) ? 'selected' : '' }} value="0">Deactivate</option>
+                    </select>
+                </div>
+
 
                 <button type="submit" name="action" value="save" class="btn btn-success">Save</button>
                 <a href="{{ route('merchant.index') }}" class="btn btn-primary">Back</a>

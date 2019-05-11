@@ -13,6 +13,7 @@ use Gpf_Rpc_Array;
 use Pap_Api_AffiliatesGrid;
 
 use Validator;
+use Hash;
 
 class AffiliateController extends Controller
 {
@@ -77,6 +78,39 @@ class AffiliateController extends Controller
             return back()->with('status','Success');
         }
         return back()->with('warning','Fail');
+    }
+
+    public function changePassword( $id ){
+        $affiliate = Affiliate::findOrFail( $id );
+        return view('admin.affiliate.change_password', compact('affiliate'));
+    }
+
+    public function changePasswordSave( Request $request, $id ){
+
+        $user = Affiliate::findOrFail( $id );
+        $rules['password'] = 'required|min:6|max:100|confirmed';
+
+        $validator = Validator::make($request->all(), $rules,[
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'password.min' => 'Vui lòng nhập mật khẩu ít nhất 6 kí tự',
+            'password.max' => 'Vui lòng nhập mật khẩu tối đa 100 kí tự',
+            'password.confirmed' => 'Nhắc lại mật khẩu không trùng khớp',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors ( $validator )->withInput();
+        }
+
+        $new_password = $request->input('password');
+        $user->password = Hash::make($new_password);
+
+
+        if($user->save()) {
+            return back()->with(['status' => 'Cập nhật thành công']);
+        }
+
+        return back()->with(['status' => 'Cập nhật lỗi']);
+
     }
 
 }
