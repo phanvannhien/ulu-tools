@@ -24,7 +24,7 @@
                 <form action="" method="get" class="mb-3">
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="">Mã đơn hàng</label>
+                            <label for="order_id">Mã đơn hàng</label>
                             <input type="text" class="form-control" name="order_id" placeholder="Mã đơn hàng" value="{{ request()->get('order_id') }}">
                         </div>
                         <div class="col-md-3">
@@ -32,7 +32,7 @@
                             <select name="campaign_id" id="" class="form-control">
                                 <option value="">Tất cả</option>
                                 @foreach( $campaigns as $key => $value )
-                                    <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                    <option {{ request()->get('campaign_id') == $key ? 'selected' : '' }} value="{{ $key }}">
                                         {{  $value }}</option>
                                 @endforeach
                             </select>
@@ -74,7 +74,7 @@
                             <tr>
                                 <td>
                                     {{ $item->order_id }} <br>
-                                    <span class="text-primary">{{ $item->created_at }}</span>
+                                    <span class="text-primary">{{ \Illuminate\Support\Carbon::parse($item->created_at)->timezone('Asia/Ho_Chi_Minh') }}</span>
                                 </td>
                                 <td>{{ $campaigns[$item->campaign_id] }}</td>
                                 <td>{{ $affiliates[$item->affiliate_id] }}</td>
