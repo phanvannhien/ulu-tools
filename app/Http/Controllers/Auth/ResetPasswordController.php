@@ -64,10 +64,10 @@ class ResetPasswordController extends Controller
             'password' => array(
                 'required',
                 'min:6',
-                'regex:/[a-z]/',      // must contain at least one lowercase letter
-                'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                'regex:/[0-9]/',      // must contain at least one digit
-                'regex:/[@$!%*#?&]/', // must contain a special character
+//                'regex:/[a-z]/',      // must contain at least one lowercase letter
+//                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+//                'regex:/[0-9]/',      // must contain at least one digit
+//                'regex:/[@$!%*#?&]/', // must contain a special character
             )
         ];
     }
@@ -86,7 +86,7 @@ class ResetPasswordController extends Controller
             'email.required' => 'Vui lòng nhập email',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Vui lòng nhập mật khẩu tối thiểu 6 kí tự',
-            'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái (a-z, A-Z). Mật khẩu phải chứa ít nhất một ký tự đặc biệt !@#$%^&*|.',
+//            'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái (a-z, A-Z). Mật khẩu phải chứa ít nhất một ký tự đặc biệt !@#$%^&*|.',
         ];
     }
 

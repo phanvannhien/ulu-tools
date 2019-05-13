@@ -81,29 +81,60 @@
                                     <input class="form-control" type="text" name="target_url" value="{{ old('target_url') }}">
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <label for="utm_source">UTM source</label>
-                                <input class="form-control" type="text" name="utm_source" value="{{ old('utm_source') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="utm_campaign">UTM campaign</label>
-                                <input class="form-control" type="text" name="utm_campaign" value="{{ old('utm_campaign') }}">
+
+                            <p class="mb-3">
+                                <strong><a class=""
+                                   data-toggle="collapse"
+                                   href="#collapse-more-params" role="button"
+                                   aria-expanded="false" aria-controls="collapse-more-params">
+                                    Thông tin thêm <i class="fa fa-angle-down"></i>
+                                </a></strong>
+                            </p>
+
+                            <div id="collapse-more-params" class="collapse">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="utm_source">Nguồn chiến dịch</label>
+                                            <input class="form-control" type="text" name="utm_source" value="{{ old('utm_source') }}"
+                                                   placeholder="VD: facebook / google ...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="utm_campaign">Tên chiến dịch</label>
+                                            <input class="form-control" type="text" name="utm_campaign" value="{{ old('utm_campaign') }}"
+                                                   placeholder="VD: Tên sản phẩm, chương trình, sự kiện">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="aff_sub1">Cách tiếp thị</label>
+                                    <input class="form-control" type="text" name="aff_sub1" value="{{ old('aff_sub1') }}"
+                                           placeholder="VD: Email / CPC / Banner">
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="aff_sub2">Affiliate cấp 1</label>
+                                            <input class="form-control" type="text" name="aff_sub2" value="{{ old('aff_sub2') }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="utm_medium">Affiliate cấp 2</label>
+                                            <input class="form-control" type="text" name="utm_medium" value="{{ old('utm_medium') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div class="form-group">
-                                <label for="aff_sub1">UTM medium</label>
-                                <input class="form-control" type="text" name="aff_sub1" value="{{ old('aff_sub1') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="aff_sub2">Affiliate Sub 1</label>
-                                <input class="form-control" type="text" name="aff_sub2" value="{{ old('aff_sub2') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="utm_medium">Affiliate Sub 2</label>
-                                <input class="form-control" type="text" name="utm_medium" value="{{ old('utm_medium') }}">
-                            </div>
 
                             <button id="get-url" class="btn btn-primary" type="button" name="submit">Nhận Link</button>
 

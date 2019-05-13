@@ -13,9 +13,9 @@
                 </div>
                 <div class="login-form-body">
 
-                    <div class="form-gp">
+                    <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $email ?? old('email') }}" required autofocus>
+                        <input class="form-control" type="email" id="email" name="email" value="{{ $email ?? old('email') }}" required autofocus>
                         <i class="ti-lock"></i>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback {{ $errors->has('email') ? ' d-block' : '' }}" role="alert">
@@ -23,9 +23,9 @@
                             </span>
                         @endif
                     </div>
-                    <div class="form-gp">
+                    <div class="form-group">
                         <label for="password">Mật khẩu mới</label>
-                        <input type="password" id="password" name="password" required>
+                        <input class="form-control" type="password" id="password" name="password" required>
                         <i class="ti-lock"></i>
                         @if ($errors->has('password'))
                             <span class="invalid-feedback {{ $errors->has('password') ? ' d-block' : '' }}" role="alert">

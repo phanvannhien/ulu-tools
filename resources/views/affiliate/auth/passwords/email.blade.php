@@ -18,9 +18,9 @@
                     </div>
                     <div class="login-form-body">
 
-                        <div class="form-gp">
+                        <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="">
+                            <input type="email" id="email" name="email" class="form-control">
                             <i class="ti-lock"></i>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback {{ $errors->has('email') ? ' d-block' : '' }}" role="alert">

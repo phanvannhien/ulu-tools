@@ -66,10 +66,10 @@ class RegisterController extends Controller
                 'required',
                 'confirmed',
                 'min:6',
-                'regex:/[a-z]/',      // must contain at least one lowercase letter
-                'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                'regex:/[0-9]/',      // must contain at least one digit
-                'regex:/[@$!%*#?&]/', // must contain a special character
+//                'regex:/[a-z]/',      // must contain at least one lowercase letter
+//                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+//                'regex:/[0-9]/',      // must contain at least one digit
+//                'regex:/[@$!%*#?&]/', // must contain a special character
             ),
             'phone' => ['required', 'string', 'min:10', 'max:11','unique:affiliates'],
         ],[
@@ -87,7 +87,7 @@ class RegisterController extends Controller
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Vui lòng nhập mật khẩu tối thiểu 6 kí tự',
             'password.confirmed' => 'Nhắc lại mật khẩu không trùng khớp',
-            'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái (a-z, A-Z). Mật khẩu phải chứa ít nhất một ký tự đặc biệt !@#$%^&*|.',
+//            'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái (a-z, A-Z). Mật khẩu phải chứa ít nhất một ký tự đặc biệt !@#$%^&*|.',
         ]);
     }
 
