@@ -71,10 +71,11 @@
                         </thead>
                         <tbody>
                         @foreach( $data as $item )
+
                             <tr>
                                 <td>
                                     {{ $item->order_id }} <br>
-                                    <span class="text-primary">{{ \Illuminate\Support\Carbon::parse($item->created_at) }}</span>
+                                    <span class="text-primary">{{  \Illuminate\Support\Carbon::parse($item->created_at )->subHour()  }}</span>
                                 </td>
                                 <td>{{ $campaigns[$item->campaign_id] }}</td>
                                 <td>{{ $affiliates[$item->affiliate_id] }}</td>
