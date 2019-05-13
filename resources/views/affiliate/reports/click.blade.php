@@ -83,7 +83,7 @@
                                     <td width="300">
                                         <div style="overflow: auto;width: 300px">{{ $item->user_agent  }}</div>
                                     </td>
-                                    <td>{{ \Illuminate\Support\Carbon::parse($item->created_at)->timezone('Asia/Ho_Chi_Minh') }}</td>
+                                    <td>{{ \Illuminate\Support\Carbon::parse($item->created_at) }}</td>
                                     <td>{{ $item->type }}</td>
                                 </tr>
                             @endforeach

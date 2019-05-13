@@ -32,6 +32,7 @@ class TransactionController extends Controller
         $params = [
             'page' => $page,
             'per_page' => $perPage,
+            'order_id' => $request->has('order_id') ? $request->input('order_id') : '',
             'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
             'created_at' => isset($queryDate) ? $queryDate : ''
         ];
