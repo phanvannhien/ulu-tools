@@ -113,7 +113,7 @@ class CampaignLinkController extends Controller
 
         foreach ( $arraySizeImages as $banner ){
             if( $request->hasFile($banner ) ){
-                $path = $request->file($banner)->storeAs('banner', time().$banner.'.jpg'  );
+                $path = $request->file($banner)->storeAs('banner', time().'_'.$banner.'.jpg'  );
                 $data->$banner = $path;
             }
         }

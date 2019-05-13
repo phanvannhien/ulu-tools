@@ -16,11 +16,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="">Chiến dịch</label>
+                                <label for="campaign_id">Chiến dịch</label>
                                 <select name="campaign_id" id="" class="form-control">
                                     <option value="">Tất cả</option>
                                     @foreach( $campaigns as $key => $value )
-                                        <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                        <option {{ request()->get('campaign_id') == $key ? 'selected' : '' }} value="{{ $key }}">
                                             {{  $value }}</option>
                                     @endforeach
                                 </select>
@@ -83,7 +83,7 @@
                                     <td width="300">
                                         <div style="overflow: auto;width: 300px">{{ $item->user_agent  }}</div>
                                     </td>
-                                    <td>{{ $item->created_at  }}</td>
+                                    <td>{{ \Illuminate\Support\Carbon::parse($item->created_at)->timezone('Asia/Ho_Chi_Minh') }}</td>
                                     <td>{{ $item->type }}</td>
                                 </tr>
                             @endforeach

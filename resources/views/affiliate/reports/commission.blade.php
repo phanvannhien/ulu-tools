@@ -32,7 +32,7 @@
                             <select name="campaign_id" id="" class="form-control">
                                 <option value="">Tất cả</option>
                                 @foreach( $campaigns as $key => $value )
-                                    <option {{ request()->get('dateinserted') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                    <option {{ request()->get('campaign_id') == $key ? 'selected' : '' }} value="{{ $key }}">
                                         {{  $value }}</option>
                                 @endforeach
                             </select>
@@ -73,7 +73,7 @@
                             <tr>
                                 <td>
                                     {{ $item->order_id }} <br>
-                                    <span class="text-primary">{{ $item->created_at }}</span>
+                                    <span class="text-primary">{{ \Illuminate\Support\Carbon::parse($item->created_at)->timezone('Asia/Ho_Chi_Minh') }}</span>
                                 </td>
                                 <td>{{ $campaigns[$item->campaign_id] }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
