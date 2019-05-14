@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
+use App\AffiliateBanners;
 use App\Http\Controllers\Controller;
 
 
@@ -112,5 +113,65 @@ class AffiliateController extends Controller
         return back()->with(['status' => 'Cập nhật lỗi']);
 
     }
+
+    public function addAffiliateBanner(Request $request, $banner_id ){
+
+
+        $affiliate = Affiliate::findOrFail( $request->affiliate_id );
+
+        $created = AffiliateBanners::firstOrCreate(
+            [
+                'banner_id' => $banner_id,
+                'affiliate_id' =>  $affiliate->userid
+            ],
+            [
+                'banner_id' => $banner_id,
+                'affiliate_id' =>  $affiliate->userid
+            ]
+        );
+        if($created){
+            return back()->with('status','Success');
+        }
+
+        return back()->with('warning','Fail');
+    }
+
+    public function removeAffiliateBanner(Request $request, $banner_id ){
+
+        
+        $deleted = AffiliateBanners::where('banner_id',$banner_id )
+                ->where('affiliate_id', $request->affiliate_id )
+                ->delete();
+
+        if($deleted){
+            return back()->with('status','Success');
+        }
+        return back()->with('warning','Fail');
+    }
+
+
+
+    // ajax
+
+    public function ajaxGetAffiliate(Request $request){
+
+        if($request->ajax()){
+            $query = $request->get('search');
+            $banner_id = $request->get('banner_id');
+
+            $affiliatesBanner = AffiliateBanners::where( 'banner_id', $banner_id )->pluck('affiliate_id');
+
+            if( $query != '' ){
+                $affiliates = Affiliate::where('full_name','LIKE','%'.$query.'%')
+                    ->whereNotIn( 'userid', $affiliatesBanner)
+                    ->select('id as id','full_name as text')->get();
+                return response()->json( $affiliates );
+            }
+
+
+
+        }
+    }
+
 
 }

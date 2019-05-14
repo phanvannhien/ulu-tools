@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AffiliateBanners;
 use App\Models\Campaign;
 use App\Models\CampaignLink;
 use Illuminate\Http\Request;
@@ -12,6 +13,9 @@ use Validator;
 class CampaignLinkController extends Controller
 {
     public function index(){
+
+
+
         $data = CampaignLink::orderBy('created_at','DESC')->paginate();
         return view('admin.campaign_link.index', compact('data'));
     }
@@ -73,9 +77,12 @@ class CampaignLinkController extends Controller
     }
 
     public function edit($id){
+
         $campaigns = Campaign::select('id','campaign_id','campaign_name')->get();
         $data = CampaignLink::findOrFail($id);
-        return view('admin.campaign_link.edit', compact('data','campaigns'));
+        $bannerAffiliates = AffiliateBanners::where('banner_id', $data->id  )->get();
+
+        return view('admin.campaign_link.edit', compact('data','campaigns','bannerAffiliates'));
     }
 
     public function update( Request $request, $id ){

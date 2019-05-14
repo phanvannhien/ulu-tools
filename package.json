@@ -24,8 +24,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ttskch/select2-bootstrap4-theme": "^1.2.2",
         "daterangepicker": "^3.0.5",
         "moment": "^2.24.0",
+        "select2": "^4.0.7-rc.0",
         "toastr": "^2.1.4"
     }
 }

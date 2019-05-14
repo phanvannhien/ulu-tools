@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
+    <script>
+        var ajax = {
+            get_affiliate: '{{ route('ajax.get.affiliate') }}'
+        }
+    </script>
 </head>
 
 <body class="body-bg">

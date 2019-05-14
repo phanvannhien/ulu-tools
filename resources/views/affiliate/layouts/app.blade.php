@@ -30,8 +30,6 @@
 </div>
 <!-- preloader area end -->
 
-
-
 <!-- main wrapper start -->
 <div class="horizontal-main-wrapper">
     @include('affiliate.partials.main_header')

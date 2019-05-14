@@ -28,6 +28,7 @@ Route::group([
         Route::get('campaign/{id}/link', 'Affiliate\CampaignController@getLinkHistory')->name('ajax.get.links');
 
 
+
         // Banks
         Route::resource('bank','Affiliate\BankController');
         Route::get('bank/{id}/default','Affiliate\BankController@setDefault')->name('bank.default');
@@ -71,6 +72,12 @@ Route::group([
         'middleware' => 'auth:admin'
     ], function() {
 
+        //ajax
+
+        Route::get('ajax/affiliate', 'Admin\AffiliateController@ajaxGetAffiliate')->name('ajax.get.affiliate');
+
+
+
         Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
 
         Route::get('/transaction', 'Admin\TransactionController@index')->name('transaction');
@@ -98,6 +105,13 @@ Route::group([
 
         Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
             ->name('admin.affiliate.campaign.approved');
+
+        Route::post('campaign_link/{id}/add-affiliate','Admin\AffiliateController@addAffiliateBanner')
+            ->name('admin.add.affiliate.banner');
+
+        Route::post('campaign_link/{id}/remove-affiliate','Admin\AffiliateController@removeAffiliateBanner')
+            ->name('admin.remove.affiliate.banner');
+
 
         Route::resource('merchant', 'Admin\MerchantController');
         Route::resource('campaign', 'Admin\CampaignController');

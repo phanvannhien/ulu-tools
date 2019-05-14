@@ -2,10 +2,41 @@
 window.moment = require('moment');
 require('daterangepicker');
 window.toastr = require('toastr');
-window.UluShortener = require('./services/shortener')
+
+require('select2')
 
 
 $(document).ready(function () {
+
+    $('.select2-affiliate').select2({
+        theme: 'bootstrap4',
+        width: '100%',
+        minimumInputLength: 3,
+        placeholder: 'Search name',
+        ajax: {
+
+            url: ajax.get_affiliate ,
+            dataType: 'json',
+            delay: 500,
+            data: function (params) {
+                if ( params.term == '' )
+                    return false;
+                var query = {
+                    search: params.term
+                }
+
+                // Query parameters will be ?search=[term]&type=public
+
+                return query;
+            },
+            processResults: function (data) {
+                // Tranforms the top-level key of the response object from 'items' to 'results'
+                return {
+                    results: data
+                };
+            }
+        }
+    });
 
     function cb(start, end) {
         console.log(start);
