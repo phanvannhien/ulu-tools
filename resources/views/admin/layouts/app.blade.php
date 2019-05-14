@@ -75,7 +75,7 @@
 
 
 
-    <script src="{{ url('js/app.js') }}"></script>
+    <script src="{{ url('js/admin.js') }}"></script>
     <!-- Editor -->
     <script src="{{ url('js/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ url('js/ckeditor/adapters/jquery.js') }}"></script>

@@ -61,6 +61,7 @@
                     <table class="table table-striped">
                         <thead>
                         <head>
+                            <th width="20">No.</th>
                             <th>Mã đơn hàng</th>
                             <th>Chiến dịch</th>
                             <th>Publisher</th>
@@ -73,6 +74,7 @@
                         @foreach( $data as $item )
 
                             <tr>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>
                                     {{ $item->order_id }} <br>
                                     <span class="text-primary">{{  \Illuminate\Support\Carbon::parse($item->created_at )->subHour()  }}</span>

@@ -138,7 +138,7 @@ class AffiliateController extends Controller
 
     public function removeAffiliateBanner(Request $request, $banner_id ){
 
-        
+
         $deleted = AffiliateBanners::where('banner_id',$banner_id )
                 ->where('affiliate_id', $request->affiliate_id )
                 ->delete();
