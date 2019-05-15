@@ -22,7 +22,7 @@
                     <label for="merchant_id" class="col-form-label">Merchant</label>
                     <select name="merchant_id" class="form-control" id="merchant_id">
                         @foreach( \App\Models\Merchant::select('account', 'account_id')->get() as $merchant )
-                            <option {{ old('merchant_id', $merchant->account_id ) == $data->account_id ? 'selected' :'' }} value="{{ $merchant->account_id }}">{{ $merchant->account }}</option>
+                            <option {{ old('merchant_id', $merchant->account_id ) == $data->merchant_id ? 'selected' :'' }} value="{{ $merchant->account_id }}">{{ $merchant->account }}</option>
                         @endforeach
                     </select>
                 </div>

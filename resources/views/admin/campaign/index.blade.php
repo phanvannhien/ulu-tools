@@ -26,7 +26,7 @@
                         <td>{{ $item->campaign_name }}</td>
                         <td>{{ $item->merchant->account }}</td>
                         <td>{{ $item->type }}</td>
-                        <td>{{ $item->status }}</td>
+                        <td><span class="badge badge-info">{{ $item->status }}</span> </td>
                         <td>
                             <a href="{{ route('campaign.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
                         </td>
