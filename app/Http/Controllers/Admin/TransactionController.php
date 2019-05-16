@@ -68,7 +68,7 @@ class TransactionController extends Controller
 
 
         if( $request->has('action') && $request->get('action') == 'download' ){
-            return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns ),
+            return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns, $affiliates ),
                 'conversion'. now() .'.xlsx' );
         }
 

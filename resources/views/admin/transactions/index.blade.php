@@ -79,7 +79,7 @@
                                 <td>
                                     {{ $item->order_id }} <br>
                                     <span class="text-primary">
-                                        {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh')}}
+                                        {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh') }}
                                     </span>
                                 </td>
                                 <td>{{ isset($campaigns[$item->campaign_id])? $campaigns[$item->campaign_id] : '' }}</td>

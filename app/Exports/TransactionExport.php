@@ -5,7 +5,7 @@ namespace App\Exports;
 use App\Transaction;
 
 use Maatwebsite\Excel\Concerns\FromArray;
-
+use \Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
@@ -13,10 +13,12 @@ class TransactionExport implements FromArray, WithHeadings, WithMapping
 {
     public $data;
     public $campaigns;
+    public $affiliates;
 
-    public function __construct($data, $campaigns){
+    public function __construct($data, $campaigns, $affiliates = array() ){
         $this->data = $data;
         $this->campaigns = $campaigns;
+        $this->affiliates = $affiliates;
     }
     /**
     * @return \Illuminate\Support\Collection
@@ -27,6 +29,7 @@ class TransactionExport implements FromArray, WithHeadings, WithMapping
         return [
             'order_id',
             'campaign',
+            'affiliate',
             'commission',
             'total_cost',
             'status',
@@ -40,10 +43,11 @@ class TransactionExport implements FromArray, WithHeadings, WithMapping
         return [
             $sale->order_id,
             $this->campaigns[ $sale->campaign_id ],
+            $this->affiliates[ $sale->affiliate_id ],
             $sale->commission ,
             $sale->total_cost,
             $sale->status,
-            $sale->created_at
+            Carbon::parse($sale->created_at)->setTimezone('Asia/Ho_Chi_Minh')
         ];
 
     }

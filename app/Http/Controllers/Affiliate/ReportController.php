@@ -16,6 +16,7 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\Http\Filters\TransactionFilter;
 
 use Excel;
+use App\Models\Affiliate;
 use Str;
 
 use App\Exports\TransactionExport;
@@ -54,6 +55,13 @@ class ReportController extends Controller
                 $perPage,
                 $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
+            $dataAff = Affiliate::select('userid', 'full_name')
+                ->get()->toArray();
+
+            $affiliates = array();
+            foreach ($dataAff as $aff){
+                $affiliates[$aff['userid']] = $aff['full_name'];
+            }
 
 
 
@@ -68,7 +76,7 @@ class ReportController extends Controller
             }
 
             if( $request->has('action') && $request->get('action') == 'download' ){
-                return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns ),
+                return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns, $affiliates ),
                     'conversion'. now() .'.xlsx' );
             }
 
