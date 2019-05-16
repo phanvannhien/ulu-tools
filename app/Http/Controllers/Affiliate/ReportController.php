@@ -28,7 +28,7 @@ class ReportController extends Controller
         $perPage = 100;
 
         if( $request->has('action') && $request->get('action') == 'download' ){
-            $perPage = 2000;
+            $perPage = 5000;
         }
 
         $page = $request->page ? $request->page : 1;
