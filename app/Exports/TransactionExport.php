@@ -42,8 +42,8 @@ class TransactionExport implements FromArray, WithHeadings, WithMapping
 
         return [
             $sale->order_id,
-            $this->campaigns[ $sale->campaign_id ],
-            $this->affiliates[ $sale->affiliate_id ],
+            isset($this->campaigns[ $sale->campaign_id ]) ? $this->campaigns[ $sale->campaign_id ] : '',
+            isset($this->affiliates[ $sale->affiliate_id ]) ? $this->affiliates[ $sale->affiliate_id ] : '',
             $sale->commission ,
             $sale->total_cost,
             $sale->status,
