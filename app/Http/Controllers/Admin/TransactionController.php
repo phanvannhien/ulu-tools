@@ -20,6 +20,13 @@ class TransactionController extends Controller
     public function index(Request $request, TransactionFilter $filter, AdminUlu $ulu){
 
         $perPage = 100;
+
+        if( $request->has('action') && $request->get('action') == 'download' ){
+            $perPage = 5000;
+        }
+
+
+
         $page = $request->page ? $request->page : 1;
         $offset = ( $page-1 ) * $perPage;
 
