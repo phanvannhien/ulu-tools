@@ -7,6 +7,9 @@
                     <nav>
                         <ul id="nav_menu">
                             <li>
+                                <a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('affiliate.index') }}" aria-expanded="true">
                                     <i class="ti-user"></i>
                                     <span>Affiliate</span></a>

@@ -114,6 +114,14 @@ class AffiliateController extends Controller
 
     }
 
+    public function registeredCampaign(Request $request){
+
+        $data = Affiliate\AffiliateCampaign::where('status',0)
+            ->orderBy('created_at','DESC')->get();
+
+        return view('admin.affiliate.registered_campaign', compact('data'));
+    }
+
     public function addAffiliateBanner(Request $request, $banner_id ){
 
 

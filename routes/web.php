@@ -106,6 +106,11 @@ Route::group([
         Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
             ->name('admin.affiliate.campaign.approved');
 
+
+        Route::get('affiliate/registered/campaigns','Admin\AffiliateController@registeredCampaign')
+            ->name('admin.affiliate.registered.campaign');
+
+
         Route::post('campaign_link/{id}/add-affiliate','Admin\AffiliateController@addAffiliateBanner')
             ->name('admin.add.affiliate.banner');
 

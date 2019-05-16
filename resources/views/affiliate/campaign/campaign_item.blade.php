@@ -10,7 +10,7 @@
                         </figure>
                     </div>
                     <div class="col-8">
-                        <span>{{ $campaign->campaign_name }}</span>
+                        <span>{{ $campaign->campaign_name }}</span> <br>
                         <span class="text-secondary">{{ strtoupper($campaign->merchant->account) }}</span>
                     </div>
                 </div>

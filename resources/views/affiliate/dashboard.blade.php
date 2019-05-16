@@ -2,6 +2,7 @@
 
 @section('main')
     <div class="container mt-3 ">
+        <h6 class="text-uppercase mb-3">Chiến dịch</h6>
         <div class="row align-items-stretch">
             @foreach ( $campaigns as $campaign)
                 @include('affiliate.campaign.campaign_item')
