@@ -26,6 +26,11 @@ class ReportController extends Controller
     public function report(Request $request, TransactionFilter $filter,  GoUlu $ulu){
 
         $perPage = 100;
+
+        if( $request->has('action') && $request->get('action') == 'download' ){
+            $perPage = 2000;
+        }
+
         $page = $request->page ? $request->page : 1;
         $offset = ( $page-1 ) * $perPage;
 
@@ -64,7 +69,6 @@ class ReportController extends Controller
             }
 
 
-
             $dataCampaigns = auth()->user()
                 ->campaigns()
                 ->select('campaigns.campaign_id', 'campaign_name')
@@ -76,8 +80,9 @@ class ReportController extends Controller
             }
 
             if( $request->has('action') && $request->get('action') == 'download' ){
+
                 return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns, $affiliates ),
-                    'conversion'. now() .'.xlsx' );
+                    'conversion'. time() .'.xlsx' );
             }
 
             return view('affiliate.reports.commission', compact('data', 'conversions','campaigns'));

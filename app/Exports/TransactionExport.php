@@ -56,4 +56,7 @@ class TransactionExport implements FromArray, WithHeadings, WithMapping
     {
         return $this->data;
     }
+
+
+
 }
