@@ -75,12 +75,17 @@
 
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
+
                                 <td>
                                     {{ $item->order_id }} <br>
-                                    <span class="text-primary">{{  \Illuminate\Support\Carbon::parse($item->created_at )->subHour()  }}</span>
+                                    <span class="text-primary">
+                                        {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh')}}
+                                    </span>
                                 </td>
-                                <td>{{ $campaigns[$item->campaign_id] }}</td>
-                                <td>{{ $affiliates[$item->affiliate_id] }}</td>
+                                <td>{{ isset($campaigns[$item->campaign_id])? $campaigns[$item->campaign_id] : '' }}</td>
+                                <td>
+                                    {{ isset($affiliates[ $item->affiliate_id ]) ? $affiliates[ $item->affiliate_id ]: '' }}
+                                </td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span></td>
                                 <td><span class="badge-info badge">{{ $item->status }}</span></td>

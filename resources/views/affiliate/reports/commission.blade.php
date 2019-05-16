@@ -80,7 +80,9 @@
                             <tr>
                                 <td>
                                     {{ $item->order_id }} <br>
-                                    <span class="text-primary">{{ \Illuminate\Support\Carbon::parse($item->created_at )->subHour() }}</span>
+                                    <span class="text-primary">
+                                        {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh')}}
+                                    </span>
                                 </td>
                                 <td>{{ $campaigns[$item->campaign_id] }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>

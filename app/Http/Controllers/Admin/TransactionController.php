@@ -8,6 +8,7 @@ use App\Imports\TransactionImport;
 use App\Models\Affiliate;
 use App\Models\Campaign;
 use App\Models\Sale;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\Services\AdminUlu;
@@ -24,8 +25,10 @@ class TransactionController extends Controller
 
         if( $request->has('created_at') ){
             $arrDate = explode( '-', $request->get('created_at') );
+            //dd(trim($arrDate[0]));
             $startDate = str_replace('/','-',trim($arrDate[0]));
             $endDate = str_replace('/','-',trim($arrDate[1]));
+
             $queryDate = $startDate.','.$endDate;
         }
 
