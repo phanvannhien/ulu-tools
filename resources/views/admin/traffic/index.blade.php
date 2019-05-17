@@ -1,18 +1,7 @@
 @extends('admin.layouts.app')
 @section('main')
     <div class="container">
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <div class="card bg-info">
-                    <div class="p-4 d-flex justify-content-between align-items-center">
-                        <div class="seofct-icon text-center">Total Traffic:
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
+
         <!-- Default box -->
         <div class="card mb-4">
             <div class="card-body">
@@ -78,13 +67,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php( $totalTraffic = 0 )
                                 @foreach( $chartData as $item )
+                                    @php(
+                                        $totalTraffic += $item['value']
+                                    )
                                     <tr>
                                         <td>{{ $item['date'] }}</td>
-                                        <td>{{ $item['value'] }}</td>
+                                        <td class="text-right">{{ number_format($item['value']) }}</td>
                                     </tr>
                                     @endforeach
                             </tbody>
+                            <tfooter>
+                                <tr>
+                                    <td>Total</td>
+                                    <td colspan=""  class="text-right">{{ number_format($totalTraffic) }}</td>
+                                </tr>
+                            </tfooter>
                         </table>
                     </div>
                 </div>
