@@ -17,7 +17,11 @@ class AdminUlu{
 
     }
 
-
+    /**
+     * @param array $params
+     * @return mixed|string
+     * GET traffic 
+     */
     public function getTraffic( $params = array() ){
         $url = $this->baseUrl.'/api/admin/traffic';
         $client = new Client();
