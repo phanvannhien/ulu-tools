@@ -19,6 +19,10 @@ class AffiliateFilter extends QueryFilters
         return $this->builder->where('username', 'LIKE', "%$s%");
     }
 
+    public function email( $s ) {
+        return $this->builder->where('email', 'LIKE', "%$s%");
+    }
+
     public function userid( $s ) {
         return $this->builder->where('userid', 'LIKE', "%$s%");
     }

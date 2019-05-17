@@ -65,7 +65,6 @@ Route::group([
 
     Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login.submit');
-
     Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 
     Route::group([
@@ -75,42 +74,52 @@ Route::group([
         //ajax
 
         Route::get('ajax/affiliate', 'Admin\AffiliateController@ajaxGetAffiliate')->name('ajax.get.affiliate');
-
-
-
         Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
 
+        /**
+         * Transaction
+         */
         Route::get('/transaction', 'Admin\TransactionController@index')->name('transaction');
         Route::post('/transaction', 'Admin\TransactionController@import')->name('check.transaction');
 
+        /**
+         * Traffic
+         */
+
+        Route::get('traffic','Admin\TrafficController@index')->name('admin.traffic');
+
+        /**
+         * Configurations
+         */
         Route::get('configuration', 'Admin\ConfigurationController@index')->name('configuration.index');
         Route::post('configuration', 'Admin\ConfigurationController@store')->name('configuration.store');
 
-        Route::resource('merchant', 'Admin\MerchantController',[
-            'only' => ['update','edit','index']
-        ]);
-
-        Route::resource('campaign_link', 'Admin\CampaignLinkController');
 
 
+
+        /**
+         * Affiliates
+         */
         Route::resource('affiliate', 'Admin\AffiliateController',[
             'only' => ['update','edit','index','show']
         ]);
-
         Route::get('affiliate/{id}/change-password','Admin\AffiliateController@changePassword')
             ->name('admin.affiliate.change.password');
-
         Route::post('affiliate/{id}/change-password','Admin\AffiliateController@changePasswordSave')
             ->name('admin.affiliate.change.password.save');
-
         Route::post('affiliate/{affiliate_id}/campaign/{campaign_id}/approved','Admin\AffiliateController@approveCampaign')
             ->name('admin.affiliate.campaign.approved');
-
-
         Route::get('affiliate/registered/campaigns','Admin\AffiliateController@registeredCampaign')
             ->name('admin.affiliate.registered.campaign');
+        Route::get('affiliate-sync', 'Admin\AffiliateController@syncPAP')->name('affiliate.sync');
+        Route::resource('affiliate_level', 'Admin\AffiliateLevelController');
+        Route::get('affiliate_level/{id}/set-default', 'Admin\AffiliateLevelController@setDefault')->name('affiliate_level.set.default');
 
 
+        /**
+         * Campaign banners
+         */
+        Route::resource('campaign_link', 'Admin\CampaignLinkController');
         Route::post('campaign_link/{id}/add-affiliate','Admin\AffiliateController@addAffiliateBanner')
             ->name('admin.add.affiliate.banner');
 
@@ -118,13 +127,17 @@ Route::group([
             ->name('admin.remove.affiliate.banner');
 
 
+        /**
+         * Merchants
+         */
         Route::resource('merchant', 'Admin\MerchantController');
+
+        /**
+         * Campaigns
+         */
         Route::resource('campaign', 'Admin\CampaignController');
 
-        Route::get('affiliate-sync', 'Admin\AffiliateController@syncPAP')->name('affiliate.sync');
-        Route::resource('affiliate_level', 'Admin\AffiliateLevelController');
-        Route::get('affiliate_level/{id}/set-default', 'Admin\AffiliateLevelController@setDefault')->name('affiliate_level.set.default');
-        
+
 
         Route::get('shopee', 'Admin\ShopeeController@index')->name('shopee.index');
         Route::get('shopee/link/normal-link', 'Admin\ShopeeController@buildlink')->name('shopee.buildlink');

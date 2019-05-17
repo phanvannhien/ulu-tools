@@ -30,12 +30,23 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.traffic') }}" aria-expanded="true">
+                                    <i class="fa fa-calendar-times-o"></i>
+                                    <span>Traffic</span>
+                                </a>
+                            </li>
+
+
+                            <li>
                                 <a href="{{ route('campaign.index') }}" aria-expanded="true">
                                     <i class="ti-user"></i>
                                     <span>Campaign</span>
                                 </a>
                                 <ul class="submenu">
-                                    <li><a href="{{ route('campaign_link.index') }}">Campaign links</a></li>
+                                    <a href="{{ route('campaign.index') }}" aria-expanded="true">
+                                        <span>All Campaigns</span>
+                                    </a>
+                                    <li><a href="{{ route('campaign_link.index') }}">Campaign Banners</a></li>
                                 </ul>
                             </li>
                             <li>
