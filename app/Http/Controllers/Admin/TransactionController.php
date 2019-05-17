@@ -11,7 +11,7 @@ use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use App\Services\AdminUlu;
+use App\ServicesUlu\AdminUlu;
 use Excel;
 use Str;
 

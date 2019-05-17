@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\AdminUlu;
+use App\ServicesUlu\AdminUlu;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 use App\Models\Affiliate;

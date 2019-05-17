@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Affiliate;
 use App\Models\Affiliate\AffiliateCampaign;
 use App\Models\Campaign;
 use App\Models\Merchant;
-use App\Services\GoUlu;
+use App\ServicesUlu\GoUlu;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

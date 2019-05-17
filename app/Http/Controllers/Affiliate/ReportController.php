@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Affiliate;
 
 use App\Models\Mongo\ClickTracking;
 use App\Models\Sale;
-use App\Services\GoUlu;
+use App\ServicesUlu\GoUlu;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

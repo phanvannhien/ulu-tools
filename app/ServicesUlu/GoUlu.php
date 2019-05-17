@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\ServicesUlu;
 use GuzzleHttp\Client;
+
 
 
 class GoUlu{
@@ -9,7 +10,11 @@ class GoUlu{
 
     public function __construct()
     {
-        $this->baseUrl = 'http://go.ulu.vn';
+        if( env('APP_ENV') == 'local'){
+            $this->baseUrl = env('API_LOCAL_BASE_URL');
+        }else{
+            $this->baseUrl = env('API_SERVER_BASE_URL');
+        }
     }
 
     public function createShortLink( $token, $params  ){

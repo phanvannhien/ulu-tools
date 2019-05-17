@@ -9,9 +9,6 @@ use App\Models\Affiliate;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
-use Pap_Api_Affiliate;
-use Gpf_Rpc_Array;
-use Pap_Api_AffiliatesGrid;
 
 use Validator;
 use Hash;

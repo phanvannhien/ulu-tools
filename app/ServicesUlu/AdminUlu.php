@@ -1,7 +1,7 @@
 <?php
-
-namespace App\Services;
+namespace App\ServicesUlu;
 use GuzzleHttp\Client;
+
 
 
 class AdminUlu{
