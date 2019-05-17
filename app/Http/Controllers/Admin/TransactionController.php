@@ -14,6 +14,7 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\ServicesUlu\AdminUlu;
 use Excel;
 use Str;
+use Illuminate\Support\Arr;
 
 class TransactionController extends Controller
 {
@@ -50,6 +51,30 @@ class TransactionController extends Controller
 
         $conversions = $ulu->getConversions( $params );
 
+
+        $dataChart = [];
+
+
+        foreach ( $conversions->payloads->summary as $item ){
+
+            $month = ($item->_id->month < 10) ? '0'.$item->_id->month : $item->_id->month;
+            $day = ($item->_id->day < 10) ? '0'.$item->_id->day : $item->_id->day;
+
+            array_push($dataChart, [
+                'date' => $item->_id->year.'-'.$month.'-'.$day,
+                'total_revenue' => $item->totalAmount,
+                'total_order' => $item->count
+            ]);
+
+
+        }
+
+        $dataChart = array_values( Arr::sort($dataChart, function ($value) {
+            return $value['date'];
+        }));
+
+
+
         $data = new Paginator(
             $conversions->payloads->data,
             $conversions->payloads->total_records,
@@ -79,7 +104,12 @@ class TransactionController extends Controller
                 'conversion'. now() .'.xlsx' );
         }
 
-        return view('admin.transactions.index',  compact('data', 'conversions','campaigns','affiliates' ));
+        return view('admin.transactions.index',  compact('data',
+            'conversions',
+            'campaigns',
+            'affiliates',
+            'dataChart'
+        ));
     }
 
 

@@ -42,10 +42,10 @@ class TrafficController extends Controller
 
 
         $conversions = $ulu->getTraffic( $params );
-
+//        dd($conversions);
 
         $chartData = [];
-        foreach ( $conversions->payloads->summary->total as $item ){
+        foreach ( $conversions->payloads->summary as $item ){
 
             $month = ($item->_id->month < 10) ? '0'.$item->_id->month : $item->_id->month;
             $day = ($item->_id->day < 10) ? '0'.$item->_id->day : $item->_id->day;
