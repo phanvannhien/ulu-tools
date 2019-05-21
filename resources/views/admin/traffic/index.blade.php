@@ -103,6 +103,7 @@
                     <thead>
                     <head>
                         <th width="20">No.</th>
+                        <th>Traffic ID</th>
                         <th>Campaign</th>
                         <th>Affiliate</th>
                         <th>Url</th>
@@ -113,6 +114,7 @@
                     @foreach( $data as $item )
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $item->id }}</td>
                             <td>{{ isset($campaigns[$item->campaign_id])? $campaigns[$item->campaign_id] : '' }}</td>
                             <td>
                                 {{ isset($affiliates[ $item->affiliate_id ]) ? $affiliates[ $item->affiliate_id ]: '' }}

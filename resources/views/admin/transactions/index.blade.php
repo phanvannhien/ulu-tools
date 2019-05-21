@@ -111,9 +111,9 @@
                         <th>Mã đơn hàng</th>
                         <th>Chiến dịch</th>
                         <th>Publisher</th>
-                        <th>Hoa hồng</th>
                         <th>Giá trị đơn hàng</th>
                         <th>Trạng thái</th>
+                        <th>Sản phẩm</th>
                     </head>
                     </thead>
                     <tbody>
@@ -123,7 +123,8 @@
                             <td>{{ $loop->index + 1 }}</td>
 
                             <td>
-                                {{ $item->order_id }} <br>
+                                Order ID: {{ $item->order_id }} <br>
+                                Traffic ID: {{ $item->visitor_id }} <br>
                                 <span class="text-primary">
                                     {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh') }}
                                 </span>
@@ -132,9 +133,17 @@
                             <td>
                                 {{ isset($affiliates[ $item->affiliate_id ]) ? $affiliates[ $item->affiliate_id ]: '' }}
                             </td>
-                            <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
-                            <td class="text-center"><span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span></td>
+
+                            <td class="text-right">
+                                <span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span>
+                                <br>
+                                <span class="text-success">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span>
+                            </td>
                             <td><span class="badge-info badge">{{ $item->status }}</span></td>
+                            <td>
+                                {{ $item->product_id }} <br/>
+                                {{ $item->product_name }}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
