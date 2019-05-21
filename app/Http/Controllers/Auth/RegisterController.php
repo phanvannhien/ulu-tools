@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Services\GoUlu;
+use App\ServicesUlu\GoUlu;
 
 class RegisterController extends Controller
 {

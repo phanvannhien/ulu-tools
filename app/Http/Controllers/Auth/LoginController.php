@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Session;
 
-use App\Services\GoUlu;
+use App\ServicesUlu\GoUlu;
 
 
 class LoginController extends Controller

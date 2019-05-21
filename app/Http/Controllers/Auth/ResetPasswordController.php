@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 use Illuminate\Http\Request;
-use App\APIs\PAPMerchant;
 use Illuminate\Validation\ValidationException;
 
 use Illuminate\Support\Facades\Auth;
