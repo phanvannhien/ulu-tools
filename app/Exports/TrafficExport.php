@@ -57,9 +57,9 @@ class TrafficExport implements FromArray,  WithHeadings, WithMapping
         return [
             $row->id,
             isset($row->affiliate_id) ? $row->affiliate_id : '' ,
-            isset($this->affiliates[ $row->affiliate_id ]) ? $this->affiliates[ $row->affiliate_id ] : '',
+            isset($row->affiliate_id) && isset( $this->affiliates[ $row->affiliate_id ]) ? $this->affiliates[ $row->affiliate_id ] : '',
             isset($row->campaign_id) ? $row->campaign_id: '',
-            isset($this->campaigns[ $row->campaign_id ]) ? $this->campaigns[ $row->campaign_id ] : '',
+            isset($row->campaign_id) && isset($this->campaigns[ $row->campaign_id ]) ? $this->campaigns[ $row->campaign_id ] : '',
             $row->url,
             $row->ip,
             $row->user_agent,
