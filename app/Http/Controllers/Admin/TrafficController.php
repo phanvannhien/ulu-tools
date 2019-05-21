@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\TrafficExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ServicesUlu\AdminUlu;
@@ -10,6 +11,8 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\Models\Affiliate;
 use App\Models\Campaign;
 use Illuminate\Support\Arr;
+
+use Excel;
 
 class TrafficController extends Controller
 {
@@ -69,7 +72,7 @@ class TrafficController extends Controller
             $page, ['path'  => $request->url(), 'query' => $request->query()]);
 
 
-        $dataCampaigns = Campaign::select('campaigns.campaign_id', 'campaign_name')
+        $dataCampaigns = Campaign::select('campaigns.campaign_id', 'campaign_name')->orderBy('campaign_name')
             ->get()->toArray();
 
         $campaigns = array();
@@ -77,7 +80,7 @@ class TrafficController extends Controller
             $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
         }
 
-        $dataAff = Affiliate::select('userid', 'full_name')
+        $dataAff = Affiliate::select('userid', 'full_name')->orderBy('full_name')
             ->get()->toArray();
 
         $affiliates = array();
@@ -87,8 +90,8 @@ class TrafficController extends Controller
 
 
         if( $request->has('action') && $request->get('action') == 'download' ){
-            return Excel::download( new TransactionExport(  $conversions->payloads->data, $campaigns, $affiliates ),
-                'conversion'. now() .'.xlsx' );
+            return Excel::download( new TrafficExport(  $conversions->payloads->data, $campaigns, $affiliates ),
+                'traffic'. time() .'.xlsx' );
         }
 
         return view('admin.traffic.index',  compact('data', 'conversions','campaigns','affiliates', 'chartData' ));
