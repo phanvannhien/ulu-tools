@@ -16,9 +16,11 @@ class TrafficExport implements FromArray,  WithHeadings, WithMapping
     public $campaigns;
     public $affiliates;
 
-    public function __construct($data = array())
+    public function __construct($data = array(), $campaigns = array(), $affiliates = array())
     {
         $this->data = $data;
+        $this->campaigns = $campaigns;
+        $this->affiliates = $affiliates;
     }
 
     /**
@@ -27,6 +29,7 @@ class TrafficExport implements FromArray,  WithHeadings, WithMapping
     public function collection()
     {
         return $this->data;
+
     }
 
     public function headings(): array
