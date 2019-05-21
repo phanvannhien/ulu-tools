@@ -30,7 +30,8 @@
                     </div>
 
                     <hr>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="search"><i class="fa fa-search"></i> Search</button>
+                        <button type="submit" class="btn btn-info" name="action" value="download"><i class="fa fa-file-excel-o"></i> Download</button>
 
                 </form>
             </div>

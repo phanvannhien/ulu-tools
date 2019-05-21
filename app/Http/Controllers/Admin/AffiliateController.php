@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\AffiliateBanners;
+use App\Exports\AffiliateExport;
 use App\Http\Controllers\Controller;
 
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 use Validator;
 use Hash;
+use Excel;
 
 class AffiliateController extends Controller
 {
@@ -19,7 +21,12 @@ class AffiliateController extends Controller
 
 
     public function index( Request $request, AffiliateFilter $filter ){
-        $data = Affiliate::filter( $filter )->paginate();
+        $data = Affiliate::filter( $filter )->paginate(50);
+        if( $request->has('action') && $request->action == 'download' ){
+            $allAffiliates = Affiliate::all();
+            return Excel::download( new AffiliateExport(  $allAffiliates ),
+                'all_affiliate_'. time() .'.xlsx' );
+        }
         return view('admin.affiliate.index', [ 'data' => $data ]);
     }
 
