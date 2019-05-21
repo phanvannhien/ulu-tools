@@ -8,36 +8,42 @@
             <form action="" method="get" class="mb-3">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="affiliate_id">Affiliate</label>
-                        <select name="affiliate_id" id="" class="form-control">
-                            <option value="">All</option>
-                            @foreach( $affiliates as $key => $value )
-                                <option {{ request()->get('affiliate_id') == $key ? 'selected' : '' }} value="{{ $key }}">
-                                    {{  $value }}</option>
-                            @endforeach
-                        </select>
+                        <div class="form-group">
+                            <label for="affiliate_id">Affiliate</label>
+                            <select name="affiliate_id" id="" class="form-control">
+                                <option value="">All</option>
+                                @foreach( $affiliates as $key => $value )
+                                    <option {{ request()->get('affiliate_id') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                        {{  $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        <label for="">Campaign</label>
-                        <select name="campaign_id" id="" class="form-control">
-                            <option value="">All</option>
-                            @foreach( $campaigns as $key => $value )
-                                <option {{ request()->get('campaign_id') == $key ? 'selected' : '' }} value="{{ $key }}">
-                                    {{  $value }}</option>
-                            @endforeach
-                        </select>
+                        <div class="form-group">
+                            <label for="">Campaign</label>
+                            <select name="campaign_id" id="" class="form-control">
+                                <option value="">All</option>
+                                @foreach( $campaigns as $key => $value )
+                                    <option {{ request()->get('campaign_id') == $key ? 'selected' : '' }} value="{{ $key }}">
+                                        {{  $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="created_at">Datetime</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <div class="btn">
-                                    <i class="fa fa-calendar"></i>
+                        <div class="form-group">
+                            <label for="created_at">Datetime</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <div class="btn">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
                                 </div>
+                                <input id="reportrange" name="created_at" class="form-control"
+                                       value="{{ request()->get('created_at') }}" type="text">
                             </div>
-                            <input id="reportrange" name="created_at" class="form-control"
-                                   value="{{ request()->get('created_at') }}" type="text">
                         </div>
                     </div>
 

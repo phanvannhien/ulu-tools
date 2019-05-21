@@ -45,6 +45,7 @@ class TransactionController extends Controller
             'per_page' => $perPage,
             'order_id' => $request->has('order_id') ? $request->input('order_id') : '',
             'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
+            'affiliate_id' => $request->has('affiliate_id') ? $request->input('affiliate_id') : '',
             'created_at' => isset($queryDate) ? $queryDate : ''
         ];
 
@@ -90,7 +91,7 @@ class TransactionController extends Controller
             $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
         }
 
-        $dataAff = Affiliate::select('userid', 'full_name')
+        $dataAff = Affiliate::select('userid', 'full_name')->orderBy('full_name')
             ->get()->toArray();
 
         $affiliates = array();
