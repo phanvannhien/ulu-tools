@@ -141,8 +141,8 @@
                             </td>
                             <td><span class="badge-info badge">{{ $item->status }}</span></td>
                             <td>
-                                {{ $item->product_id }} <br/>
-                                {{ $item->product_name }}
+                                {{ isset($item->product_id) ? $item->product_id : '' }}<br/>
+                                {{ isset($item->product_name) ? $item->product_name : ''  }}
                             </td>
                         </tr>
                     @endforeach
