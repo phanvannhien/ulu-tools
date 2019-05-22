@@ -84,7 +84,7 @@
                                         {{ \Illuminate\Support\Carbon::parse($item->created_at)->setTimezone('Asia/Ho_Chi_Minh')}}
                                     </span>
                                 </td>
-                                <td>{{ $campaigns[$item->campaign_id] }}</td>
+                                <td>{{ isset($campaigns[$item->campaign_id]) ? $campaigns[$item->campaign_id] : '' }}</td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->commission).config('ulu.price_suffix')  }}</span></td>
                                 <td class="text-center"><span class="text-danger">{{ number_format($item->total_cost).config('ulu.price_suffix') }}</span></td>
                                 <td><span class="badge-info badge">{{ $item->status }}</span></td>
