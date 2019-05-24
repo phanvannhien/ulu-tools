@@ -42,6 +42,10 @@ return [
     'price_suffix' => ' đ',
     'campaign_type' => [
         'CPC','CPL','CPQL','CPS'
+    ],
+    'status' => [
+        0 => 'Deactivated',
+        1 => 'Activated'
     ]
 
 ];

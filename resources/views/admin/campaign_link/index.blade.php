@@ -2,10 +2,14 @@
 
 @section('main')
     <!-- Default box -->
+    <h5 class="mb-3">Các banners chiến dịch</h5>
     <div class="card">
         <div class="card-body">
             <div class="clearfix mb-3">
                 <a class="btn btn-success btn-xs" href="{{ route('campaign_link.create') }}"><i class="fa fa-plus"></i> Create new</a>
+            </div>
+            <div class="alert alert-warning">
+                Lưu ý: Xoá banner sẽ đồng thời xoá hết Publisher trong banners.
             </div>
             <table class="table table-striped">
                 <thead>
@@ -32,9 +36,17 @@
 
                         </td>
                         <td>{{ $item->start_date.' - '.$item->end_date }}</td>
-                        <td>{{ $item->status }}</td>
+                        <td><span class="badge badge-info">{{ config('ulu.status')[$item->status] }}</span> </td>
                         <td>
-                            <a href="{{ route('campaign_link.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
+                            
+                            <a class="btn btn-success btn-xs" href="{{ route('campaign_link.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('campaign_link.create', $item->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-xs btn-danger" type="submit" onclick="return confirm('Are you sure?')">
+                                    Remove
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

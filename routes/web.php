@@ -136,7 +136,8 @@ Route::group([
          * Campaigns
          */
         Route::resource('campaign', 'Admin\CampaignController');
-
+        Route::get('campaign/{id}', 'Admin\CampaignController@show');
+       
 
 
         Route::get('shopee', 'Admin\ShopeeController@index')->name('shopee.index');

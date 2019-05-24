@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use Hash;
 use Excel;
+use DB;
 
 class AffiliateController extends Controller
 {
@@ -176,7 +177,7 @@ class AffiliateController extends Controller
             if( $query != '' ){
                 $affiliates = Affiliate::where('full_name','LIKE','%'.$query.'%')
                     ->whereNotIn( 'userid', $affiliatesBanner)
-                    ->select('id as id','full_name as text')->get();
+                    ->select('id as id', (DB::raw("CONCAT(full_name,' - ',email) AS text") ))->get();
                 return response()->json( $affiliates );
             }
 

@@ -103,4 +103,9 @@ class CampaignController extends Controller
             ->with('status',  'Delete success' );
 
     }
+
+    public function show($id){
+        $data = Campaign::findOrFail($id);
+        return view('admin.campaign.show', compact('data') );
+    }
 }

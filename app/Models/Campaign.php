@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Affiliate\AffiliateCampaign;
 
 class Campaign extends Model
 {
@@ -12,5 +13,8 @@ class Campaign extends Model
         return $this->belongsTo( Merchant::class, 'merchant_id','account_id' );
     }
 
+    public function publishers(){
+        return $this->hasMany( AffiliateCampaign::class, 'campaign_id','id' );
+    }
 
 }

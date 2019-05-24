@@ -28,7 +28,8 @@
                         <td>{{ $item->type }}</td>
                         <td><span class="badge badge-info">{{ $item->status }}</span> </td>
                         <td>
-                            <a href="{{ route('campaign.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
+                            <a href="{{ route('campaign.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a> | 
+                            <a href="{{ route('campaign.show', $item->id) }}"><i class="fa fa-user"></i> Show</a>
                         </td>
                     </tr>
                 @endforeach

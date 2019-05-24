@@ -110,7 +110,7 @@
         <div class="col-md-6">
 
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-warning">
                     Banner Affiliates
                 </div>
                 <div class="card-body">
