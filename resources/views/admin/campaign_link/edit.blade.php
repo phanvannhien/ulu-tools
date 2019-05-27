@@ -44,8 +44,8 @@
                         <div class="form-group">
                             <label for="status" class="col-form-label">Status</label>
                             <select name="status" id="" class="form-control">
-                                <option {{ ( old('status', $data->status) ) ? 'selected' : '' }} value="1">Activate</option>
-                                <option {{ ( old('status', $data->status) == 0) ? 'selected' : '' }} value="0">Deactivate</option>
+                                <option {{  $data->status == 1  ? 'selected' : '' }} value="1">Activate</option>
+                                <option {{  $data->status == 0  ? 'selected' : '' }} value="0">Deactivate</option>
                             </select>
                         </div>
                         <div class="form-group border p-3">

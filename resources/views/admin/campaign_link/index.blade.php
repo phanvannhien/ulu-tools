@@ -25,7 +25,19 @@
                 </thead>
                 <tbody>
                 @foreach( $data as $item )
-                    <tr>
+                <?php
+                    $start = \Carbon\Carbon::parse($item->start_date);
+                    $end = \Carbon\Carbon::parse($item->end_date);
+                    $now = \Carbon\Carbon::now();
+                    $class = '';
+                    if( $now->gte( $start )  && $now->lte( $end ) ){
+                        $class = 'bg-success';
+                    }else{
+                        $class = 'bg-warning';
+                    }
+                    
+                ?>
+                    <tr class="{{ $class }}">
                         <td>{{ $item->campaign->campaign_name }}</td>
 
                         <td>{{ $item->link_title }}</td>
@@ -40,7 +52,7 @@
                         <td>
                             
                             <a class="btn btn-success btn-xs" href="{{ route('campaign_link.edit', $item->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                            <form action="{{ route('campaign_link.create', $item->id) }}" method="post">
+                            <form action="{{ route('campaign_link.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-xs btn-danger" type="submit" onclick="return confirm('Are you sure?')">

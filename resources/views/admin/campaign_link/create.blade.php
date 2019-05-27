@@ -27,7 +27,8 @@
                             <input name="link" class="form-control" type="text" value="{{ old('link') }}" placeholder="" id="link">
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="form-group">
+ 
                             <label for="">Ngày tháng</label>
                             <div class="input-group">
                                 <div class="input-group-addon">

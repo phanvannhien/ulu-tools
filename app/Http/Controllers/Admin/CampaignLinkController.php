@@ -26,9 +26,10 @@ class CampaignLinkController extends Controller
     }
 
     public function store( Request $request ){
+    
         $rules = [
             'campaign_id' => 'required',
-            'link' => 'required|string|active_url',
+            'link' => 'required|string',
             'date_time' => 'required',
         ];
 
@@ -46,6 +47,8 @@ class CampaignLinkController extends Controller
         $arrDate = explode( '-', $request->get('date_time') );
         $data->start_date = str_replace('/','-',trim($arrDate[0]));
         $data->end_date = str_replace('/','-',trim($arrDate[1]));
+        $data->status = $request->input('status');
+
 
         $arraySizeImages = [
             'banner_240_400',
@@ -88,7 +91,7 @@ class CampaignLinkController extends Controller
     public function update( Request $request, $id ){
         $rules = [
             'campaign_id' => 'required',
-            'link' => 'required|string|active_url',
+            'link' => 'required|string',
             'date_time' => 'required',
         ];
 
@@ -106,6 +109,8 @@ class CampaignLinkController extends Controller
         $arrDate = explode( '-', $request->get('date_time') );
         $data->start_date = str_replace('/','-',trim($arrDate[0]));
         $data->end_date = str_replace('/','-',trim($arrDate[1]));
+
+        $data->status = $request->input('status');
 
         $arraySizeImages = [
             'banner_240_400',
@@ -133,6 +138,13 @@ class CampaignLinkController extends Controller
         }
 
         return back()->with('status', 'Fail');
+    }
+
+    public function destroy($id){
+        $data = CampaignLink::findOrFail($id);
+        AffiliateBanners::where('banner_id', $id)->delete();
+        $data->delete();
+        return back()->with('status','Success'); 
     }
 
 }
