@@ -48,7 +48,7 @@ class CampaignLinkController extends Controller
         $data->start_date = str_replace('/','-',trim($arrDate[0]));
         $data->end_date = str_replace('/','-',trim($arrDate[1]));
         $data->status = $request->input('status');
-
+        $data->banner_html = $request->input('banner_html');
 
         $arraySizeImages = [
             'banner_240_400',
@@ -111,7 +111,8 @@ class CampaignLinkController extends Controller
         $data->end_date = str_replace('/','-',trim($arrDate[1]));
 
         $data->status = $request->input('status');
-
+        $data->banner_html = $request->input('banner_html');
+        
         $arraySizeImages = [
             'banner_240_400',
             'banner_160_600',

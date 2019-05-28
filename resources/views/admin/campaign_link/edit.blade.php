@@ -28,6 +28,10 @@
                             <label for="link" class="col-form-label">URL Link <span class="text-danger">*</span></label>
                             <input name="link" class="form-control" type="text" value="{{ old('link', $data->link) }}" placeholder="" id="link">
                         </div>
+                        <div class="form-group">
+                            <label for="banner_html" class="col-form-label">Description</label>
+                            <textarea name="banner_html" id="banner_html" cols="30" rows="3" class="form-control">{{ old('banner_html', $data->banner_html) }}</textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="">Ngày tháng <span class="text-danger">*</span></label>
