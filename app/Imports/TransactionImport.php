@@ -15,24 +15,27 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-use Pap_Api_TransactionsGrid;
-use Pap_Api_Transaction;
-use Gpf_Data_Filter;
-use Gpf_Rpc_Array;
-use Gpf_Data_Record;
+use GuzzleHttp\Client;
 
 class TransactionImport implements  WithHeadingRow, WithValidation, ToModel
 {
 
+    protected $baseUrl;
+
+    public function __construct()
+    {
+        if( env('APP_ENV') == 'local'){
+            $this->baseUrl = env('API_LOCAL_BASE_URL');
+        }else{
+            $this->baseUrl = env('API_SERVER_BASE_URL');
+        }
+
+    }
+
+
     public function collection(Collection $rows)
     {
         dd($rows);
-        foreach ($rows as $row)
-        {
-            User::create([
-                'name' => $row[0],
-            ]);
-        }
     }
 
 
@@ -43,30 +46,34 @@ class TransactionImport implements  WithHeadingRow, WithValidation, ToModel
      */
     public function model( array $row )
     {
-        $session = session()->get('user')['session'];
-        $sale = new Pap_Api_Transaction($session);
-
-        $sale->setOrderId( $row['order_id'] );
-        $sale->setProductId($row['product_id']);
-
-        if ($sale->load()) {
-
-            if( $sale->getStatus()  == 'P' ){
-                $sale->setStatus('A');
-                $sale->setMerchantNote('transaction verified');
-                $sale->save();
-            }
-        }
-
-        return null;
+       
+        $url = $this->baseUrl.'/api/conversion/postback';
+        $client = new Client();
+        $response =  $client->request('GET', $url, [
+            'query' => [
+                'visitor_id' => $row['visitor_id'],
+                'order_id' => $row['order_id'],
+                'product_id' => $row['product_id'],
+                'product_name' => $row['product_name'],
+                'total_cost' => $row['total_cost'],
+                'created_at' => $row['created_at'],
+                'status' => $row['status']
+            ]
+        ]);
+        $data = $response->getBody()->getContents();
+        $data = json_decode( $data );
+        return null ;
 
     }
 
     public function rules(): array
     {
         return [
+            'visitor_id' => 'required',
             'order_id' => 'required',
             'product_id' => 'required',
+            'product_name' => 'required',
+            'total_cost' => 'required',
             'status' => 'required',
         ];
     }

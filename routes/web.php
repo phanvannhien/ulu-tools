@@ -80,7 +80,10 @@ Route::group([
          * Transaction
          */
         Route::get('/transaction', 'Admin\TransactionController@index')->name('transaction');
-        Route::post('/transaction', 'Admin\TransactionController@import')->name('check.transaction');
+        Route::get('/transaction/import', 'Admin\TransactionController@import')->name('admin.transaction.import');
+        Route::post('/transaction/import', 'Admin\TransactionController@importSave')->name('admin.transaction.import.save');
+
+        
 
         /**
          * Traffic
@@ -137,7 +140,8 @@ Route::group([
          */
         Route::resource('campaign', 'Admin\CampaignController');
         Route::get('campaign/{id}', 'Admin\CampaignController@show');
-       
+        Route::get('campaign/{id}/affiliate/{aff_id}', 'Admin\CampaignController@affiliateCampaignEdit')->name('admin.aff.campaign');
+        Route::post('campaign/{id}/affiliate/{aff_id}', 'Admin\CampaignController@affiliateCampaignSave')->name('admin.aff.campaign.save');
 
 
         Route::get('shopee', 'Admin\ShopeeController@index')->name('shopee.index');

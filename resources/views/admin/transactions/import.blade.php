@@ -1,17 +1,16 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
 @section('main')
-    @include('admin.partials.messages')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('check.transaction') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.transaction.import.save') }}" 
+                method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="">Select file Excel File <a href="{{ url('examples/import_transaction.xlsx') }}">Download File Example .xlsx</a></label>
                     <input type="file" class="form-control" class="" name="file">
                 </div>
-
-                <button class="btn btn-primary" type="submit" name="submit">Upload</button>
+                <button class="btn btn-primary" type="submit" name="submit">Start import</button>
             </form>
         </div>
     </div>

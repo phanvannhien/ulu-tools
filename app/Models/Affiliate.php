@@ -75,7 +75,11 @@ class Affiliate extends Authenticatable
         $isReg = $this
             ->campaigns()
             ->where('affiliate_campaigns.campaign_id', $campaign_id)
-            ->select('affiliate_campaigns.userid','affiliate_campaigns.campaign_id', 'affiliate_campaigns.status' )->first();
+            ->select('affiliate_campaigns.userid',
+            'affiliate_campaigns.campaign_id', 
+            'affiliate_campaigns.fixed_url', 
+            'affiliate_campaigns.status' )
+            ->first();
         if( $isReg )
             return $isReg;
         return false;

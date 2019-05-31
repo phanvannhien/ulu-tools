@@ -113,8 +113,10 @@ class TransactionController extends Controller
         ));
     }
 
-
     public function import(Request $request){
+        return view('admin.transactions.import');
+    }
+    public function importSave(Request $request){
 
         if( $request->hasFile('file') ){
             try {

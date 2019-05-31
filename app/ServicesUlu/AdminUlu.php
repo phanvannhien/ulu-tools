@@ -46,5 +46,16 @@ class AdminUlu{
         return $data ;
     }
 
+    public function importConversions( $params = array() ){
+        $url = $this->baseUrl.'/api/admin/conversion';
+        $client = new Client();
+        $response =  $client->request('POST', $url, [
+            'query' => $params
+        ]);
+        $data = $response->getBody()->getContents();
+        $data = json_decode( $data );
+        return $data ;
+    }
+
 
 }

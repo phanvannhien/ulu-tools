@@ -108,4 +108,22 @@ class CampaignController extends Controller
         $data = Campaign::findOrFail($id);
         return view('admin.campaign.show', compact('data') );
     }
+
+    public function affiliateCampaignEdit( $id, $aff_id ){
+        $data = \App\Models\Affiliate\AffiliateCampaign::where('userid', $aff_id)
+            ->where('campaign_id', $id)->first();
+        return view('admin.campaign.affiliate', compact('data') );
+    }
+
+    public function affiliateCampaignSave(Request $request, $id, $aff_id ){
+        $data = \App\Models\Affiliate\AffiliateCampaign::where('userid', $aff_id)
+            ->where('campaign_id', $id)->first();
+          
+        $data->fixed_url = $request->fixed_url;
+        $data->save();
+        
+        return back()->with('status', 'Success');
+    }
+
+
 }

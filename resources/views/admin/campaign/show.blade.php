@@ -14,7 +14,7 @@
                         <td>Full name</td>
                         <td>Email</td>
                         <td>Phone</td>
-                      
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +23,7 @@
                         <td>{{ $item->affiliate->full_name }}</td>
                         <td>{{ $item->affiliate->email }}</td>
                         <td>{{ $item->affiliate->phone }}</td>
+                        <td><a href="{{ route('admin.aff.campaign',[ 'id' => $item->campaign_id, 'aff_id' => $item->affiliate->userid ]) }}">Edit</a></td>
                     </tr>
                 @endforeach
                 </tbody>
