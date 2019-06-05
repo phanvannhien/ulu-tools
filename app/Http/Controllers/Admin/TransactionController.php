@@ -46,6 +46,7 @@ class TransactionController extends Controller
             'order_id' => $request->has('order_id') ? $request->input('order_id') : '',
             'campaign_id' => $request->has('campaign_id') ? $request->input('campaign_id') : '',
             'affiliate_id' => $request->has('affiliate_id') ? $request->input('affiliate_id') : '',
+            'status' => $request->has('status') ? $request->input('status') : '',
             'created_at' => isset($queryDate) ? $queryDate : ''
         ];
 
