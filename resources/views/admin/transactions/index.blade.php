@@ -35,6 +35,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="">All</option>
+                                <option {{ request()->get('status') == 'pending' ? 'selected' : '' }} value="pending">pending</option>
+                                <option {{ request()->get('status') == 'approved' ? 'selected' : '' }} value="approved">approved</option>
+                                <option {{ request()->get('status') == 'cancelled' ? 'selected' : '' }} value="cancelled">cancelled</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
