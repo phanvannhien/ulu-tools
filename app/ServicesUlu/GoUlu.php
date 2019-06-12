@@ -35,7 +35,7 @@ class GoUlu{
             'email' => $email,
             'password' => $password
         ];
-        return $this->uluRepository->loginAffiliate($loginAffiliate);
+        return $this->uluRepository->loginAffiliate($requestData);
         
     }
 
