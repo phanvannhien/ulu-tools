@@ -34,28 +34,26 @@
     </div>
     <!-- preloader area end -->
 
-    <!-- main wrapper start -->
-    <div class="horizontal-main-wrapper">
-        @include('admin.partials.main_header')
-        @include('admin.partials.header_nav')
+    <!-- page container area start -->
+    <div class="page-container">
+        @include('admin.partials.sidebar')
 
-        <div class="main-content-inner mt-3">
-            <div class="container">
-                @include('admin.partials.messages')
-                @yield('main')
+        <!-- main content area start -->
+        <div class="main-content">
+            @include('admin.partials.header_vertical')
+            
+            <div class="main-content-inner mt-3">
+                <div class="container">
+                    @include('admin.partials.messages')
+                    @yield('main')
+                </div>
             </div>
+
+           
         </div>
 
-        <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>© Copyright {{ date('Y') }}. All right reserved.</p>
-            </div>
-        </footer>
-        <!-- footer area end-->
     </div>
-    <!-- main wrapper start -->
-
+    <!-- page container area end -->
 
     <!-- jquery latest version -->
     <script src="{{ url('srtdash/assets/js/vendor/jquery-2.2.4.min.js') }}"></script>

@@ -98,7 +98,7 @@
 }
 
 .main-content-inner {
-    padding: 0 30px 50px;
+    padding: 0 0px 50px;
 }
 
 /*------------------------- END Core Css -------------------*/
@@ -114,7 +114,7 @@
     height: 100vh;
     width: 250px;
     overflow: hidden;
-    background: #303641;
+    background: #0088fb;
     box-shadow: 2px 0 32px rgba(0, 0, 0, 0.05);
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -127,7 +127,7 @@
 .main-menu {
     height: calc(100% - 100px);
     overflow: hidden;
-    padding: 20px 10px 0 0;
+    padding: 20px 0px 0 0;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -143,9 +143,9 @@
 }
 
 .sidebar-header {
-    padding: 6px 32px 14px;
-    background: #303641;
-    border-bottom: 1px solid #343e50;
+    padding: 5px 32px 5px;
+    background: #0088fb;
+    border-bottom: 1px solid #22a2d8;
 }
 .sidebar-menu .logo{
     text-align: center;
@@ -161,16 +161,16 @@
 .metismenu li a {
     position: relative;
     display: block;
-    color: #8d97ad;
+    color: #FFF;
     font-size: 15px;
     text-transform: capitalize;
-    padding: 15px 15px;
+    padding: 10px 15px;
     letter-spacing: 0;
     font-weight: 400;
 }
 
 .metismenu li a i {
-    color: #0088fb;
+    color: #FFF;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -180,8 +180,8 @@
     content: '\f107';
     font-family: fontawesome;
     right: 15px;
-    top: 12px;
-    color: #8d97ad;
+    top: 6px;
+    color: #FFF;
     font-size: 20px;
 }
 
@@ -216,6 +216,8 @@
     color: #fff;
     background: #343942;
 }
+
+
 
 .metismenu li:hover>a,
 .metismenu li.active>a {
@@ -406,14 +408,13 @@
 /*-------------------- 2.2 Header Area -------------------*/
 
 .header-area {
-    padding: 5px 15px;
+    padding: 12px 15px;
     background: #fff;
     border-bottom: 1px solid #d8e3e7;
 }
 
 .nav-btn {
     margin-right: 30px;
-    margin-top: 10px;
     cursor: pointer;
 }
 
@@ -723,13 +724,13 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    padding: 17px 0px;
+    padding: 0px;
     position: relative;
 }
 
 .user-profile img.avatar {
-    height: 35px;
-    width: 35px;
+    height: 27px;
+    width: 27px;
     border-radius: 50%;
     margin-right: 12px;
 }

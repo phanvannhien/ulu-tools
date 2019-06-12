@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
-                    <a href="{{ route('admin.dashboard') }}"><img src="{{ url('logo-blue.png') }}" alt="logo" style="max-height: 40px"></a>
+                    <a href="{{ route('admin.dashboard') }}"><img src="{{ url('logo-white.png') }}" alt="logo" style="max-height: 40px"></a>
                 </div>
             </div>
             <!-- profile info & task notification -->
