@@ -1,19 +1,20 @@
 <?php
 namespace App\ServicesUlu;
 use GuzzleHttp\Client;
-
-
+use App\Repositories\UluRepositoryEloquent;
 
 class AdminUlu{
     protected $baseUrl;
+    private $uluRepository;
 
-    public function __construct()
+    public function __construct(UluRepositoryEloquent $uluRepository)
     {
         if( env('APP_ENV') == 'local'){
             $this->baseUrl = env('API_LOCAL_BASE_URL');
         }else{
             $this->baseUrl = env('API_SERVER_BASE_URL');
         }
+        $this->uluRepository = $uluRepository;
 
     }
 
@@ -24,37 +25,17 @@ class AdminUlu{
      */
     public function getTraffic( $params = array() ){
         $url = $this->baseUrl.'/api/admin/traffic';
-        $client = new Client();
-        $response =  $client->request('GET', $url, [
-            'query' => $params
-        ]);
-        $data = $response->getBody()->getContents();
-        $data = json_decode( $data );
-        return $data ;
+        return $this->uluRepository->getData($url, $params);
     }
-
 
     public function getConversions( $params = array() ){
         $url = $this->baseUrl.'/api/admin/conversion';
-        $client = new Client();
-
-        $response =  $client->request('GET', $url, [
-            'query' => $params
-        ]);
-        $data = $response->getBody()->getContents();
-        $data = json_decode( $data );
-        return $data ;
+        return $this->uluRepository->getData($url, $params);
     }
 
     public function importConversions( $params = array() ){
         $url = $this->baseUrl.'/api/admin/conversion';
-        $client = new Client();
-        $response =  $client->request('POST', $url, [
-            'query' => $params
-        ]);
-        $data = $response->getBody()->getContents();
-        $data = json_decode( $data );
-        return $data ;
+        return $this->uluRepository->postData($url, $params);
     }
 
 

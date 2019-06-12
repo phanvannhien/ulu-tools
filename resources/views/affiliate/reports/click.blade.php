@@ -9,9 +9,8 @@
             </ul>
         </div>
 
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-body">
-
                 <form class=" mb-3" action="{{ route('affiliate.report.click') }}" method="get">
                     <div class="row">
                         <div class="col-md-3">
@@ -43,21 +42,27 @@
                                     <div class="btn">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-
                                 </div>
                                 <input id="reportrange" name="created_at" class="form-control" value="{{ request()->get('created_at') }}" type="text">
                             </div>
                         </div>
-
-
                     </div>
-
                     <hr>
                     <p class="clearfix">
                     <button class="btn btn-primary btn-sm ml-3 float-right" type="submit" name="submit" value="filter"><i class="fa fa-filter"></i> Lọc</button>
                     </p>
-
                 </form>
+            </div>
+        </div>
+        <!-- Statistics Chart Component -->
+            @statistics
+                @slot('id','click-statistics')
+                @slot('chartData',$chartData)
+                @slot('class','mb-4')
+            @endstatistics
+        <!-- End Statistics Chart Component -->
+        <div class="card">
+            <div class="card-body">
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -97,7 +102,6 @@
                 <div class="d-flex justify-content-center">
                     {!! $data->appends(request()->input())->links() !!}
                 </div>
-
             </div>
             <div class="card-footer">
                 @if( $data && count($data))
@@ -105,7 +109,5 @@
                 @endif
             </div>
         </div>
-
-
     </div>
 @endsection

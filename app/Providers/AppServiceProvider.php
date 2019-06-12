@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\Blade;
+use Prettus;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        // $this->app->register(RepositoryServiceProvider::class);
     }
 
     /**
@@ -23,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Create Alias Chart Component
+        Blade::component('chart.statistics', 'statistics');
+
     }
 }

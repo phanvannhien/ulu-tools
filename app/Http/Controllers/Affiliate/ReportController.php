@@ -21,6 +21,9 @@ use Str;
 
 use App\Exports\TransactionExport;
 
+use Illuminate\Support\Arr;
+
+
 class ReportController extends Controller
 {
     public function report(Request $request, TransactionFilter $filter,  GoUlu $ulu){
@@ -121,6 +124,23 @@ class ReportController extends Controller
         try{
             $clicks = $ulu->getClickTracking( auth()->user()->jwt_token, $params );
 
+            $chartData = [];
+            foreach ( $clicks->payloads->summary as $item ){
+
+                $month = ($item->_id->month < 10) ? '0'.$item->_id->month : $item->_id->month;
+                $day = ($item->_id->day < 10) ? '0'.$item->_id->day : $item->_id->day;
+
+                array_push($chartData, [
+                    'date' => $item->_id->year.'-'.$month.'-'.$day,
+                    'value' => $item->count
+                ]);
+
+            }
+
+            $chartData = array_values( Arr::sort($chartData, function ($value) {
+                return $value['date'];
+            }));
+
             $data = new Paginator(
                 $clicks->payloads->data,
                 $clicks->payloads->count,
@@ -136,7 +156,7 @@ class ReportController extends Controller
             foreach ($dataCampaigns as $campaign){
                 $campaigns[$campaign['campaign_id']] = $campaign['campaign_name'];
             }
-            return view('affiliate.reports.click', compact('data','campaigns'));
+            return view('affiliate.reports.click', compact('data','campaigns','chartData'));
         }catch (ConnectException $e){
             throw ValidationException::withMessages(['Có lỗi xảy ra, không thể thực hiện']);
         }
