@@ -34,5 +34,5 @@ interface UluRepository extends RepositoryInterface
      * @param $requestData: array
      * @return Object
      */
-    public function loginAffiliate($requestData);
+    public function loginAffiliate($url,$requestData);
 }

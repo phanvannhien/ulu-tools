@@ -80,7 +80,7 @@ class UluRepositoryEloquent extends BaseRepository implements UluRepository
      * @param $requestData: array
      * @return Object
      */
-    public function loginAffiliate($requestData){
+    public function loginAffiliate($url,$requestData){
         $client = new Client();
         $response =  $client->request('POST', $url, ['json' => $requestData]);
         $data = $response->getBody()->getContents();
