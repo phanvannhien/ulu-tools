@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/metisMenu.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/slicknav.min.css') }}">
-
     <!-- others css -->
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/typography.css') }}">
     <link rel="stylesheet" href="{{ url('srtdash/assets/css/default-css.css') }}">
@@ -30,19 +29,27 @@
 </div>
 <!-- preloader area end -->
 
-<!-- main wrapper start -->
-<div class="horizontal-main-wrapper">
-    @include('affiliate.partials.main_header')
-    @include('affiliate.partials.header_nav')
-    <div id="app" class="main-content-inner">
-        <div class="container mt-3">
+<!-- page container area start -->
+<div class="page-container">
+    @include('affiliate.partials.sidebar')
+
+    <!-- main content area start -->
+    <div class="main-content">
+        @include('affiliate.partials.header_vertical')
+    
+        <div id="app" class="main-content-inner mt-3">
+            <div class="container">
                 @include('affiliate.partials.messages')
+                @yield('main')
+            </div>
         </div>
-        @yield('main')
+
+       
     </div>
 
 </div>
-<!-- main wrapper start -->
+<!-- page container area end -->
+
 
 <!-- jquery latest version -->
 <script src="{{ url('srtdash/assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
@@ -58,7 +65,6 @@
 <script src="{{ url('srtdash/assets/js/plugins.js') }}"></script>
 <script src="{{ url('srtdash/assets/js/scripts.js') }}"></script>
 <script src="{{ url('js/app.js') }}"></script>
-
 
 @yield('footer')
 </body>

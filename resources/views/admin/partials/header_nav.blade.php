@@ -1,7 +1,10 @@
 <!-- header area start -->
 <div class="header-area bg-primary header-bottom">
+
     <div class="container">
         <div class="row align-items-center">
+            
+
             <div class="col-lg-12  d-none d-lg-block">
                 <div class="horizontal-menu">
                     <nav>
