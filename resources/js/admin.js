@@ -57,7 +57,6 @@ $(document).ready(function () {
             }
         }
     });
-
     function cb(start, end) {
         console.log(start);
         $('#reportrange').val(start.format('YYYY/MM/DD') + ' - ' + end.format('YYYY/MM/DD'));
@@ -80,6 +79,10 @@ $(document).ready(function () {
             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month').endOf('day')]
         }
     }, cb);
+   
+    $('#conversion_created_date').daterangepicker({
+        "singleDatePicker": true,
+    });
 
 
 

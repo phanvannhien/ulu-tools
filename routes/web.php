@@ -83,7 +83,9 @@ Route::group([
         Route::get('/transaction/import', 'Admin\TransactionController@import')->name('admin.transaction.import');
         Route::post('/transaction/import', 'Admin\TransactionController@importSave')->name('admin.transaction.import.save');
 
-        
+        Route::get('/transaction/create', 'Admin\TransactionController@create')->name('admin.transaction.create');
+        Route::post('/transaction/addConvension', 'Admin\TransactionController@addConvension')->name('admin.transaction.add.convension');
+
 
         /**
          * Traffic

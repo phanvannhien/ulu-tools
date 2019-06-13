@@ -63,9 +63,10 @@ class UluRepositoryEloquent extends BaseRepository implements UluRepository
      * @return Object
      */
     public function postData($url = null,$params = array(), $token = null){
+        
         $client = new Client();
         $response =  $client->request('POST', $url, [
-            'query' => $params,
+            'json' => $params,
             'headers' => [
                 'authorization' => !empty($token) ? 'Bearer '.$token : '',
             ],

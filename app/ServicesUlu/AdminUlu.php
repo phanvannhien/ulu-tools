@@ -38,5 +38,7 @@ class AdminUlu{
         return $this->uluRepository->postData($url, $params);
     }
 
+   
+
 
 }

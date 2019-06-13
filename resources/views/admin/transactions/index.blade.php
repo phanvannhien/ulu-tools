@@ -67,6 +67,7 @@
                 <button class="btn btn-primary" type="submit" name="action" value="filter"><i class="fa fa-filter"></i> Lọc</button>
                 <button class="btn btn-success" type="submit" name="action" value="download"><i class="fa fa-download"></i> Tải về (xlsx)</button>
                 <a href="{{ route('admin.transaction.import') }}" class="btn btn-info">Import</a>
+                <a href="{{ route('admin.transaction.create') }}" class="btn btn-secondary">Add</a>
             </form>
         </div>
     </div>

@@ -96,5 +96,6 @@ class TrafficController extends Controller
 
         return view('admin.traffic.index',  compact('data', 'conversions','campaigns','affiliates', 'chartData' ));
     }
+    
 
 }

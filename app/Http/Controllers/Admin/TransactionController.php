@@ -12,9 +12,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\ServicesUlu\AdminUlu;
+use App\ServicesUlu\GoUlu;
+
 use Excel;
 use Str;
 use Illuminate\Support\Arr;
+use Validator;
 
 class TransactionController extends Controller
 {
@@ -137,5 +140,36 @@ class TransactionController extends Controller
 
         return back()->with('warning','Select file');
 
+    }
+    public function create(){
+        $campaigns = Campaign::select('id','campaign_id','campaign_name')->where('type','CPL')->get();
+        return view('admin.transactions.create',compact('campaigns'));
+    }
+    public function addConvension(Request $request, GoUlu $ulu){
+        $rules = [
+            'affiliate_id' => 'required',
+            'campaign_id' => 'required',
+            'visitor_id' => 'required',
+            'convension_number' => 'required|numeric',
+            'payout_system' => 'required|numeric',
+            'commission_affiliate' => 'required|numeric',
+            'created_at' => 'required',
+        ];
+        $messages = [
+            'affiliate_id.required' => 'The publisher field is required',
+            'campaign_id.required' => 'The campaign field is required',
+            'visitor_id.required' => 'The trafficeID field is required',
+        ];
+        $validator = Validator::make($request->all(), $rules,$messages );
+        if ($validator->fails()) {
+            return back()->withErrors( $validator )->withInput();
+        }
+        try {
+            $result = $ulu->createConvension(auth()->user()->jwt_token,$request->all());       
+            return back()->with('status', 'Convension was created successfully !' );
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            // dd($e);
+        }
+        
     }
 }
